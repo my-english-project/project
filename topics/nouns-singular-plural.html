@@ -1,0 +1,526 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouns: Singular and Plural Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        /* ========================================================================= */
+        /* INSTITUTIONAL PALETTE DEFINITION */
+        /* ========================================================================= */
+        :root {
+            /* UTS & CELE Colors */
+            --color-uts-blue: #004c8f;
+            --color-uts-green: #00a859;
+            --color-cele-yellow: #ffb700;
+            
+            /* Tailwind Mapping for Harmony */
+            --color-primary: var(--color-uts-blue);
+            --color-secondary: var(--color-uts-green);
+            --color-accent: var(--color-cele-yellow);
+        }
+
+        /* Applying Custom Colors to Tailwind Utility Classes */
+        .bg-primary { background-color: var(--color-primary); }
+        .text-primary { color: var(--color-primary); }
+        .border-primary { border-color: var(--color-primary); }
+
+        .bg-secondary { background-color: var(--color-secondary); }
+        .text-secondary { color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .hover\:bg-accent:hover { background-color: var(--color-accent); }
+        .hover\:text-accent:hover { color: var(--color-accent); }
+        .focus\:border-accent:focus { border-color: var(--color-accent); }
+
+        /* ========================================================================= */
+        /* CUSTOM STYLES */
+        /* ========================================================================= */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 350px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 250px;
+                max-height: 250px;
+            }
+        }
+        /* Active Tab Button: Now uses UTS Blue with White Text */
+        .tab-button.active {
+            background-color: var(--color-uts-blue);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 76, 143, 0.4);
+        }
+        /* Custom size for logos in the header */
+        .header-logo {
+            height: 40px; 
+            width: auto;
+            object-fit: contain;
+        }
+        /* Table highlight color (subtle light grey-green) */
+        .bg-rule-highlight {
+            background-color: rgba(0, 168, 89, 0.05); /* Lightest touch of UTS Green */
+        }
+        .text-rule-highlight {
+            color: var(--color-uts-green);
+        }
+        
+        /* FIX RESPONSIVE: Forzar el centrado del título con Absolute positioning en MD y más, mientras los logos están en los extremos */
+        .header-title-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Hacer el título más pequeño en móvil */
+        @media (max-width: 768px) {
+            .header-title-container {
+                position: static; /* Deshabilitar posición absoluta en móvil */
+                transform: none;
+                text-align: center;
+                flex-grow: 1; /* Permite que ocupe espacio */
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen">
+
+<header class="bg-primary shadow-md sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative">
+        
+        <div class="flex-shrink-0">
+            <img src="../assets/images/logo-uts-2024.png" alt="Logo Universidad Tecnológica de Salamanca" class="header-logo">
+        </div>
+        
+        <div class="header-title-container hidden md:block">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">Nouns: Singular and Plural</h1>
+        </div>
+        
+        <div class="block md:hidden text-center flex-grow">
+             <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">Nouns: Singular and Plural</h1>
+        </div>
+        
+        <div class="flex-shrink-0">
+            <img src="../assets/images/logo_cele.png" alt="Logo CELE UTS" class="header-logo">
+        </div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 hidden md:block">
+        <nav class="flex justify-center space-x-4">
+            <a href="#intro" class="text-white hover:text-accent transition duration-150">Intro</a>
+            <a href="#rules" class="text-white hover:text-accent transition duration-150">Rules</a>
+            <a href="#practice" class="text-white hover:text-accent transition duration-150">Practice</a>
+            <a href="#summary" class="text-white hover:text-accent transition duration-150">Summary</a>
+        </nav>
+    </div>
+</header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <section id="intro" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-4">
+                <h2 class="text-2xl font-semibold text-secondary mb-2 sm:mb-0">Introduction & Basic Concepts</h2>
+                
+                <nav class="text-sm" aria-label="breadcrumb">
+                    <ol class="flex space-x-2 text-gray-500 flex-wrap">
+                        <li><a href="../index.html" class="hover:text-secondary">Home</a></li>
+                        <li>/</li>
+                        <li><a href="../basic-I/index.html" class="hover:text-secondary">Basic I</a></li>
+                        <li>/</li>
+                        <li class="font-semibold text-secondary">Nouns: Singular and Plural</li>
+                    </ol>
+                </nav>
+            </div>
+            
+            <!--<p class="text-sm text-gray-600 mb-6">This section presents the fundamental definitions of nouns, singular, and plural forms, establishing the foundation for the subsequent rules and exercises. Understanding these basic concepts is key to mastering the transformation rules.</p>-->
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-4 border-l-4 border-primary bg-blue-50/50 rounded-lg">
+                    <h3 class="text-xl font-medium text-primary mb-2">What is a Noun?</h3>
+                    <p class="mb-2">A <strong>Noun</strong> is a word that names a person, a place, a thing, or an idea.</p>
+                    <p class="text-sm italic">Examples: boy, park, apple, house, friend, table.</p>
+                    <p class="mt-4">In English, almost all nouns can be <strong>singular</strong> (one) or <strong>plural</strong> (more than one). Learning the rules to change a noun from singular to plural is very important!</p>
+                </div>
+                <div class="p-4 border-l-4 border-secondary bg-rule-highlight rounded-lg">
+                    <h3 class="text-xl font-medium text-secondary mb-2">Singular (One) vs. Plural (Many)</h3>
+                    <p class="mb-2"><strong>Singular (1):</strong> When we talk about only one person, place, or thing.</p>
+                    <p class="text-sm italic">Example: one cat, one car.</p><br>
+                    <p class="mb-2"><strong>Plural (2+):</strong> When we talk about two or more people, places, or things.</p>
+                    <p class="text-sm italic">Example: two cats, three cars.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">The Five Plural Rules: Explorer</h2>
+            <p class="text-sm text-gray-600 mb-6">Explore the five main rules governing the formation of plural nouns. Click on any rule below to see its detailed explanation and corresponding examples.</p>
+
+            <div class="grid md:grid-cols-5 gap-2 mb-6">
+                <button data-rule="R1" class="tab-button bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-accent hover:text-primary transition duration-200 active">Rule 1: Simple -S</button>
+                <button data-rule="R2" class="tab-button bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-accent hover:text-primary transition duration-200">Rule 2: -ES</button>
+                <button data-rule="R3" class="tab-button bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-accent hover:text-primary transition duration-200">Rule 3: -Y</button>
+                <button data-rule="R4" class="tab-button bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-accent hover:text-primary transition duration-200">Rule 4: Irregular</button>
+                <button data-rule="R5" class="tab-button bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-accent hover:text-primary transition duration-200">Rule 5: Zero Change</button>
+            </div>
+
+            <div id="rule-content-display" class="border border-gray-200 p-4 rounded-lg bg-white shadow-inner">
+                <h3 id="rule-title" class="text-xl font-bold text-primary mb-3">Rule 1: The Simple "-S"</h3>
+                <p id="rule-description" class="mb-4">For most nouns in English, we simply add <strong>-S</strong> at the end.</p>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-left text-sm font-light">
+                        <thead class="border-b bg-gray-100 font-medium text-gray-700">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Singular (1)</th>
+                                <th scope="col" class="px-6 py-3">Plural (2+)</th>
+                                <!--<th scope="col" class="px-6 py-3">Translation</th>-->
+                            </tr>
+                        </thead>
+                        <tbody id="rule-examples">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="practice" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Practice Quiz: Test Your Knowledge</h2>
+            <p class="text-sm text-gray-600 mb-6">Answer these questions to test your understanding of the plural rules. Your progress will be tracked below.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 p-4 border border-secondary rounded-lg bg-rule-highlight">
+                    <h3 id="q-number" class="text-lg font-semibold text-secondary mb-2">Question 1 / 10</h3>
+                    <p id="q-word" class="text-3xl font-extrabold text-gray-800 mb-4">book</p>
+                    
+                    <label for="answer-input" class="block text-sm font-medium text-gray-700 mb-1">Enter the Plural Form:</label>
+                    <input type="text" id="answer-input" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary mb-4" placeholder="Type the plural here">
+                    
+                    <button id="check-button" class="w-full bg-primary text-white p-3 rounded-lg hover:bg-secondary transition duration-150 font-bold">Check Answer</button>
+                    
+                    <p id="q-hint" class="mt-4 text-sm italic text-gray-500"></p>
+                    <div id="q-feedback" class="mt-3 p-3 rounded-lg font-bold hidden"></div>
+                </div>
+
+                <div class="md:col-span-1 p-4 flex flex-col items-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Your Progress</h3>
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                    <p id="score-text" class="mt-4 text-2xl font-bold text-primary">Score: 0 / 10</p>
+                    <button id="reset-quiz-button" class="mt-4 bg-gray-400 text-white p-2 rounded-lg hover:bg-gray-500 transition duration-150 font-medium hidden">Reset Practice</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Quick Review & Key Takeaway</h2>
+            <p class="text-sm text-gray-600 mb-6">Review the summary table below for a final look at the main rules. The key to success is identifying the noun's ending!</p>
+
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full text-left text-sm font-light">
+                    <thead class="border-b bg-gray-100 font-medium text-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Noun Endings</th>
+                            <th scope="col" class="px-6 py-3">Plural Form</th>
+                            <th scope="col" class="px-6 py-3">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">Most Nouns</td>
+                            <td class="px-6 py-3">Add -S</td>
+                            <td class="px-6 py-3">car &rarr; cars</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">s, sh, ch, x, z</td>
+                            <td class="px-6 py-3">Add -ES</td>
+                            <td class="px-6 py-3">box &rarr; boxes</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">Consonant + Y</td>
+                            <td class="px-6 py-3">Change Y to IES</td>
+                            <td class="px-6 py-3">baby &rarr; babies</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">Vowel + Y</td>
+                            <td class="px-6 py-3">Add -S</td>
+                            <td class="px-6 py-3">day &rarr; days</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">Irregular Nouns</td>
+                            <td class="px-6 py-3">Memorize!</td>
+                            <td class="px-6 py-3">man &rarr; men</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-lg font-bold text-primary mt-6">Key Takeaway: Always check the last letters of the noun to know which rule to follow!</p>
+        </section>
+
+    </main>
+
+    <script>
+        const RULES_DATA = {
+            'R1': {
+                title: 'Rule 1: The Simple "-S"',
+                description: 'For most nouns in English, we simply add <strong>-S</strong> at the end.',
+                examples: [
+                    { s: 'book', p: 'books', t: 'libro(s)' },
+                    { s: 'pen', p: 'pens', t: 'pluma(s)' },
+                    { s: 'chair', p: 'chairs', t: 'silla(s)' },
+                    { s: 'apple', p: 'apples', t: 'manzana(s)' },
+                    { s: 'table', p: 'tables', t: 'mesa(s)' }
+                ]
+            },
+            'R2': {
+                title: 'Rule 2: The "-ES" Ending',
+                description: 'If a noun ends in <strong>-s, -sh, -ch, -x,</strong> or <strong>-z</strong>, we add <strong>-ES</strong> to make it plural. (This helps us pronounce the word!)',
+                examples: [
+                    { s: 'bus', p: 'buses', t: 'autobús(es)' },
+                    { s: 'box', p: 'boxes', t: 'caja(s)' },
+                    { s: 'watch', p: 'watches', t: 'reloj(es)' },
+                    { s: 'brush', p: 'brushes', t: 'cepillo(s)' },
+                    { s: 'kiss', p: 'kisses', t: 'beso(s)' }
+                ]
+            },
+            'R3': {
+                title: 'Rule 3: The "-Y" Rule',
+                description: 'Case 1 (Consonant + Y): Change <strong>Y</strong> to <strong>I</strong> and add <strong>-ES</strong> (e.g., baby &rarr; babies). Case 2 (Vowel + Y): Just add <strong>-S</strong> (e.g., day &rarr; days).',
+                examples: [
+                    { s: 'baby', p: 'babies', t: 'Consonant + Y' },
+                    { s: 'city', p: 'cities', t: 'Consonant + Y' },
+                    { s: 'party', p: 'parties', t: 'Consonant + Y' },
+                    { s: 'day', p: 'days', t: 'Vowel + Y' },
+                    { s: 'key', p: 'keys', t: 'Vowel + Y' }
+                ]
+            },
+            'R4': {
+                title: 'Rule 4: Irregular Nouns (Part 1)',
+                description: 'Some nouns do not follow any rules. The whole word changes. You must <strong>memorize</strong> them!',
+                examples: [
+                    { s: 'man', p: 'men', t: 'hombre(s)' },
+                    { s: 'woman', p: 'women', t: 'mujer(es)' },
+                    { s: 'child', p: 'children', t: 'niño(s)' },
+                    { s: 'foot', p: 'feet', t: 'pie(s)' },
+                    { s: 'tooth', p: 'teeth', t: 'diente(s)' },
+                    { s: 'mouse', p: 'mice', t: 'ratón(es)' }
+                ]
+            },
+            'R5': {
+                title: 'Rule 5: Zero Change (Irregular Part 2)',
+                description: 'Some nouns are exactly the same in singular and plural form.',
+                examples: [
+                    { s: 'one fish', p: 'two fish', t: 'pez(es)' },
+                    { s: 'one sheep', p: 'many sheep', t: 'oveja(s)' },
+                    { s: 'one deer', p: 'three deer', t: 'venado(s)' },
+                    { s: 'one series', p: 'two series', t: 'serie(s)' }
+                ]
+            }
+        };
+
+        const PRACTICE_QUESTIONS = [
+            { id: 1, word: 'Flower', hint: 'Simple -S rule', answer: 'Flowers', rule: 'R1' },
+            { id: 2, word: 'Fox', hint: '-X ending rule', answer: 'Foxes', rule: 'R2' },
+            { id: 3, word: 'Lady', hint: 'Consonant + Y rule', answer: 'Ladies', rule: 'R3' },
+            { id: 4, word: 'Person', hint: 'Irregular noun', answer: 'People', rule: 'R4' },
+            { id: 5, word: 'Watch', hint: '-CH ending rule', answer: 'Watches', rule: 'R2' },
+            { id: 6, word: 'Pen', hint: 'Simple -S rule', answer: 'Pens', rule: 'R1' },
+            { id: 7, word: 'Party', hint: 'Consonant + Y rule', answer: 'Parties', rule: 'R3' },
+            { id: 8, word: 'Child', hint: 'Irregular noun', answer: 'Children', rule: 'R4' },
+            { id: 9, word: 'Brush', hint: '-SH ending rule', answer: 'Brushes', rule: 'R2' },
+            { id: 10, word: 'Day', hint: 'Vowel + Y rule', answer: 'Days', rule: 'R3' },
+        ];
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        const totalQuestions = PRACTICE_QUESTIONS.length;
+        let quizActive = true;
+        let chartInstance = null;
+
+        function loadRule(ruleKey) {
+            const rule = RULES_DATA[ruleKey];
+            document.getElementById('rule-title').innerHTML = rule.title;
+            document.getElementById('rule-description').innerHTML = rule.description;
+            
+            const examplesTable = document.getElementById('rule-examples');
+            examplesTable.innerHTML = '';
+            
+            rule.examples.forEach((ex, index) => {
+                const row = examplesTable.insertRow();
+                row.className = index % 2 === 0 ? 'bg-white hover:bg-gray-50' : 'bg-gray-50 hover:bg-gray-100';
+                row.insertCell(0).className = 'px-6 py-2 whitespace-nowrap font-medium';
+                // Highlight plural form with Green UTS color
+                row.insertCell(1).className = 'px-6 py-2 whitespace-nowrap text-secondary font-bold'; 
+                //row.insertCell(2).className = 'px-6 py-2';
+                
+                row.cells[0].textContent = ex.s;
+                row.cells[1].textContent = ex.p;
+                //row.cells[2].textContent = ex.t;
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.tab-button[data-rule="${ruleKey}"]`).classList.add('active');
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= totalQuestions) {
+                endQuiz();
+                return;
+            }
+            quizActive = true;
+            document.getElementById('answer-input').disabled = false;
+            document.getElementById('check-button').disabled = false;
+            document.getElementById('check-button').textContent = 'Check Answer';
+            document.getElementById('q-feedback').classList.add('hidden');
+            
+            const q = PRACTICE_QUESTIONS[currentQuestionIndex];
+            document.getElementById('q-number').textContent = `Question ${currentQuestionIndex + 1} / ${totalQuestions}`;
+            document.getElementById('q-word').textContent = q.word;
+            document.getElementById('q-hint').textContent = `Hint: ${q.hint}`;
+            document.getElementById('answer-input').value = '';
+        }
+
+        function checkAnswer() {
+            if (!quizActive) return;
+
+            const inputElement = document.getElementById('answer-input');
+            const feedbackElement = document.getElementById('q-feedback');
+            const userAnswer = inputElement.value.trim().toLowerCase();
+            const correctAnswer = PRACTICE_QUESTIONS[currentQuestionIndex].answer.toLowerCase();
+            
+            if (userAnswer === '') {
+                feedbackElement.textContent = 'Please enter an answer.';
+                feedbackElement.className = 'mt-3 p-3 rounded-lg font-bold bg-yellow-100 text-yellow-700'; // Kept generic yellow for caution
+                return;
+            }
+
+            quizActive = false;
+            inputElement.disabled = true;
+            document.getElementById('check-button').disabled = true;
+
+            if (userAnswer === correctAnswer) {
+                correctAnswers++;
+                feedbackElement.textContent = `Correct! "${PRACTICE_QUESTIONS[currentQuestionIndex].answer}" is right. 🎉`;
+                feedbackElement.className = 'mt-3 p-3 rounded-lg font-bold bg-green-100 text-secondary'; // Light green background, UTS Green text
+            } else {
+                feedbackElement.textContent = `Incorrect. The correct plural is: "${PRACTICE_QUESTIONS[currentQuestionIndex].answer}". Review Rule ${PRACTICE_QUESTIONS[currentQuestionIndex].rule}.`;
+                feedbackElement.className = 'mt-3 p-3 rounded-lg font-bold bg-red-100 text-red-700'; // Kept red for error
+            }
+
+            updateProgress();
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 2000);
+        }
+
+        function updateProgress() {
+            const percentageCorrect = totalQuestions > 0 ? (correctAnswers / totalQuestions) : 0;
+            const percentageAnswered = totalQuestions > 0 ? (currentQuestionIndex + 1) / totalQuestions : 0;
+            
+            document.getElementById('score-text').textContent = `Score: ${correctAnswers} / ${currentQuestionIndex + 1}`;
+            
+            if (chartInstance) {
+                chartInstance.data.datasets[0].data = [correctAnswers, (currentQuestionIndex + 1) - correctAnswers, totalQuestions - (currentQuestionIndex + 1)];
+                chartInstance.data.datasets[0].backgroundColor = [
+                    'var(--color-uts-green)', // Correct: UTS Green
+                    '#f87171', // Incorrect: Red (standard)
+                    '#d1d5db'  // Remaining: Grey (standard)
+                ];
+                chartInstance.update();
+            }
+        }
+
+        function endQuiz() {
+            const finalScore = `Final Score: ${correctAnswers} out of ${totalQuestions}`;
+            document.getElementById('q-word').textContent = finalScore;
+            document.getElementById('q-number').textContent = 'Quiz Finished!';
+            document.getElementById('q-hint').textContent = 'Great job reviewing the rules!';
+            document.getElementById('check-button').textContent = 'Finished!';
+            document.getElementById('q-feedback').classList.add('hidden');
+            document.getElementById('reset-quiz-button').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            document.getElementById('reset-quiz-button').classList.add('hidden');
+            updateProgress(); 
+            loadQuestion();
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correct', 'Incorrect/Skipped', 'Remaining'],
+                    datasets: [{
+                        data: [0, 0, totalQuestions],
+                        backgroundColor: [
+                            'var(--color-uts-green)', // Correct: UTS Green
+                            '#f87171', // Incorrect: Red
+                            '#d1d5db'  // Remaining: Grey
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 10,
+                                font: { size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            loadRule('R1');
+            loadQuestion();
+            initChart();
+            document.getElementById('check-button').addEventListener('click', checkAnswer);
+            document.getElementById('reset-quiz-button').addEventListener('click', resetQuiz);
+            
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    loadRule(this.getAttribute('data-rule'));
+                });
+            });
+        };
+    </script>
+</body>
+</html>

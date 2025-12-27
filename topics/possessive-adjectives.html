@@ -1,0 +1,443 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Possessive Adjectives Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <style>
+        /* ========================================================================= */
+        /* INSTITUTIONAL PALETTE DEFINITION (Copied from Nouns) */
+        /* ========================================================================= */
+        :root {
+            /* UTS & CELE Colors */
+            --color-uts-blue: #004c8f;
+            --color-uts-green: #00a859;
+            --color-cele-yellow: #ffb700;
+            
+            /* Tailwind Mapping for Harmony */
+            --color-primary: var(--color-uts-blue);
+            --color-secondary: var(--color-uts-green);
+            --color-accent: var(--color-cele-yellow);
+        }
+
+        /* Applying Custom Colors to Tailwind Utility Classes */
+        .bg-primary { background-color: var(--color-primary); }
+        .text-primary { color: var(--color-primary); }
+        .border-primary { border-color: var(--color-primary); }
+
+        .bg-secondary { background-color: var(--color-secondary); }
+        .text-secondary { color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .hover\:bg-accent:hover { background-color: var(--color-accent); }
+        .hover\:text-accent:hover { color: var(--color-accent); }
+        .focus\:border-accent:focus { border-color: var(--color-accent); }
+
+        /* ========================================================================= */
+        /* CUSTOM STYLES */
+        /* ========================================================================= */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 350px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 250px;
+                max-height: 250px;
+            }
+        }
+        /* Active Tab Button (Used for visual tabs if needed, though this design uses simple sections) */
+        .tab-button.active {
+            background-color: var(--color-uts-blue);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 76, 143, 0.4);
+        }
+        /* Custom size for logos in the header */
+        .header-logo {
+            height: 40px; 
+            width: auto;
+            object-fit: contain;
+        }
+        /* Table highlight color (subtle light grey-green) */
+        .bg-rule-highlight {
+            background-color: rgba(0, 168, 89, 0.05); /* Lightest touch of UTS Green */
+        }
+        .text-rule-highlight {
+            color: var(--color-uts-green);
+        }
+        
+        /* FIX RESPONSIVE: Forzar el centrado del título con Absolute positioning en MD y más, mientras los logos están en los extremos */
+        .header-title-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Hacer el título más pequeño en móvil */
+        @media (max-width: 768px) {
+            .header-title-container {
+                position: static; /* Deshabilitar posición absoluta en móvil */
+                transform: none;
+                text-align: center;
+                flex-grow: 1; /* Permite que ocupe espacio */
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen">
+
+<header class="bg-primary shadow-md sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative">
+        
+        <div class="flex-shrink-0">
+            <img src="../assets/images/logo-uts-2024.png" alt="UTS Logo" class="header-logo">
+        </div>
+        
+        <div class="header-title-container hidden md:block">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">Possessive Adjectives</h1>
+        </div>
+        
+        <div class="block md:hidden text-center flex-grow">
+             <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">Possessive Adjectives</h1>
+        </div>
+        
+        <div class="flex-shrink-0">
+            <img src="../assets/images/logo_cele.png" alt="CELE UTS Logo" class="header-logo">
+        </div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 hidden md:block">
+        <nav class="flex justify-center space-x-4">
+            <a href="#intro" class="text-white hover:text-accent transition duration-150">Intro</a>
+            <a href="#chart" class="text-white hover:text-accent transition duration-150">Chart</a>
+            <a href="#practice" class="text-white hover:text-accent transition duration-150">Practice</a>
+            <a href="#summary" class="text-white hover:text-accent transition duration-150">Summary</a>
+        </nav>
+    </div>
+</header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <section id="intro" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-4">
+                <h2 class="text-2xl font-semibold text-secondary mb-2 sm:mb-0">Introduction & Basic Usage</h2>
+                
+                <nav class="text-sm" aria-label="breadcrumb">
+                    <ol class="flex space-x-2 text-gray-500 flex-wrap">
+                        <li><a href="../index.html" class="hover:text-secondary">Home</a></li>
+                        <li>/</li>
+                        <li><a href="../basic-I/index.html" class="hover:text-secondary">Basic I</a></li>
+                        <li>/</li>
+                        <li class="font-semibold text-secondary">Possessive Adjectives</li>
+                    </ol>
+                </nav>
+            </div>
+            
+            <p class="text-sm text-gray-600 mb-6">Possessive adjectives are words that show <strong>ownership</strong> or <strong>possession</strong>. They indicate who something belongs to and are always followed by a noun.</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-4 border-l-4 border-primary bg-blue-50/50 rounded-lg">
+                    <h3 class="text-xl font-medium text-primary mb-2">Key Rule: Always Before a Noun</h3>
+                    <p class="mb-2">Possessive adjectives (*my, your, his, her, its, our, their*) function as adjectives—they modify a noun. </p>
+                    <p class="mt-4 text-sm italic">Example: <strong>My</strong> jacket is red. / <strong>Their</strong> house is big.</p>
+                </div>
+                <div class="p-4 border-l-4 border-secondary bg-rule-highlight rounded-lg">
+                    <h3 class="text-xl font-medium text-secondary mb-2">Agreement: Owner, Not Object</h3>
+                    <p class="mb-2">The adjective must agree with the <strong>owner</strong>, not the item being owned. The form of the adjective never changes.</p>
+                    <p class="mt-4 text-sm italic">Compare: <strong>Her</strong> book (singular object) / <strong>Her</strong> books (plural objects).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="chart" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-primary border-b pb-2 mb-4">Possessive Adjective Reference Chart</h2>
+            <p class="text-sm text-gray-600 mb-6">Use this chart to match the correct possessive adjective to its corresponding subject pronoun.</p>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-left text-sm font-light">
+                    <thead class="border-b bg-gray-100 font-medium text-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Subject Pronoun (Owner)</th>
+                            <th scope="col" class="px-6 py-3">Possessive Adjective</th>
+                            <th scope="col" class="px-6 py-3">Example Sentence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usage-chart">
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">I</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">MY</td>
+                            <td class="px-6 py-2">This is <strong>my</strong> computer.</td>
+                        </tr>
+                        <tr class="border-b bg-gray-50 hover:bg-gray-100">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">YOU</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">YOUR</td>
+                            <td class="px-6 py-2">Is that <strong>your</strong> final answer?</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">HE</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">HIS</td>
+                            <td class="px-6 py-2"><strong>His</strong> passport is expired.</td>
+                        </tr>
+                        <tr class="border-b bg-gray-50 hover:bg-gray-100">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">SHE</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">HER</td>
+                            <td class="px-6 py-2"><strong>Her</strong> birthday is in July.</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">IT</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">ITS</td>
+                            <td class="px-6 py-2">The company released <strong>its</strong> annual report.</td>
+                        </tr>
+                        <tr class="border-b bg-gray-50 hover:bg-gray-100">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">WE</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">OUR</td>
+                            <td class="px-6 py-2"><strong>Our</strong> team won the championship.</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-2 whitespace-nowrap font-medium">THEY</td>
+                            <td class="px-6 py-2 whitespace-nowrap text-secondary font-bold">THEIR</td>
+                            <td class="px-6 py-2">I visited <strong>their</strong> new office.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="practice" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Practice Quiz: Fill in the Blanks</h2>
+            <p class="text-sm text-gray-600 mb-6">Choose the correct possessive adjective to complete the sentence. Your progress will be tracked below.</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 p-4 border border-secondary rounded-lg bg-rule-highlight">
+                    <h3 id="q-number" class="text-lg font-semibold text-secondary mb-2">Question 1 / 10</h3>
+                    <p id="q-sentence" class="text-xl font-extrabold text-gray-800 mb-4">I have a dog. ____ name is Buddy.</p>
+                    
+                    <label for="answer-input" class="block text-sm font-medium text-gray-700 mb-1">Enter the Possessive Adjective:</label>
+                    <input type="text" id="answer-input" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-secondary focus:border-secondary mb-4" placeholder="Type the adjective here (e.g., 'My', 'Her')">
+                    
+                    <button id="check-button" class="w-full bg-primary text-white p-3 rounded-lg hover:bg-secondary transition duration-150 font-bold">Check Answer</button>
+                    
+                    <p id="q-hint" class="mt-4 text-sm italic text-gray-500"></p>
+                    <div id="q-feedback" class="mt-3 p-3 rounded-lg font-bold hidden"></div>
+                </div>
+
+                <div class="md:col-span-1 p-4 flex flex-col items-center">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">Your Progress</h3>
+                    <div class="chart-container">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                    <p id="score-text" class="mt-4 text-2xl font-bold text-primary">Score: 0 / 10</p>
+                    <button id="reset-quiz-button" class="mt-4 bg-gray-400 text-white p-2 rounded-lg hover:bg-gray-500 transition duration-150 font-medium hidden">Reset Practice</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="summary" class="bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Key Takeaway: Adjectives vs. Pronouns</h2>
+            <p class="text-sm text-gray-600 mb-6">Always distinguish between adjectives (which require a noun) and pronouns (which stand alone).</p>
+
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full text-left text-sm font-light">
+                    <thead class="border-b bg-gray-100 font-medium text-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Owner</th>
+                            <th scope="col" class="px-6 py-3">Possessive Adjective</th>
+                            <th scope="col" class="px-6 py-3">Possessive Pronoun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">I</td>
+                            <td class="px-6 py-3 text-secondary font-bold">MY (My coat)</td>
+                            <td class="px-6 py-3 text-primary font-bold">MINE (The coat is mine)</td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-3">We</td>
+                            <td class="px-6 py-3 text-secondary font-bold">OUR (Our idea)</td>
+                            <td class="px-6 py-3 text-primary font-bold">OURS (The idea is ours)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-lg font-bold text-primary mt-6">Possessive Adjective forms: my, your, his, her, its, our, their. Remember: Adjectives must modify a noun!</p>
+        </section>
+
+    </main>
+
+    <script>
+        // --- QUIZ DATA ---
+        const PRACTICE_QUESTIONS = [
+            { id: 1, sentence: 'I have a dog. ____ name is Buddy.', hint: 'The owner is "The dog".', answer: 'Its', rule: 'It' },
+            { id: 2, sentence: 'She is a student. ____ classes are difficult.', hint: 'The owner is "She".', answer: 'Her', rule: 'She' },
+            { id: 3, sentence: 'We live in Mexico. ____ capital is Mexico City.', hint: 'The owner is "Mexico".', answer: 'Its', rule: 'It' },
+            { id: 4, sentence: 'He has two brothers. ____ names are Alex and Mark.', hint: 'The owner are "Alex and Mark".', answer: 'Their', rule: 'They' },
+            { id: 5, sentence: 'You look tired. Is ____ homework too long?', hint: 'The owner is "You".', answer: 'Your', rule: 'You' },
+            { id: 6, sentence: 'They bought a house. ____ yard is huge.', hint: 'The owner is "The house".', answer: 'Its', rule: 'It' },
+            { id: 7, sentence: 'The company changed ____ logo.', hint: 'The owner is "The company" (It).', answer: 'Its', rule: 'It' },
+            { id: 8, sentence: 'I forgot ____ wallet at home.', hint: 'The owner is "I".', answer: 'My', rule: 'I' },
+            { id: 9, sentence: 'Maria and Luis visit ____ grandparents every summer.', hint: 'The owners are "Maria and Luis" (They).', answer: 'Their', rule: 'They' },
+            { id: 10, sentence: 'This is my boss. ____ name is Mr. Smith.', hint: 'The owner is "my boss" (He).', answer: 'His', rule: 'He' },
+        ];
+
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        const totalQuestions = PRACTICE_QUESTIONS.length;
+        let quizActive = true;
+        let chartInstance = null;
+        
+        // Function to load the practice question
+        function loadQuestion() {
+            if (currentQuestionIndex >= totalQuestions) {
+                endQuiz();
+                return;
+            }
+            quizActive = true;
+            document.getElementById('answer-input').disabled = false;
+            document.getElementById('check-button').disabled = false;
+            document.getElementById('check-button').textContent = 'Check Answer';
+            document.getElementById('q-feedback').classList.add('hidden');
+            
+            const q = PRACTICE_QUESTIONS[currentQuestionIndex];
+            document.getElementById('q-number').textContent = `Question ${currentQuestionIndex + 1} / ${totalQuestions}`;
+            document.getElementById('q-sentence').textContent = q.sentence;
+            document.getElementById('q-hint').textContent = `Hint: ${q.hint}`;
+            document.getElementById('answer-input').value = '';
+        }
+
+        // Function to check the answer
+        function checkAnswer() {
+            if (!quizActive) return;
+
+            const inputElement = document.getElementById('answer-input');
+            const feedbackElement = document.getElementById('q-feedback');
+            const userAnswer = inputElement.value.trim();
+            const correctAnswer = PRACTICE_QUESTIONS[currentQuestionIndex].answer;
+            
+            if (userAnswer === '') {
+                feedbackElement.textContent = 'Please enter an answer.';
+                feedbackElement.className = 'mt-3 p-3 rounded-lg font-bold bg-yellow-100 text-yellow-700';
+                feedbackElement.classList.remove('hidden');
+                return;
+            }
+
+            quizActive = false;
+            inputElement.disabled = true;
+            document.getElementById('check-button').disabled = true;
+
+            const isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
+
+            if (isCorrect) {
+                correctAnswers++;
+                feedbackElement.textContent = `Correct! "${correctAnswer}" is the right adjective. 🎉`;
+                feedbackElement.className = 'mt-3 p-3 rounded-lg font-bold bg-green-100 text-secondary';
+            } else {
+                feedbackElement.textContent = `Incorrect. The correct adjective is: "${correctAnswer}". Review the chart for the owner "${PRACTICE_QUESTIONS[currentQuestionIndex].rule}".`;
+                feedbackElement.className = 'mt-3 p-3 rounded-lg font-bold bg-red-100 text-red-700';
+            }
+            feedbackElement.classList.remove('hidden');
+
+            updateProgress();
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                loadQuestion();
+            }, 2000);
+        }
+        
+        // Function to update the chart and score
+        function updateProgress() {
+            document.getElementById('score-text').textContent = `Score: ${correctAnswers} / ${currentQuestionIndex + 1}`;
+            
+            if (chartInstance) {
+                chartInstance.data.datasets[0].data = [
+                    correctAnswers, 
+                    (currentQuestionIndex + 1) - correctAnswers, 
+                    totalQuestions - (currentQuestionIndex + 1)
+                ];
+                chartInstance.data.datasets[0].backgroundColor = [
+                    '#079C23', // Correct: UTS Green
+                    '#f87171', // Incorrect: Red (standard)
+                    '#d1d5db'  // Remaining: Grey (standard)
+                ];
+                chartInstance.update();
+            }
+        }
+
+        // Function to handle quiz end
+        function endQuiz() {
+            const finalScore = `Final Score: ${correctAnswers} out of ${totalQuestions}`;
+            document.getElementById('q-sentence').textContent = finalScore;
+            document.getElementById('q-number').textContent = 'Quiz Finished!';
+            document.getElementById('q-hint').textContent = 'Great job reviewing the adjectives!';
+            document.getElementById('check-button').textContent = 'Finished!';
+            document.getElementById('reset-quiz-button').classList.remove('hidden');
+            document.getElementById('answer-input').classList.add('hidden');
+            document.getElementById('check-button').classList.add('hidden');
+        }
+
+        // Function to reset the quiz
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            document.getElementById('reset-quiz-button').classList.add('hidden');
+            document.getElementById('answer-input').classList.remove('hidden');
+            document.getElementById('check-button').classList.remove('hidden');
+            updateProgress(); 
+            loadQuestion();
+        }
+
+        // Function to initialize the Chart.js doughnut chart
+        function initChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correct', 'Incorrect/Skipped', 'Remaining'],
+                    datasets: [{
+                        data: [0, 0, totalQuestions],
+                        backgroundColor: [
+                            'var(--color-uts-green)', // Correct: UTS Green
+                            '#f87171', // Incorrect: Red
+                            '#d1d5db'  // Remaining: Grey
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 12 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed !== null) { label += context.parsed; }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            loadQuestion();
+            initChart();
+            document.getElementById('check-button').addEventListener('click', checkAnswer);
+            document.getElementById('reset-quiz-button').addEventListener('click', resetQuiz);
+        };
+    </script>
+</body>
+</html>

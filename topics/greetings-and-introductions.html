@@ -1,0 +1,468 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings and Introductions - Presentation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- PALETA INSTITUCIONAL --- */
+        :root {
+            --uts-blue: #004c8f;
+            --uts-green: #00a859;
+            --cele-yellow: #ffb700;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f4f6;
+            min-height: 100vh;
+        }
+
+        /* --- MARCO DE LA PRESENTACIÓN --- */
+        .presentation-frame {
+            width: 100%;
+            max-width: 1000px;
+            background-color: white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin: 2rem auto;
+            /* Altura base mínima para desktop */
+            min-height: 600px; 
+        }
+        
+        /* --- ENCABEZADO --- */
+        .slide-header {
+            background-color: var(--uts-blue);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            height: 50px;
+            object-fit: contain;
+        }
+
+        /* --- CONTENEDOR DE DIAPOSITIVAS --- */
+        .slide-content {
+            flex-grow: 1;
+            /* Importante: Mantiene el flujo normal y solo oculta/muestra el contenido */
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 2rem 3rem;
+            overflow-y: auto; 
+            display: none; /* Ocultar por defecto */
+            flex-direction: column;
+            background-color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+            /* Animación */
+            transition: opacity 0.4s ease-in-out;
+            opacity: 0;
+        }
+
+        .slide.active {
+            display: flex; /* Mostrar solo la activa */
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* --- TIPOGRAFÍA Y ELEMENTOS --- */
+        h2 {
+            color: var(--uts-blue);
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            border-bottom: 4px solid var(--uts-green);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Tablas */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .custom-table th {
+            background-color: var(--uts-blue);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .custom-table td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 10px;
+            color: #374151;
+        }
+        .custom-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        /* Grid for Questions */
+        .qa-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .qa-card {
+            background-color: #f0fdf4; /* Tinte verde claro */
+            border-left: 5px solid var(--uts-green);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        /* --- CONTROLES --- */
+        .controls {
+            background-color: #f3f4f6;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .btn-nav {
+            background-color: var(--uts-blue);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-nav:hover {
+            background-color: #003366;
+        }
+        .btn-nav:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Title Slide Specifics */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,76,143,0.05) 0%, rgba(0,168,89,0.05) 100%);
+        }
+        .title-slide h1 {
+            font-size: 4rem;
+            color: var(--uts-blue);
+        }
+
+        /* Responsive Overrides for Mobile */
+        @media (max-width: 768px) {
+            .presentation-frame {
+                min-height: 85vh; 
+                margin: 0;
+                border-radius: 0;
+            }
+            .slide {
+                padding: 1rem;
+            }
+            .title-slide h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .qa-grid { grid-template-columns: 1fr; }
+            .custom-table th, .custom-table td {
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+            .controls { padding: 0.75rem; }
+            .btn-nav { padding: 0.4rem 1rem; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen">
+
+    <div class="presentation-frame">
+        <!-- ENCABEZADO (Persistente) -->
+        <div class="slide-header">
+            <img src="../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo-img">
+            <span class="text-xl font-bold tracking-wider hidden sm:block">ENGLISH BASIC I</span>
+            <img src="../assets/images/logo_cele.png" alt="CELE Logo" class="logo-img">
+        </div>
+
+        <!-- CONTENIDO DE DIAPOSITIVAS -->
+        <div class="slide-content">
+
+            <!-- Slide 1: Portada -->
+            <div class="slide title-slide active" id="slide-1">
+                <h1 class="font-bold">Greetings &<br>Introductions</h1>
+                <p>Goal for Today</p>
+                
+            </div>
+
+            <!-- Slide 2: Objetivo -->
+            <div class="slide" id="slide-2">
+                <h2>Goal for Today</h2>
+                <div class="flex flex-col justify-center h-full">
+                    <ul class="space-y-6 text-xl text-gray-700 list-disc pl-10">
+                        <li>Learn how to greet people formally and informally.</li>
+                        <li>Learn how to introduce yourself.</li>
+                        <li>Learn how to introduce others.</li>
+                        <li>Ask and answer basic personal information questions.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 3: Saludos -->
+            <div class="slide" id="slide-3">
+                <h2>Greetings (Salutations)</h2>
+                <p class="mb-4 text-gray-600 italic">Always use a formal greeting when meeting someone for the first time in a professional setting.</p>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Situation</th>
+                            <th>Formal (Business/Elders)</th>
+                            <th>Informal (Friends/Family)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Greeting</strong></td>
+                            <td>Good morning / afternoon / evening.</td>
+                            <td>Hi / Hey!</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Asking How?</strong></td>
+                            <td>How are you? / How have you been?</td>
+                            <td>What's up? / How's it going?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Response</strong></td>
+                            <td>I'm doing well, thank you. And you?</td>
+                            <td>I'm great! / Good / Not bad.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Closing</strong></td>
+                            <td>It's a pleasure to meet you.</td>
+                            <td>Nice to see you! / Catch you later.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Slide 4: Presentarse -->
+            <div class="slide" id="slide-4">
+                <h2>Introducing Yourself</h2>
+                <p class="mb-4 text-gray-600">Start a conversation with someone you don't know.</p>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Function</th>
+                            <th style="width: 40%;">Phrase</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Initiate</strong></td>
+                            <td>Hello. My name is... / I'm...</td>
+                            <td>Hello. My name is David Miller.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ask Name</strong></td>
+                            <td>And what is your name? / And you are?</td>
+                            <td>And you are?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Response</strong></td>
+                            <td>My name is... / I'm...</td>
+                            <td>I'm Sarah Johnson.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Show Pleasure</strong></td>
+                            <td>It's nice to meet you.</td>
+                            <td>It's a pleasure to meet you, Sarah.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Slide 5: Presentar a Otros -->
+            <div class="slide" id="slide-5">
+                <h2>Introducing Others</h2>
+                <p class="mb-4 text-gray-600">When you are the link between two people.</p>
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Phrase</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Formal</strong></td>
+                            <td>I'd like to introduce...</td>
+                            <td>"Maria, I'd like to introduce Mr. Jones, my colleague."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Informal</strong></td>
+                            <td>Meet... / This is...</td>
+                            <td>"Meet Alex. He's a friend from my class."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Acknowledging</strong></td>
+                            <td>(Response)</td>
+                            <td>"Nice to meet you, Mr. Jones."</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+
+            <!-- Slide 6: Preguntas Básicas 1 -->
+            <div class="slide" id="slide-6">
+                <h2>Asking for Basic Information (Part 1)</h2>
+                <p class="mb-4 text-gray-600">Keep the conversation going.</p>
+                <div class="qa-grid">
+                    <div class="qa-card">
+                        <div class="qa-question">Where are you from?</div>
+                        <div class="qa-answer">I'm from Brazil. / I grew up in London.</div>
+                    </div>
+                    <div class="qa-card">
+                        <div class="qa-question">What do you do?</div>
+                        <div class="qa-answer">I'm a student. / I work as an accountant.</div>
+                    </div>
+                    <div class="qa-card">
+                        <div class="qa-question">What are your hobbies?</div>
+                        <div class="qa-answer">I enjoy hiking and reading. / I like video games.</div>
+                    </div>
+                    <div class="qa-card">
+                        <div class="qa-question">How old are you?</div>
+                        <div class="qa-answer">I am 25 years old.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Preguntas Básicas 2 -->
+            <div class="slide" id="slide-7">
+                <h2>Asking for Basic Information (Part 2)</h2>
+                <div class="qa-grid">
+                    <div class="qa-card">
+                        <div class="qa-question">Do you have any brothers or sisters?</div>
+                        <div class="qa-answer">Yes, I have one brother. / No, I am an only child.</div>
+                    </div>
+                    <div class="qa-card">
+                        <div class="qa-question">What is your favorite food?</div>
+                        <div class="qa-answer">My favorite food is pizza. / I really like sushi.</div>
+                    </div>
+                    <div class="qa-card">
+                        <div class="qa-question">Do you like learning English?</div>
+                        <div class="qa-answer">Yes, I love it! / It's difficult, but I like it.</div>
+                    </div>
+                    <div class="qa-card">
+                        <div class="qa-question">What time do you start class?</div>
+                        <div class="qa-answer">I start class at 8:30 in the morning.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLES -->
+        <div class="controls">
+            <button class="btn-nav" id="prevBtn" onclick="changeSlide(-1)">&#8592; Anterior</button>
+            <div class="slide-counter">
+                Diapositiva <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">7</span>
+            </div>
+            <button class="btn-nav" id="nextBtn" onclick="changeSlide(1)">Siguiente &#8594;</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideNumDisplay = document.getElementById('currentSlideNum');
+        const totalSlidesNumDisplay = document.getElementById('totalSlidesNum');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Set total slides
+        totalSlidesNumDisplay.textContent = totalSlides;
+
+        function updateControls() {
+            // Update counter
+            currentSlideNumDisplay.textContent = currentSlide + 1;
+
+            // Enable/Disable buttons
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Función para ajustar la altura del contenedor principal a la altura de la diapositiva activa
+        function updatePresentationFrameHeight() {
+            const activeSlide = document.querySelector('.slide.active');
+            const presentationFrame = document.querySelector('.presentation-frame');
+            
+            if (activeSlide && presentationFrame) {
+                // Sumamos la altura del contenido de la diapositiva y la altura fija del encabezado/controles
+                const contentHeight = activeSlide.scrollHeight;
+                const headerHeight = document.querySelector('.slide-header').offsetHeight;
+                const controlsHeight = document.querySelector('.controls').offsetHeight;
+                
+                // Aplicamos la altura mínima para evitar que se comprima demasiado en desktop
+                const newHeight = Math.max(contentHeight + headerHeight + controlsHeight + 20, 600); // 600px min height
+                
+                // Actualizamos solo la altura del contenedor principal
+                presentationFrame.style.height = `${newHeight}px`;
+            }
+        }
+
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            updateControls();
+             // Esperar un momento breve para que el navegador recalcule el scrollHeight antes de ajustar la altura.
+            setTimeout(updatePresentationFrameHeight, 50);
+        }
+
+        function changeSlide(direction) {
+            const newIndex = currentSlide + direction;
+            if (newIndex >= 0 && newIndex < totalSlides) {
+                currentSlide = newIndex;
+                showSlide(currentSlide);
+            }
+        }
+
+        // Inicializar al cargar el DOM
+        document.addEventListener('DOMContentLoaded', () => {
+             showSlide(0); 
+        });
+
+        // Aseguramos que la altura se recalcule si la ventana cambia de tamaño (para tablets/móviles)
+        window.addEventListener('resize', () => {
+            showSlide(currentSlide); 
+        });
+    </script>
+</body>
+</html>
