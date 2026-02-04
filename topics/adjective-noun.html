@@ -1,336 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adjective + Noun Flashcards</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom Fonts: Comfortaa (Headings) and Nunito (Body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        /* Base Styles */
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #f0f9ff; /* bg-sky-50 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            font-family: 'Comfortaa', cursive;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adjective + Noun Flashcards</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Fonts: Comfortaa (Headings) and Nunito (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        /* 3D Flip Card Styles */
-        .flashcard-container {
-            perspective: 1000px;
-            width: 100%;
-            max-width: 600px; /* Max width for the card */
-            height: 400px; /* Fixed height for consistent feel */
-            margin-bottom: 24px;
-        }
+  <style>
+    /* Base Styles */
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #f0f9ff;
+      /* bg-sky-50 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        .flashcard {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(3, 105, 161, 0.2); /* Blue shadow */
-            border-radius: 20px;
-        }
+    h1,
+    h2,
+    h3 {
+      font-family: 'Comfortaa', cursive;
+    }
 
-        .flashcard.is-flipped {
-            transform: rotateY(180deg);
-        }
+    /* 3D Flip Card Styles */
+    .flashcard-container {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 600px;
+      /* Max width for the card */
+      height: 400px;
+      /* Fixed height for consistent feel */
+      margin-bottom: 24px;
+    }
 
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            background-color: white;
-        }
+    .flashcard {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(3, 105, 161, 0.2);
+      /* Blue shadow */
+      border-radius: 20px;
+    }
 
-        .card-front {
-            background-color: #0369a1; /* Dark Blue */
-            color: white;
-            border: 4px solid #bae6fd;
-        }
+    .flashcard.is-flipped {
+      transform: rotateY(180deg);
+    }
 
-        .card-back {
-            transform: rotateY(180deg);
-            background-color: #ffffff;
-            color: #1f2937;
-            border: 4px solid #fde047; /* Yellow border */
-        }
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      background-color: white;
+    }
 
-        /* Custom Content Styling */
-        .card-front h2 {
-            @apply text-5xl font-extrabold mb-4;
-        }
-        .card-front .icon {
-            @apply text-7xl mb-6 text-amber-300;
-        }
+    .card-front {
+      background-color: #0369a1;
+      /* Dark Blue */
+      color: white;
+      border: 4px solid #bae6fd;
+    }
 
-        .card-back h3 {
-            @apply text-3xl font-extrabold text-sky-700 mb-4;
-        }
+    .card-back {
+      transform: rotateY(180deg);
+      background-color: #ffffff;
+      color: #1f2937;
+      border: 4px solid #fde047;
+      /* Yellow border */
+    }
 
-        .card-back ul {
-            @apply list-none p-0 space-y-2 mt-4;
-        }
-        .card-back li {
-            @apply text-xl text-slate-700 font-semibold;
-        }
+    /* Custom Content Styling */
+    .card-front h2 {
+      @apply text-5xl font-extrabold mb-4;
+    }
 
-        .highlight-text {
-            @apply text-2xl font-extrabold text-red-600 bg-red-50 p-2 rounded-lg inline-block my-2;
-        }
-        
-        .correct-example {
-            @apply text-2xl font-extrabold text-emerald-600 bg-emerald-50 p-2 rounded-lg inline-block my-2;
-        }
+    .card-front .icon {
+      @apply text-7xl mb-6 text-amber-300;
+    }
 
-        /* Navigation Button Styling */
-        .nav-button {
-            @apply px-6 py-3 rounded-full font-bold text-lg transition duration-300 shadow-md flex items-center space-x-2 transform active:scale-95; /* Added transform for pop effect */
-        }
+    .card-back h3 {
+      @apply text-3xl font-extrabold text-sky-700 mb-4;
+    }
 
-        .nav-button:disabled {
-            @apply bg-gray-300 text-gray-500 cursor-not-allowed shadow-inner;
-        }
+    .card-back ul {
+      @apply list-none p-0 space-y-2 mt-4;
+    }
 
-        /* Specific button styling */
-        #prevBtn {
-            @apply bg-sky-600 text-white hover:bg-sky-700 shadow-sky-400/50;
-        }
+    .card-back li {
+      @apply text-xl text-slate-700 font-semibold;
+    }
 
-        #nextBtn {
-            @apply bg-amber-500 text-white hover:bg-amber-600 shadow-amber-400/50;
-        }
+    .highlight-text {
+      @apply text-2xl font-extrabold text-red-600 bg-red-50 p-2 rounded-lg inline-block my-2;
+    }
 
-    </style>
+    .correct-example {
+      @apply text-2xl font-extrabold text-emerald-600 bg-emerald-50 p-2 rounded-lg inline-block my-2;
+    }
+
+    /* Navigation Button Styling */
+    .nav-button {
+      @apply px-6 py-3 rounded-full font-bold text-lg transition duration-300 shadow-md flex items-center space-x-2 transform active:scale-95;
+      /* Added transform for pop effect */
+    }
+
+    .nav-button:disabled {
+      @apply bg-gray-300 text-gray-500 cursor-not-allowed shadow-inner;
+    }
+
+    /* Specific button styling */
+    #prevBtn {
+      @apply bg-sky-600 text-white hover:bg-sky-700 shadow-sky-400/50;
+    }
+
+    #nextBtn {
+      @apply bg-amber-500 text-white hover:bg-amber-600 shadow-amber-400/50;
+    }
+  </style>
 </head>
+
 <body>
 
-    <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-700 mb-8 border-b-4 border-sky-300 pb-2">
-        <i class="fa-solid fa-graduation-cap mr-3 text-amber-500"></i> Adjective + Noun
-    </h1>
+  <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-700 mb-8 border-b-4 border-sky-300 pb-2">
+    <i class="fa-solid fa-graduation-cap mr-3 text-amber-500"></i> Adjective + Noun
+  </h1>
 
-    <div id="flashcardContainer" class="flashcard-container" onclick="flipCard()">
-        <div id="flashcard" class="flashcard">
-            <!-- Card Front Content (Question/Topic) -->
-            <div id="cardFront" class="card-face card-front">
-                <!-- Content will be injected here by JavaScript -->
-            </div>
-            
-            <!-- Card Back Content (Answer/Definition) -->
-            <div id="cardBack" class="card-face card-back">
-                <!-- Content will be injected here by JavaScript -->
-            </div>
-        </div>
+  <div id="flashcardContainer" class="flashcard-container" onclick="flipCard()">
+    <div id="flashcard" class="flashcard">
+      <!-- Card Front Content (Question/Topic) -->
+      <div id="cardFront" class="card-face card-front">
+        <!-- Content will be injected here by JavaScript -->
+      </div>
+
+      <!-- Card Back Content (Answer/Definition) -->
+      <div id="cardBack" class="card-face card-back">
+        <!-- Content will be injected here by JavaScript -->
+      </div>
     </div>
+  </div>
 
-    <!-- Navigation and Status -->
-    <div class="flex flex-col sm:flex-row justify-between items-center w-full max-w-xl px-4">
-        <p id="cardStatus" class="text-lg font-semibold text-slate-600 mb-4 sm:mb-0"></p>
-        
-        <div class="flex space-x-4">
-            <button id="prevBtn" class="nav-button" disabled onclick="prevCard()">
-                <i class="fa-solid fa-arrow-left"></i> <span>Previous</span>
-            </button>
-            <button id="nextBtn" class="nav-button" onclick="nextCard()">
-                <span>Next</span> <i class="fa-solid fa-arrow-right"></i>
-            </button>
-        </div>
+  <!-- Navigation and Status -->
+  <div class="flex flex-col sm:flex-row justify-between items-center w-full max-w-xl px-4">
+    <p id="cardStatus" class="text-lg font-semibold text-slate-600 mb-4 sm:mb-0"></p>
+
+    <div class="flex space-x-4">
+      <button id="prevBtn" class="nav-button" disabled onclick="prevCard()">
+        <i class="fa-solid fa-arrow-left"></i> <span>Previous</span>
+      </button>
+      <button id="nextBtn" class="nav-button" onclick="nextCard()">
+        <span>Next</span> <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
+  </div>
 
-    <script>
-        // --- Data Structure for Flashcards ---
-        const cards = [
-            {
-                topic: "Lesson Start",
-                front: {
-                    title: "Welcome to Adjectives + Nouns!",
-                    icon: '<i class="fa-solid fa-shapes icon"></i>',
-                    subtitle: "Click the card to begin your lesson."
-                },
-                back: {
-                    title: "<strong>Introduction</strong>",
-                    content: 'This interactive lesson will teach you the Golden Rule of English grammar: how to correctly pair adjectives and nouns. Swipe to continue!',
-                }
-            },
-            {
-                topic: "What is a Noun?",
-                front: {
-                    title: "What is a NOUN?",
-                    icon: '<i class="fa-solid fa-cube icon"></i>',
-                    subtitle: "Tap to see the definition."
-                },
-                back: {
-                    title: "NOUN Definition",
-                    content: 'A Noun is a naming word. It names a:<ul class="text-left mx-auto max-w-xs"><li><i class="fa-solid fa-user text-sky-500 mr-2"></i> Person (Teacher, Student)</li><li><i class="fa-solid fa-location-dot text-sky-500 mr-2"></i> Place (School, Park)</li><li><i class="fa-solid fa-mug-hot text-sky-500 mr-2"></i> Thing (Book, Apple)</li><li><i class="fa-solid fa-dog text-sky-500 mr-2"></i> Animal (Dog, Cat)</li></ul>',
-                }
-            },
-            {
-                topic: "What is an Adjective?",
-                front: {
-                    title: "What is an ADJECTIVE?",
-                    icon: '<i class="fa-solid fa-lightbulb icon"></i>',
-                    subtitle: "Tap to see its job."
-                },
-                back: {
-                    title: "ADJECTIVE Definition",
-                    content: 'An Adjective is a DESCRIBING word. It gives us more information about the noun.<p class="mt-4 text-xl">Example: <span class="highlight-text bg-red-100 text-red-700">Red</span> Apple</p>',
-                }
-            },
-            {
-                topic: "The Golden Rule",
-                front: {
-                    title: "Where does the ADJECTIVE go?",
-                    icon: '<i class="fa-solid fa-gavel icon"></i>',
-                    subtitle: "Tap for the Golden Rule of English."
-                },
-                back: {
-                    title: "THE GOLDEN RULE",
-                    content: 'The Adjective always comes <span class="highlight-text bg-amber-100 text-amber-700">BEFORE</span> the Noun.<p class="mt-4">❌ <span class="highlight-text">Dog Happy</span></p><p>✅ <span class="correct-example">Happy Dog</span></p>',
-                }
-            },
-            {
-                topic: "Adjective Type: Colors",
-                front: {
-                    title: "Colors as Adjectives",
-                    icon: '<i class="fa-solid fa-palette icon"></i>',
-                    subtitle: "Tap for examples."
-                },
-                back: {
-                    title: "EXAMPLES: Colors",
-                    content: 'Colors describe the noun:<ul class="text-left mx-auto max-w-xs"><li>A <span class="correct-example">red</span> car.</li><li>The <span class="correct-example">blue</span> sky.</li><li>A <span class="correct-example">yellow</span> banana.</li></ul>',
-                }
-            },
-            {
-                topic: "Adjective Type: Size",
-                front: {
-                    title: "Size as Adjectives",
-                    icon: '<i class="fa-solid fa-arrows-up-down icon"></i>',
-                    subtitle: "Tap for examples."
-                },
-                back: {
-                    title: "EXAMPLES: Size",
-                    content: 'Size words describe dimension:<ul class="text-left mx-auto max-w-xs"><li>A <span class="correct-example">big</span> elephant.</li><li>A <span class="correct-example">small</span> mouse.</li><li>A <span class="correct-example">tall</span> building.</li></ul>',
-                }
-            },
-            {
-                topic: "Adjective Type: Feelings/Opinion",
-                front: {
-                    title: "Feelings & Opinion",
-                    icon: '<i class="fa-solid fa-face-smile icon"></i>',
-                    subtitle: "Tap for examples."
-                },
-                back: {
-                    title: "EXAMPLES: Feelings",
-                    content: 'These describe quality or emotion:<ul class="text-left mx-auto max-w-xs"><li>A <span class="correct-example">happy</span> girl.</li><li>A <span class="correct-example">sad</span> movie.</li><li>A <span class="correct-example">delicious</span> cake.</li></ul>',
-                }
-            },
-            {
-                topic: "Adjective Order Rule",
-                front: {
-                    title: "Order: Size vs. Color",
-                    icon: '<i class="fa-solid fa-list-ol icon"></i>',
-                    subtitle: "Tap to learn the order of adjectives."
-                },
-                back: {
-                    title: "ADJECTIVE ORDER",
-                    content: 'When using Size and Color, Size usually comes first.<p class="mt-4 text-3xl font-extrabold text-sky-800">A <span class="text-red-600">Big</span> <span class="text-green-600">Green</span> Tree</p><p class="text-xl mt-2">(Size) (Color) (Noun)</p>',
-                }
-            },
-            // --- NEW QUIZ CARDS START HERE ---
-            {
-                topic: "Quiz 1: Order",
-                front: {
-                    title: "QUIZ 1: Order",
-                    icon: '<i class="fa-solid fa-question icon text-emerald-300"></i>',
-                    subtitle: 'How would you order these? Tap to check! "old, blue, car"',
-                },
-                back: {
-                    title: "Answer: Order",
-                    content: 'The correct order is:<p class="text-3xl font-extrabold text-slate-800 my-4">"old, blue, car"</p><p class="text-xl mt-2">Remember: Age (old) usually comes before Color (blue).</p><p class="correct-example">An old blue car</p>',
-                }
-            },
-            {
-                topic: "Quiz 2: Identification",
-                front: {
-                    title: "QUIZ 2: Adjective or Noun?",
-                    icon: '<i class="fa-solid fa-question icon text-emerald-300"></i>',
-                    subtitle: 'Which word is the ADJECTIVE? Tap to check! "Funny Clown"',
-                },
-                back: {
-                    title: "Answer: Identification",
-                    content: 'Which word describes the noun?<p class="text-3xl font-extrabold text-slate-800 my-4">"Funny Clown"</p><p class="text-xl mt-2">The word <span class="correct-example">Funny</span> is the adjective because it describes the clown (noun).</p>',
-                }
-            },
-            {
-                topic: "Quiz 3: Placement",
-                front: {
-                    title: "QUIZ 3: Placement",
-                    icon: '<i class="fa-solid fa-question icon text-emerald-300"></i>',
-                    subtitle: 'Which sentence is correct? Tap to check!',
-                },
-                back: {
-                    title: "Answer: Placement",
-                    content: 'Which is correct?<ul class="text-left mx-auto max-w-xs space-y-2"><li>❌ I saw a <span class="highlight-text">dog big</span>.</li><li>✅ I saw a <span class="correct-example">big dog</span>.</li></ul><p class="text-xl mt-4">The adjective must go <span class="highlight-text bg-amber-100 text-amber-700">before</span> the noun!</p>',
-                }
-            },
-            // --- LESSON COMPLETE CARD ---
-            {
-                topic: "Lesson Complete!",
-                front: {
-                    title: "Lesson Complete!",
-                    icon: '<i class="fa-solid fa-check-circle icon"></i>',
-                    subtitle: "You mastered the Adjective + Noun rule!"
-                },
-                back: {
-                    title: "Next Steps",
-                    content: 'You can go back to review any card using the "Previous" button.',
-                }
-            }
-        ];
+  <script>
+    // --- Data Structure for Flashcards ---
+    const cards = [
+      {
+        topic: "Lesson Start",
+        front: {
+          title: "Welcome to Adjectives + Nouns!",
+          icon: '<i class="fa-solid fa-shapes icon"></i>',
+          subtitle: "Click the card to begin your lesson."
+        },
+        back: {
+          title: "<strong>Introduction</strong>",
+          content: 'This interactive lesson will teach you the Golden Rule of English grammar: how to correctly pair adjectives and nouns. Swipe to continue!',
+        }
+      },
+      {
+        topic: "What is a Noun?",
+        front: {
+          title: "What is a NOUN?",
+          icon: '<i class="fa-solid fa-cube icon"></i>',
+          subtitle: "Tap to see the definition."
+        },
+        back: {
+          title: "NOUN Definition",
+          content: 'A Noun is a naming word. It names a:<ul class="text-left mx-auto max-w-xs"><li><i class="fa-solid fa-user text-sky-500 mr-2"></i> Person (Teacher, Student)</li><li><i class="fa-solid fa-location-dot text-sky-500 mr-2"></i> Place (School, Park)</li><li><i class="fa-solid fa-mug-hot text-sky-500 mr-2"></i> Thing (Book, Apple)</li><li><i class="fa-solid fa-dog text-sky-500 mr-2"></i> Animal (Dog, Cat)</li></ul>',
+        }
+      },
+      {
+        topic: "What is an Adjective?",
+        front: {
+          title: "What is an ADJECTIVE?",
+          icon: '<i class="fa-solid fa-lightbulb icon"></i>',
+          subtitle: "Tap to see its job."
+        },
+        back: {
+          title: "ADJECTIVE Definition",
+          content: 'An Adjective is a DESCRIBING word. It gives us more information about the noun.<p class="mt-4 text-xl">Example: <span class="highlight-text bg-red-100 text-red-700">Red</span> Apple</p>',
+        }
+      },
+      {
+        topic: "The Golden Rule",
+        front: {
+          title: "Where does the ADJECTIVE go?",
+          icon: '<i class="fa-solid fa-gavel icon"></i>',
+          subtitle: "Tap for the Golden Rule of English."
+        },
+        back: {
+          title: "THE GOLDEN RULE",
+          content: 'The Adjective always comes <span class="highlight-text bg-amber-100 text-amber-700">BEFORE</span> the Noun.<p class="mt-4">❌ <span class="highlight-text">Dog Happy</span></p><p>✅ <span class="correct-example">Happy Dog</span></p>',
+        }
+      },
+      {
+        topic: "Adjective Type: Colors",
+        front: {
+          title: "Colors as Adjectives",
+          icon: '<i class="fa-solid fa-palette icon"></i>',
+          subtitle: "Tap for examples."
+        },
+        back: {
+          title: "EXAMPLES: Colors",
+          content: 'Colors describe the noun:<ul class="text-left mx-auto max-w-xs"><li>A <span class="correct-example">red</span> car.</li><li>The <span class="correct-example">blue</span> sky.</li><li>A <span class="correct-example">yellow</span> banana.</li></ul>',
+        }
+      },
+      {
+        topic: "Adjective Type: Size",
+        front: {
+          title: "Size as Adjectives",
+          icon: '<i class="fa-solid fa-arrows-up-down icon"></i>',
+          subtitle: "Tap for examples."
+        },
+        back: {
+          title: "EXAMPLES: Size",
+          content: 'Size words describe dimension:<ul class="text-left mx-auto max-w-xs"><li>A <span class="correct-example">big</span> elephant.</li><li>A <span class="correct-example">small</span> mouse.</li><li>A <span class="correct-example">tall</span> building.</li></ul>',
+        }
+      },
+      {
+        topic: "Adjective Type: Feelings/Opinion",
+        front: {
+          title: "Feelings & Opinion",
+          icon: '<i class="fa-solid fa-face-smile icon"></i>',
+          subtitle: "Tap for examples."
+        },
+        back: {
+          title: "EXAMPLES: Feelings",
+          content: 'These describe quality or emotion:<ul class="text-left mx-auto max-w-xs"><li>A <span class="correct-example">happy</span> girl.</li><li>A <span class="correct-example">sad</span> movie.</li><li>A <span class="correct-example">delicious</span> cake.</li></ul>',
+        }
+      },
+      {
+        topic: "Adjective Order Rule",
+        front: {
+          title: "Order: Size vs. Color",
+          icon: '<i class="fa-solid fa-list-ol icon"></i>',
+          subtitle: "Tap to learn the order of adjectives."
+        },
+        back: {
+          title: "ADJECTIVE ORDER",
+          content: 'When using Size and Color, Size usually comes first.<p class="mt-4 text-3xl font-extrabold text-sky-800">A <span class="text-red-600">Big</span> <span class="text-green-600">Green</span> Tree</p><p class="text-xl mt-2">(Size) (Color) (Noun)</p>',
+        }
+      },
+      // --- NEW QUIZ CARDS START HERE ---
+      {
+        topic: "Quiz 1: Order",
+        front: {
+          title: "QUIZ 1: Order",
+          icon: '<i class="fa-solid fa-question icon text-emerald-300"></i>',
+          subtitle: 'How would you order these? Tap to check! "old, blue, car"',
+        },
+        back: {
+          title: "Answer: Order",
+          content: 'The correct order is:<p class="text-3xl font-extrabold text-slate-800 my-4">"old, blue, car"</p><p class="text-xl mt-2">Remember: Age (old) usually comes before Color (blue).</p><p class="correct-example">An old blue car</p>',
+        }
+      },
+      {
+        topic: "Quiz 2: Identification",
+        front: {
+          title: "QUIZ 2: Adjective or Noun?",
+          icon: '<i class="fa-solid fa-question icon text-emerald-300"></i>',
+          subtitle: 'Which word is the ADJECTIVE? Tap to check! "Funny Clown"',
+        },
+        back: {
+          title: "Answer: Identification",
+          content: 'Which word describes the noun?<p class="text-3xl font-extrabold text-slate-800 my-4">"Funny Clown"</p><p class="text-xl mt-2">The word <span class="correct-example">Funny</span> is the adjective because it describes the clown (noun).</p>',
+        }
+      },
+      {
+        topic: "Quiz 3: Placement",
+        front: {
+          title: "QUIZ 3: Placement",
+          icon: '<i class="fa-solid fa-question icon text-emerald-300"></i>',
+          subtitle: 'Which sentence is correct? Tap to check!',
+        },
+        back: {
+          title: "Answer: Placement",
+          content: 'Which is correct?<ul class="text-left mx-auto max-w-xs space-y-2"><li>❌ I saw a <span class="highlight-text">dog big</span>.</li><li>✅ I saw a <span class="correct-example">big dog</span>.</li></ul><p class="text-xl mt-4">The adjective must go <span class="highlight-text bg-amber-100 text-amber-700">before</span> the noun!</p>',
+        }
+      },
+      // --- LESSON COMPLETE CARD ---
+      {
+        topic: "Lesson Complete!",
+        front: {
+          title: "Lesson Complete!",
+          icon: '<i class="fa-solid fa-check-circle icon"></i>',
+          subtitle: "You mastered the Adjective + Noun rule!"
+        },
+        back: {
+          title: "Next Steps",
+          content: 'You can go back to review any card using the "Previous" button.',
+        }
+      }
+    ];
 
-        // --- State Variables ---
-        let currentCardIndex = 0;
-        let isFlipped = false;
+    // --- State Variables ---
+    let currentCardIndex = 0;
+    let isFlipped = false;
 
-        // --- DOM Elements ---
-        const flashcard = document.getElementById('flashcard');
-        const cardFront = document.getElementById('cardFront');
-        const cardBack = document.getElementById('cardBack');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const cardStatus = document.getElementById('cardStatus');
+    // --- DOM Elements ---
+    const flashcard = document.getElementById('flashcard');
+    const cardFront = document.getElementById('cardFront');
+    const cardBack = document.getElementById('cardBack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const cardStatus = document.getElementById('cardStatus');
 
-        // --- Core Functions ---
+    // --- Core Functions ---
 
-        function displayCard() {
-            const cardData = cards[currentCardIndex];
-            
-            // Render Front (Topic/Question)
-            cardFront.innerHTML = `
+    function displayCard() {
+      const cardData = cards[currentCardIndex];
+
+      // Render Front (Topic/Question)
+      cardFront.innerHTML = `
                 <div class="p-4">
                     ${cardData.front.icon}
                     <h2>${cardData.front.title}</h2>
@@ -338,8 +353,8 @@
                 </div>
             `;
 
-            // Render Back (Answer/Definition)
-            cardBack.innerHTML = `
+      // Render Back (Answer/Definition)
+      cardBack.innerHTML = `
                 <div class="p-4">
                     <h3>${cardData.back.title}</h3>
                     <div class="mt-4 text-lg">
@@ -347,55 +362,56 @@
                     </div>
                 </div>
             `;
-            
-            // Reset flip state and update controls
-            isFlipped = false;
-            flashcard.classList.remove('is-flipped');
-            updateControls();
-        }
 
-        function flipCard() {
-            // Only allow flip if it's not the last card (summary card)
-            if (currentCardIndex < cards.length) {
-                isFlipped = !isFlipped;
-                flashcard.classList.toggle('is-flipped', isFlipped);
-            }
-        }
+      // Reset flip state and update controls
+      isFlipped = false;
+      flashcard.classList.remove('is-flipped');
+      updateControls();
+    }
 
-        function nextCard() {
-            if (currentCardIndex < cards.length - 1) {
-                currentCardIndex++;
-                displayCard();
-            }
-        }
+    function flipCard() {
+      // Only allow flip if it's not the last card (summary card)
+      if (currentCardIndex < cards.length) {
+        isFlipped = !isFlipped;
+        flashcard.classList.toggle('is-flipped', isFlipped);
+      }
+    }
 
-        function prevCard() {
-            if (currentCardIndex > 0) {
-                currentCardIndex--;
-                displayCard();
-            }
-        }
+    function nextCard() {
+      if (currentCardIndex < cards.length - 1) {
+        currentCardIndex++;
+        displayCard();
+      }
+    }
 
-        function updateControls() {
-            // Disable buttons at start and end
-            prevBtn.disabled = currentCardIndex === 0;
-            nextBtn.disabled = currentCardIndex === cards.length - 1;
+    function prevCard() {
+      if (currentCardIndex > 0) {
+        currentCardIndex--;
+        displayCard();
+      }
+    }
 
-            // Update status text
-            if (currentCardIndex === 0) {
-                cardStatus.textContent = "Introduction";
-            } else if (currentCardIndex === cards.length - 1) {
-                cardStatus.textContent = "Lesson Complete!";
-            } else {
-                cardStatus.textContent = `Card ${currentCardIndex} of ${cards.length - 1}`;
-            }
-        }
+    function updateControls() {
+      // Disable buttons at start and end
+      prevBtn.disabled = currentCardIndex === 0;
+      nextBtn.disabled = currentCardIndex === cards.length - 1;
 
-        // --- Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-            displayCard();
-        });
-    </script>
+      // Update status text
+      if (currentCardIndex === 0) {
+        cardStatus.textContent = "Introduction";
+      } else if (currentCardIndex === cards.length - 1) {
+        cardStatus.textContent = "Lesson Complete!";
+      } else {
+        cardStatus.textContent = `Card ${currentCardIndex} of ${cards.length - 1}`;
+      }
+    }
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+      displayCard();
+    });
+  </script>
 
 </body>
+
 </html>

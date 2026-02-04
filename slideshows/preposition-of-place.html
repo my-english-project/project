@@ -1,421 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prepositions of Place - Lesson</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root {
-            --uts-blue: #004c8f;
-            --uts-green: #00a859;
-        }
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: #f1f5f9;
-        }
-        h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
-        }
-        .slide {
-            display: none;
-            animation: fadeIn 0.4s ease-out;
-        }
-        .slide.active {
-            display: flex;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .image-placeholder {
-            background: #f8fafc;
-            border: 2px dashed #cbd5e1;
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 350px;
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            color: #64748b;
-            font-style: italic;
-        }
-        .btn-nav {
-            background-color: var(--uts-blue);
-            transition: all 0.3s;
-        }
-        .btn-nav:hover {
-            background-color: var(--uts-green);
-            transform: scale(1.05);
-        }
-        .btn-nav:disabled {
-            background-color: #94a3b8;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .example-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .example-list li::before {
-            content: "•";
-            color: var(--uts-green);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prepositions of Place - Lesson</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --uts-blue: #004c8f;
+      --uts-green: #00a859;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #f1f5f9;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .image-placeholder {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 350px;
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .btn-nav {
+      background-color: var(--uts-blue);
+      transition: all 0.3s;
+    }
+
+    .btn-nav:hover {
+      background-color: var(--uts-green);
+      transform: scale(1.05);
+    }
+
+    .btn-nav:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background-color: #475569;
+    }
+
+    .btn-secondary:hover {
+      background-color: #1e293b;
+    }
+
+    .example-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .example-list li::before {
+      content: "•";
+      color: var(--uts-green);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .header-logo {
+      height: 50px;
+      object-fit: contain;
+    }
+  </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
 
-    <!-- Header Section -->
-    <header class="bg-[#004c8f] text-white py-4 shadow-lg">
-        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-graduation-cap text-2xl text-[#00a859]"></i>
-                <span class="font-bold tracking-tight uppercase text-sm sm:text-base">English Basic Level</span>
-            </div>
-            <h1 class="hidden md:block text-lg font-semibold">Prepositions of Place</h1>
-            <div class="text-xs sm:text-sm font-medium opacity-80">Teacher's Deck</div>
+  <!-- Header Section with Side Images -->
+  <header class="bg-[#004c8f] text-white py-4 shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <!-- Left Logo -->
+      <div class="flex-shrink-0">
+        <img src="../assets/images/logo-uts-2024.png" alt="UTS Logo" class="header-logo"
+          onerror="this.src='https://via.placeholder.com/100x50?text=UTS'">
+      </div>
+
+      <div class="flex flex-col items-center">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-graduation-cap text-2xl text-[#00a859]"></i>
+          <span class="font-bold tracking-tight uppercase text-sm sm:text-base">English Basic Level</span>
         </div>
-    </header>
+        <h1 class="hidden md:block text-lg font-semibold">Prepositions of Place</h1>
+      </div>
 
-    <!-- Main Presentation Container -->
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-8">
-        <div class="bg-white w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col min-h-[600px]">
-            
-            <!-- Slides Area -->
-            <div id="slides-container" class="flex-grow relative p-8 sm:p-12">
-                
-                <!-- Slide 1: Welcome -->
-                <div class="slide active flex-col items-center text-center justify-center h-full">
-                    <i class="fa-solid fa-location-dot text-7xl text-[#00a859] mb-6"></i>
-                    <h2 class="text-5xl font-bold text-[#004c8f] mb-4">Prepositions of Place</h2>
-                    <p class="text-xl text-gray-600 max-w-lg">Let's learn how to describe exactly where objects are located with many examples!</p>
-                </div>
+      <!-- Right Logo -->
+      <div class="flex-shrink-0">
+        <img src="../assets/images/logo_cele.png" alt="CELE Logo" class="header-logo"
+          onerror="this.src='https://via.placeholder.com/100x50?text=CELE'">
+      </div>
+    </div>
+  </header>
 
-                <!-- Slide 2: Definition -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-6 border-l-8 border-[#00a859] pl-4">The Question: Where?</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-xl">Prepositions of place answer the question: <br><span class="text-3xl font-bold text-[#00a859]">"Where is it?"</span></p>
-                            <p class="text-gray-600 italic">They show the relationship between people, objects, or animals and their position in space.</p>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
+  <!-- Main Presentation Container -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-8">
+    <div class="bg-white w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col min-h-[600px]">
 
-                <!-- Slide 3: IN -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">1. IN</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">IN</strong> when something is <strong>inside</strong> a container or an enclosed area.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The ball is <span class="text-[#00a859] underline">in</span> the box."</li>
-                                    <li>"The keys are <span class="text-[#00a859] underline">in</span> my pocket."</li>
-                                    <li>"The coffee is <span class="text-[#00a859] underline">in</span> the cup."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
+      <!-- Slides Area -->
+      <div id="slides-container" class="flex-grow relative p-8 sm:p-12">
 
-                <!-- Slide 4: ON -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">2. ON</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">ON</strong> when something is <strong>touching a surface</strong>.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The book is <span class="text-[#00a859] underline">on</span> the table."</li>
-                                    <li>"The clock is <span class="text-[#00a859] underline">on</span> the wall."</li>
-                                    <li>"The cat is <span class="text-[#00a859] underline">on</span> the sofa."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 5: UNDER -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">3. UNDER</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">UNDER</strong> when something is at a <strong>lower level</strong> than something else.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The cat is <span class="text-[#00a859] underline">under</span> the chair."</li>
-                                    <li>"The shoes are <span class="text-[#00a859] underline">under</span> the bed."</li>
-                                    <li>"The ball is <span class="text-[#00a859] underline">under</span> the desk."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 6: NEXT TO -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">4. NEXT TO</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">NEXT TO</strong> when something is <strong>beside</strong> another object.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The apple is <span class="text-[#00a859] underline">next to</span> the computer."</li>
-                                    <li>"The bank is <span class="text-[#00a859] underline">next to</span> the supermarket."</li>
-                                    <li>"She is sitting <span class="text-[#00a859] underline">next to</span> her friend."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 7: BEHIND -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">5. BEHIND</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">BEHIND</strong> when something is <strong>at the back</strong> of another object.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The dog is <span class="text-[#00a859] underline">behind</span> the sofa."</li>
-                                    <li>"The sun is <span class="text-[#00a859] underline">behind</span> the clouds."</li>
-                                    <li>"The car is <span class="text-[#00a859] underline">behind</span> the truck."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 8: IN FRONT OF -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">6. IN FRONT OF</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">IN FRONT OF</strong> when something is in a <strong>forward position</strong>.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The pencil is <span class="text-[#00a859] underline">in front of</span> the notebook."</li>
-                                    <li>"The teacher is <span class="text-[#00a859] underline">in front of</span> the class."</li>
-                                    <li>"There is a park <span class="text-[#00a859] underline">in front of</span> my house."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 9: BETWEEN -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">7. BETWEEN</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">BETWEEN</strong> when something is <strong>in the middle</strong> of two objects.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The student is <span class="text-[#00a859] underline">between</span> the two desks."</li>
-                                    <li>"The letter 'B' is <span class="text-[#00a859] underline">between</span> 'A' and 'C'."</li>
-                                    <li>"The café is <span class="text-[#00a859] underline">between</span> the library and the cinema."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 10: ABOVE -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">8. ABOVE</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">ABOVE</strong> when something is <strong>higher</strong> than another object (not touching).</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The clock is <span class="text-[#00a859] underline">above</span> the whiteboard."</li>
-                                    <li>"The plane is <span class="text-[#00a859] underline">above</span> the clouds."</li>
-                                    <li>"The shelves are <span class="text-[#00a859] underline">above</span> the sink."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 11: ACROSS FROM -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">9. ACROSS FROM / OPPOSITE</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">ACROSS FROM</strong> when two things are <strong>facing each other</strong> on different sides.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The bakery is <span class="text-[#00a859] underline">across from</span> the park."</li>
-                                    <li>"The hospital is <span class="text-[#00a859] underline">across from</span> the station."</li>
-                                    <li>"They live <span class="text-[#00a859] underline">across from</span> each other."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 12: NEAR -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">10. NEAR</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">NEAR</strong> when something is <strong>close</strong> to another object, but not touching.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"The school is <span class="text-[#00a859] underline">near</span> my house."</li>
-                                    <li>"The remote is <span class="text-[#00a859] underline">near</span> the TV."</li>
-                                    <li>"Is there a pharmacy <span class="text-[#00a859] underline">near</span> here?"</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 13: AT -->
-                <div class="slide flex-col h-full">
-                    <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">11. AT</h2>
-                    <div class="grid md:grid-cols-2 gap-10 items-center">
-                        <div class="space-y-4">
-                            <p class="text-lg">Use <strong class="text-[#00a859]">AT</strong> to talk about a <strong>specific point</strong> or location.</p>
-                            <div class="bg-blue-50 p-6 rounded-xl border-l-4 border-[#004c8f]">
-                                <p class="text-xl font-bold text-[#004c8f] mb-2">Examples:</p>
-                                <ul class="example-list text-lg italic">
-                                    <li>"She is waiting <span class="text-[#00a859] underline">at</span> the bus stop."</li>
-                                    <li>"He is <span class="text-[#00a859] underline">at</span> the door."</li>
-                                    <li>"They are <span class="text-[#00a859] underline">at</span> the cinema."</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="image-placeholder">
-                            
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 14: Review -->
-                <div class="slide flex-col items-center text-center justify-center h-full">
-                    <h2 class="text-4xl font-bold text-[#004c8f] mb-6">Review Time!</h2>
-                    <p class="text-xl mb-8">Can you create your own examples using these prepositions?</p>
-                    <div class="grid grid-cols-3 gap-4 text-sm font-bold uppercase tracking-widest text-white">
-                        <div class="bg-[#004c8f] p-3 rounded-lg">In</div>
-                        <div class="bg-[#00a859] p-3 rounded-lg">On</div>
-                        <div class="bg-[#004c8f] p-3 rounded-lg">Under</div>
-                        <div class="bg-[#00a859] p-3 rounded-lg">Next to</div>
-                        <div class="bg-[#004c8f] p-3 rounded-lg">Behind</div>
-                        <div class="bg-[#00a859] p-3 rounded-lg">In front of</div>
-                        <div class="bg-[#004c8f] p-3 rounded-lg">Between</div>
-                        <div class="bg-[#00a859] p-3 rounded-lg">Across from</div>
-                        <div class="bg-[#004c8f] p-3 rounded-lg">Near</div>
-                        <div class="bg-[#00a859] p-3 rounded-lg">At</div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Navigation Controls -->
-            <footer class="bg-gray-50 border-t p-6 flex justify-between items-center">
-                <button id="prevBtn" class="btn-nav px-6 py-2 rounded-full text-white font-bold flex items-center">
-                    <i class="fa-solid fa-arrow-left mr-2"></i> Previous
-                </button>
-                <div class="text-gray-500 font-medium">
-                    Slide <span id="current-num">1</span> of <span id="total-num">14</span>
-                </div>
-                <button id="nextBtn" class="btn-nav px-6 py-2 rounded-full text-white font-bold flex items-center">
-                    Next <i class="fa-solid fa-arrow-right ml-2"></i>
-                </button>
-            </footer>
+        <!-- Slide 1: Welcome -->
+        <div class="slide active flex-col items-center text-center justify-center h-full">
+          <i class="fa-solid fa-location-dot text-7xl text-[#00a859] mb-6"></i>
+          <h2 class="text-5xl font-bold text-[#004c8f] mb-4">Prepositions of Place</h2>
+          <p class="text-xl text-gray-600 max-w-lg">Let's learn how to describe exactly where objects are located with 5 examples each!</p>
         </div>
-    </main>
 
-    <script>
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const currentNum = document.getElementById('current-num');
-        const totalNum = document.getElementById('total-num');
-        
-        let currentSlide = 0;
-        totalNum.textContent = slides.length;
+        <!-- Slide 2: Definition -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-6 border-l-8 border-[#00a859] pl-4">The Question: Where?</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-xl">Prepositions of place answer the question: <br><span
+                  class="text-3xl font-bold text-[#00a859]">"Where is it?"</span></p>
+              <p class="text-gray-600 italic">They show the relationship between people, objects, or animals and their
+                position in space.</p>
+            </div>
+            <div class="image-placeholder">
+              <img src="../assets/images/prepositions-of-place.png" alt="Prepositions Illustration" class="w-full h-full object-contain"
+                onerror="this.parentElement.innerHTML='[Visual Aid: Prepositions Summary]'">
+            </div>
+          </div>
+        </div>
 
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-            currentNum.textContent = currentSlide + 1;
-            prevBtn.disabled = currentSlide === 0;
-            nextBtn.disabled = currentSlide === slides.length - 1;
-        }
+        <!-- Slide 3: IN -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">1. IN</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">Inside a container or area.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The ball is <span class="text-[#00a859] underline">in</span> the box."</li>
+                  <li>"The keys are <span class="text-[#00a859] underline">in</span> my pocket."</li>
+                  <li>"The coffee is <span class="text-[#00a859] underline">in</span> the cup."</li>
+                  <li>"The cat is <span class="text-[#00a859] underline">in</span> the garden."</li>
+                  <li>"The students are <span class="text-[#00a859] underline">in</span> the classroom."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/in-place.png" alt="In" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: IN]'">
+            </div>
+          </div>
+        </div>
 
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlides();
-            }
-        });
+        <!-- Slide 4: ON -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">2. ON</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">Touching a surface.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The book is <span class="text-[#00a859] underline">on</span> the table."</li>
+                  <li>"The clock is <span class="text-[#00a859] underline">on</span> the wall."</li>
+                  <li>"The cat is <span class="text-[#00a859] underline">on</span> the sofa."</li>
+                  <li>"The laptop is <span class="text-[#00a859] underline">on</span> the desk."</li>
+                  <li>"The hat is <span class="text-[#00a859] underline">on</span> his head."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/on-place.png" alt="On" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: ON]'">
+            </div>
+          </div>
+        </div>
 
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                updateSlides();
-            }
-        });
+        <!-- Slide 5: UNDER -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">3. UNDER / BELOW</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">At a lower level.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The cat is <span class="text-[#00a859] underline">under</span> the chair."</li>
+                  <li>"The shoes are <span class="text-[#00a859] underline">under</span> the bed."</li>
+                  <li>"The ball is <span class="text-[#00a859] underline">under</span> the desk."</li>
+                  <li>"The box is <span class="text-[#00a859] underline">under</span> the stairs."</li>
+                  <li>"The temperature is <span class="text-[#00a859] underline">below</span> zero."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/under-place.png" alt="Under" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: UNDER]'">
+            </div>
+          </div>
+        </div>
 
-        // Initialize
+        <!-- Slide 6: NEXT TO -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">4. NEXT TO / BESIDE</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">Beside another object.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The apple is <span class="text-[#00a859] underline">next to</span> the computer."</li>
+                  <li>"The bank is <span class="text-[#00a859] underline">next to</span> the supermarket."</li>
+                  <li>"She is sitting <span class="text-[#00a859] underline">next to</span> her friend."</li>
+                  <li>"The lamp is <span class="text-[#00a859] underline">next to</span> the bed."</li>
+                  <li>"The hospital is <span class="text-[#00a859] underline">next to</span> the park."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/next-to-place.png" alt="Next to" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: NEXT TO]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: BEHIND -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">5. BEHIND</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">At the back of another object.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The dog is <span class="text-[#00a859] underline">behind</span> the sofa."</li>
+                  <li>"The sun is <span class="text-[#00a859] underline">behind</span> the clouds."</li>
+                  <li>"The car is <span class="text-[#00a859] underline">behind</span> the truck."</li>
+                  <li>"The child is hiding <span class="text-[#00a859] underline">behind</span> the tree."</li>
+                  <li>"The garden is <span class="text-[#00a859] underline">behind</span> the house."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/behind-place.png" alt="Behind" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: BEHIND]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: IN FRONT OF -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">6. IN FRONT OF</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">In a forward position.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The pencil is <span class="text-[#00a859] underline">in front of</span> the notebook."</li>
+                  <li>"The teacher is <span class="text-[#00a859] underline">in front of</span> the class."</li>
+                  <li>"There is a park <span class="text-[#00a859] underline">in front of</span> my house."</li>
+                  <li>"Wait <span class="text-[#00a859] underline">in front of</span> the building."</li>
+                  <li>"The mirror is <span class="text-[#00a859] underline">in front of</span> me."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/in-front-of-place.png" alt="In front of" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: IN FRONT OF]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 9: BETWEEN -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">7. BETWEEN</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">In the middle of two objects.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The student is <span class="text-[#00a859] underline">between</span> the two desks."</li>
+                  <li>"The letter 'B' is <span class="text-[#00a859] underline">between</span> 'A' and 'C'."</li>
+                  <li>"The café is <span class="text-[#00a859] underline">between</span> the library and the cinema."</li>
+                  <li>"The ball is <span class="text-[#00a859] underline">between</span> the shoes."</li>
+                  <li>"I am standing <span class="text-[#00a859] underline">between</span> my parents."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/between-place.png" alt="Between" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: BETWEEN]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 10: ABOVE -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">8. ABOVE / OVER</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">Higher than another object.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The clock is <span class="text-[#00a859] underline">above</span> the whiteboard."</li>
+                  <li>"The plane is <span class="text-[#00a859] underline">above</span> the clouds."</li>
+                  <li>"The shelves are <span class="text-[#00a859] underline">above</span> the sink."</li>
+                  <li>"The helicopter is hovering <span class="text-[#00a859] underline">over</span> the house."</li>
+                  <li>"Hang the picture <span class="text-[#00a859] underline">above</span> the sofa."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/above-place.png" alt="Above" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: ABOVE]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 11: ACROSS FROM -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">9. ACROSS FROM</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">Facing each other on different sides.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The bakery is <span class="text-[#00a859] underline">across from</span> the park."</li>
+                  <li>"The hospital is <span class="text-[#00a859] underline">across from</span> the station."</li>
+                  <li>"They live <span class="text-[#00a859] underline">across from</span> each other."</li>
+                  <li>"The pharmacy is <span class="text-[#00a859] underline">across from</span> the mall."</li>
+                  <li>"Sit <span class="text-[#00a859] underline">across from</span> your partner."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/opposite-place.png" alt="Across from" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: ACROSS FROM]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 12: NEAR -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">10. NEAR / CLOSE TO</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">Close to another object.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"The school is <span class="text-[#00a859] underline">near</span> my house."</li>
+                  <li>"The remote is <span class="text-[#00a859] underline">near</span> the TV."</li>
+                  <li>"Is there a pharmacy <span class="text-[#00a859] underline">near</span> here?"</li>
+                  <li>"The park is <span class="text-[#00a859] underline">close to</span> the lake."</li>
+                  <li>"Keep your friends <span class="text-[#00a859] underline">near</span> you."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/near-place.png" alt="Near" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: NEAR]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 13: AT -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">11. AT</h2>
+          <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-4">
+              <p class="text-lg font-semibold">A specific point or location.</p>
+              <div class="bg-blue-50 p-4 rounded-xl border-l-4 border-[#004c8f]">
+                <ul class="example-list text-md italic">
+                  <li>"She is waiting <span class="text-[#00a859] underline">at</span> the bus stop."</li>
+                  <li>"He is <span class="text-[#00a859] underline">at</span> the door."</li>
+                  <li>"They are <span class="text-[#00a859] underline">at</span> the cinema."</li>
+                  <li>"I am <span class="text-[#00a859] underline">at</span> work right now."</li>
+                  <li>"Meet me <span class="text-[#00a859] underline">at</span> the airport."</li>
+                </ul>
+              </div>
+            </div>
+            <div class="image-placeholder">
+               <img src="../assets/images/at-place.png" alt="At" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='[Image: AT]'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 14: Review -->
+        <div class="slide flex-col items-center text-center justify-center h-full">
+          <h2 class="text-4xl font-bold text-[#004c8f] mb-6">Review Time!</h2>
+          <p class="text-xl mb-8">Can you create your own examples using these prepositions?</p>
+          <div class="grid grid-cols-3 gap-4 text-sm font-bold uppercase tracking-widest text-white">
+            <div class="bg-[#004c8f] p-3 rounded-lg">In</div>
+            <div class="bg-[#00a859] p-3 rounded-lg">On</div>
+            <div class="bg-[#004c8f] p-3 rounded-lg">Under</div>
+            <div class="bg-[#00a859] p-3 rounded-lg">Next to</div>
+            <div class="bg-[#004c8f] p-3 rounded-lg">Behind</div>
+            <div class="bg-[#00a859] p-3 rounded-lg">In front of</div>
+            <div class="bg-[#004c8f] p-3 rounded-lg">Between</div>
+            <div class="bg-[#00a859] p-3 rounded-lg">Across from</div>
+            <div class="bg-[#004c8f] p-3 rounded-lg">Near</div>
+            <div class="bg-[#00a859] p-3 rounded-lg">At</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigation Controls -->
+      <footer class="bg-gray-50 border-t p-6 flex justify-between items-center shadow-inner">
+        <button id="prevBtn" class="btn-nav px-6 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+          <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+        </button>
+
+        <div class="flex items-center space-x-3">
+          
+          <button id="restartBtn" class="btn-nav btn-secondary px-5 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+            <i class="fa-solid fa-rotate-left mr-2"></i> Restart
+          </button>
+
+          <div class="text-gray-500 font-bold hidden sm:block pl-2">
+            Slide <span id="current-num" class="text-[#004c8f]">1</span> of <span id="total-num">14</span>
+          </div>
+          <a href="../index.html" id="homeLink" class="btn-nav btn-secondary px-5 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+            <i class="fa-solid fa-house mr-2"></i> Home
+          </a>
+
+        </div>
+
+        <button id="nextBtn" class="btn-nav px-6 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+          Next <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const currentNum = document.getElementById('current-num');
+    const totalNum = document.getElementById('total-num');
+
+    let currentSlide = 0;
+    totalNum.textContent = slides.length;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      currentNum.textContent = currentSlide + 1;
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
         updateSlides();
-    </script>
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    });
+
+    restartBtn.addEventListener('click', () => {
+      currentSlide = 0;
+      updateSlides();
+    });
+
+    // Initialize
+    updateSlides();
+  </script>
 </body>
+
 </html>

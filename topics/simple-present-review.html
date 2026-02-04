@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Present - Detailed Grammar & Routines</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --uts-blue: #004c8f;
+      --uts-green: #00a859;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #f1f5f9;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-nav {
+      background-color: var(--uts-blue);
+      transition: all 0.3s;
+    }
+
+    .btn-nav:hover {
+      background-color: var(--uts-green);
+      transform: scale(1.05);
+    }
+
+    .btn-nav:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background-color: #475569;
+    }
+
+    .btn-secondary:hover {
+      background-color: #1e293b;
+    }
+
+    .header-logo {
+      height: 50px;
+      object-fit: contain;
+    }
+
+    /* Estilos de Tabla */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .custom-table th {
+      background-color: var(--uts-blue);
+      color: white;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .custom-table td {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 8px;
+      color: #334155;
+    }
+
+    .custom-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Estilos de Tarjetas Interactivas */
+    .exercise-input {
+      border-bottom: 2px solid #cbd5e1;
+      outline: none;
+      transition: all 0.3s;
+      padding: 0 4px;
+      background-color: transparent;
+      width: 130px;
+      text-align: center;
+      font-weight: bold;
+      color: var(--uts-blue);
+    }
+
+    .exercise-input:focus {
+      border-color: var(--uts-blue);
+      background-color: #f8fafc;
+    }
+
+    .exercise-input.correct {
+      border-color: var(--uts-green);
+      color: var(--uts-green);
+      background-color: #f0fdf4;
+    }
+
+    .exercise-input.incorrect {
+      border-color: #ef4444;
+      color: #ef4444;
+      background-color: #fef2f2;
+    }
+
+    .qa-card {
+      background-color: #f0fdf4;
+      border-left: 5px solid var(--uts-green);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .solution-text {
+      font-size: 0.75rem;
+      font-weight: bold;
+      display: none;
+      margin-top: 2px;
+    }
+
+    .solution-text.show {
+      display: block;
+    }
+
+    .grammar-highlight {
+      color: #e11d48;
+      font-weight: 800;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header Section -->
+  <header class="bg-[#004c8f] text-white py-4 shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <div class="flex-shrink-0">
+        <img src="../assets/images/logo-uts-2024.png" alt="UTS Logo" class="header-logo"
+          onerror="this.src='https://via.placeholder.com/100x50?text=UTS'">
+      </div>
+
+      <div class="flex flex-col items-center text-center">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-book-open text-2xl text-[#00a859]"></i>
+          <span class="font-bold tracking-tight uppercase text-sm sm:text-base">English Basic Level</span>
+        </div>
+        <h1 class="hidden md:block text-lg font-semibold">Simple Present Tense & Routines</h1>
+      </div>
+
+      <div class="flex-shrink-0">
+        <img src="../assets/images/logo_cele.png" alt="CELE Logo" class="header-logo"
+          onerror="this.src='https://via.placeholder.com/100x50?text=CELE'">
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Presentation Container -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-8">
+    <div class="bg-white w-full max-w-5xl rounded-2xl shadow-2xl overflow-hidden flex flex-col min-h-[620px]">
+
+      <!-- Slides Area -->
+      <div id="slides-container" class="flex-grow relative p-8 sm:p-12">
+
+        <!-- Slide 1: Welcome -->
+        <div class="slide active flex-col items-center text-center justify-center h-full">
+          <i class="fa-solid fa-gears text-7xl text-[#00a859] mb-6"></i>
+          <h2 class="text-5xl font-bold text-[#004c8f] mb-4">Simple Present Mastery</h2>
+          <p class="text-xl text-gray-600 max-w-lg">Grammar Rules, Spelling, and Daily Life.</p>
+        </div>
+
+        <!-- Slide 2: Basic Concept -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-6 border-l-8 border-[#00a859] pl-4">Usage & Meaning</h2>
+          <p class="text-lg text-gray-700 mb-6">We use the **Simple Present** for:</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-primary">
+              <p class="font-bold">Habits & Routines</p>
+              <p class="text-sm italic">"I drink coffee every morning."</p>
+            </div>
+            <div class="p-4 bg-green-50 rounded-lg border-l-4 border-secondary">
+              <p class="font-bold">General Truths</p>
+              <p class="text-sm italic">"The sun rises in the east."</p>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-gray-400">
+              <p class="font-bold">Fixed Timetables</p>
+              <p class="text-sm italic">"The train leaves at 8:00 PM."</p>
+            </div>
+            <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+              <p class="font-bold">Permanent Situations</p>
+              <p class="text-sm italic">"I live in Salamanca."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: The 3rd Person Singular Rules -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Affirmative: He / She / It</h2>
+          <p class="mb-4 text-gray-600 font-semibold">The main rule: add <span class="grammar-highlight">-s</span> to the verb.</p>
+          <div class="overflow-x-auto rounded-xl border border-gray-200">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Ending of Verb</th>
+                  <th>Rule</th>
+                  <th>Examples</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Most verbs</td>
+                  <td>Add <strong>-s</strong></td>
+                  <td>Work &rarr; Work<strong>s</strong> / Eat &rarr; Eat<strong>s</strong></td>
+                </tr>
+                <tr>
+                  <td>-ch, -sh, -s, -x, -z, -o</td>
+                  <td>Add <strong>-es</strong></td>
+                  <td>Watch &rarr; Watch<strong>es</strong> / Go &rarr; Go<strong>es</strong></td>
+                </tr>
+                <tr>
+                  <td>Consonant + y</td>
+                  <td>Change to <strong>-ies</strong></td>
+                  <td>Study &rarr; Stud<strong>ies</strong> / Fly &rarr; Fl<strong>ies</strong></td>
+                </tr>
+                <tr>
+                  <td>Vowel + y</td>
+                  <td>Just add <strong>-s</strong></td>
+                  <td>Play &rarr; Play<strong>s</strong> / Buy &rarr; Buy<strong>s</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Slide 4: Negative Form (Do not / Does not) -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Negative Form</h2>
+          <p class="mb-6">We use auxiliary verbs <span class="grammar-highlight">DO</span> or <span class="grammar-highlight">DOES</span> + NOT.</p>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="p-6 bg-gray-50 rounded-xl border-2 border-primary">
+              <h3 class="font-bold text-primary mb-2">I / You / We / They</h3>
+              <p class="text-2xl font-bold">DON'T</p>
+              <p class="text-sm italic mt-2">"I <strong>don't like</strong> Mondays."</p>
+            </div>
+            <div class="p-6 bg-blue-50 rounded-xl border-2 border-secondary">
+              <h3 class="font-bold text-secondary mb-2">He / She / It</h3>
+              <p class="text-2xl font-bold">DOESN'T</p>
+              <p class="text-sm italic mt-2">"She <strong>doesn't like</strong> Mondays."</p>
+            </div>
+          </div>
+          <div class="mt-6 p-4 bg-red-50 text-red-700 border-l-4 border-red-500 font-bold">
+            ⚠️ IMPORTANT: When using "doesn't", the verb returns to its base form (NO 'S'). 
+            <br>Wrong: <span class="line-through">She doesn't plays.</span> &rarr; Correct: She doesn't play.
+          </div>
+        </div>
+
+        <!-- Slide 5: Interrogative Form -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Questions & Short Answers</h2>
+          <div class="bg-white border p-6 rounded-xl shadow-sm mb-6">
+            <p class="text-xl text-center">
+              <span class="text-uts-green font-bold">DO / DOES</span> + Subject + <span class="text-uts-blue font-bold">Verb (Base)</span>?
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="qa-card">
+              <p class="font-bold">Do you live here?</p>
+              <p class="text-sm">Yes, I do. / No, I don't.</p>
+            </div>
+            <div class="qa-card">
+              <p class="font-bold">Does he work today?</p>
+              <p class="text-sm">Yes, he does. / No, he doesn't.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Daily Routines Expanded -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Daily Routines: From Morning to Night</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+            <div class="p-3 bg-blue-50 border border-blue-200 rounded text-center">
+              <p class="text-xs font-bold text-blue-800 uppercase mb-1 tracking-wider">Morning</p>
+              <p class="text-sm font-semibold">Wake up / Get up</p>
+              <p class="text-sm font-semibold">Brush my teeth</p>
+              <p class="text-sm font-semibold">Have breakfast</p>
+              <p class="text-sm font-semibold">Go to school</p>
+            </div>
+            <div class="p-3 bg-green-50 border border-green-200 rounded text-center">
+              <p class="text-xs font-bold text-green-800 uppercase mb-1 tracking-wider">Afternoon</p>
+              <p class="text-sm font-semibold">Have lunch</p>
+              <p class="text-sm font-semibold">Do homework</p>
+              <p class="text-sm font-semibold">Finish classes</p>
+              <p class="text-sm font-semibold">Go home</p>
+            </div>
+            <div class="p-3 bg-purple-50 border border-purple-200 rounded text-center">
+              <p class="text-xs font-bold text-purple-800 uppercase mb-1 tracking-wider">Night</p>
+              <p class="text-sm font-semibold">Have dinner</p>
+              <p class="text-sm font-semibold">Take a shower</p>
+              <p class="text-sm font-semibold">Read a book</p>
+              <p class="text-sm font-semibold">Go to sleep</p>
+            </div>
+          </div>
+          
+          <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-uts-blue">
+            <h3 class="text-sm font-bold text-uts-blue mb-2">Example Sentences:</h3>
+            <ul class="text-sm space-y-1 italic text-gray-700">
+              <li>&bull; I <strong>wake up</strong> at 6:30 every morning.</li>
+              <li>&bull; My father <strong>brushes</strong> his teeth after breakfast. <span class="text-red-500">(3rd person)</span></li>
+              <li>&bull; We <strong>have</strong> lunch in the cafeteria at 2:00 PM.</li>
+              <li>&bull; Sarah <strong>does</strong> her homework in the library. <span class="text-red-500">(3rd person)</span></li>
+              <li>&bull; They <strong>don't go</strong> to sleep late on weekdays.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Slide 7: Interactive Practice Part I -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Practice Part I</h2>
+          <p class="text-sm text-gray-600 mb-6 italic">Apply the rules correctly (Questions 1-7).</p>
+          
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-4 text-sm">
+            <div class="exercise-item" data-id="0">
+                <p>1. Mary <input type="text" class="exercise-input" placeholder="study"> every day. (study) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: studies</p>
+            </div>
+            <div class="exercise-item" data-id="1">
+                <p>2. My cat <input type="text" class="exercise-input" placeholder="not eat"> fish. (not eat) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: doesn't eat</p>
+            </div>
+            <div class="exercise-item" data-id="2">
+                <p>3. <input type="text" class="exercise-input" placeholder="Do/Does" style="width: 80px;"> he play tennis? 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: Does</p>
+            </div>
+            <div class="exercise-item" data-id="3">
+                <p>4. We <input type="text" class="exercise-input" placeholder="watch"> TV. (watch) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: watch</p>
+            </div>
+            <div class="exercise-item" data-id="4">
+                <p>5. He <input type="text" class="exercise-input" placeholder="go"> home. (go) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: goes</p>
+            </div>
+            <div class="exercise-item" data-id="5">
+                <p>6. They <input type="text" class="exercise-input" placeholder="not speak"> French. (not speak) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: don't speak</p>
+            </div>
+            <div class="exercise-item" data-id="6">
+                <p>7. She <input type="text" class="exercise-input" placeholder="brush"> her teeth. (brush) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: brushes</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Interactive Practice Part II -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Practice Part II</h2>
+          <p class="text-sm text-gray-600 mb-6 italic">Apply the rules correctly (Questions 8-14).</p>
+          
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-4 text-sm">
+            <div class="exercise-item" data-id="7">
+                <p>8. <input type="text" class="exercise-input" placeholder="Do/Does" style="width: 80px;"> you like pizza? 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: Do</p>
+            </div>
+            <div class="exercise-item" data-id="8">
+                <p>9. The train <input type="text" class="exercise-input" placeholder="leave"> at 9. (leave) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: leaves</p>
+            </div>
+            <div class="exercise-item" data-id="9">
+                <p>10. My dog <input type="text" class="exercise-input" placeholder="not bark">. (not bark) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: doesn't bark</p>
+            </div>
+            <div class="exercise-item" data-id="10">
+                <p>11. I <input type="text" class="exercise-input" placeholder="do"> yoga. (do) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: do</p>
+            </div>
+            <div class="exercise-item" data-id="11">
+                <p>12. He <input type="text" class="exercise-input" placeholder="not play"> video games. (not play) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: doesn't play</p>
+            </div>
+            <div class="exercise-item" data-id="12">
+                <p>13. <input type="text" class="exercise-input" placeholder="Do/Does" style="width: 80px;"> she work here? 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: Does</p>
+            </div>
+            <div class="exercise-item" data-id="13">
+                <p>14. Birds <input type="text" class="exercise-input" placeholder="fly"> south. (fly) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: fly</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 9: Interactive Practice Part III -->
+        <div class="slide flex-col h-full">
+          <h2 class="text-3xl font-bold text-[#004c8f] mb-4 border-l-8 border-[#00a859] pl-4">Practice Part III</h2>
+          <p class="text-sm text-gray-600 mb-6 italic">Apply the rules correctly (Questions 15-20).</p>
+          
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-4 text-sm">
+            <div class="exercise-item" data-id="14">
+                <p>15. A baby <input type="text" class="exercise-input" placeholder="cry">. (cry) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: cries</p>
+            </div>
+            <div class="exercise-item" data-id="15">
+                <p>16. We <input type="text" class="exercise-input" placeholder="not have"> money. (not have) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: don't have</p>
+            </div>
+            <div class="exercise-item" data-id="16">
+                <p>17. My sister <input type="text" class="exercise-input" placeholder="wash"> the car. (wash) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: washes</p>
+            </div>
+            <div class="exercise-item" data-id="17">
+                <p>18. <input type="text" class="exercise-input" placeholder="Do/Does" style="width: 80px;"> they swim? 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: Do</p>
+            </div>
+            <div class="exercise-item" data-id="18">
+                <p>19. It <input type="text" class="exercise-input" placeholder="snow"> in winter. (snow) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: snows</p>
+            </div>
+            <div class="exercise-item" data-id="19">
+                <p>20. You <input type="text" class="exercise-input" placeholder="not know"> the answer. (not know) 
+                <span class="text-xs text-uts-green cursor-pointer ml-2 hover:underline show-answer-btn">[Show]</span></p>
+                <p class="solution-text text-primary">Answer: don't know</p>
+            </div>
+          </div>
+          
+          <div class="mt-8 p-4 bg-gray-100 border-2 border-primary rounded-xl text-center">
+            <p class="font-bold text-primary">Total Score: <span id="total-score">0</span> / 20</p>
+          </div>
+        </div>
+
+        <!-- Slide 10: Final Checklist -->
+        <div class="slide flex-col items-center text-center justify-center h-full">
+            <h2 class="text-4xl font-bold text-[#004c8f] mb-6">Final Checklist</h2>
+            <ul class="text-left space-y-4 max-w-md mx-auto">
+                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> <strong>-s / -es / -ies</strong> for He, She, It.</li>
+                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Use <strong>Doesn't</strong> to negate He, She, It.</li>
+                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Verb stays in <strong>Base Form</strong> in negatives.</li>
+                <li><i class="fa-solid fa-check text-green-500 mr-2"></i> <strong>Do/Does</strong> come first in questions.</li>
+            </ul>
+            <p class="mt-10 text-[#004c8f] font-bold text-xl">Keep practicing your English!</p>
+        </div>
+
+      </div>
+
+      <!-- Navigation Controls -->
+      <footer class="bg-gray-50 border-t p-6 flex justify-between items-center shadow-inner">
+        <button id="prevBtn" class="btn-nav px-6 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+          <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+        </button>
+
+        <div class="flex items-center space-x-3">
+          <button id="restartBtn" class="btn-nav btn-secondary px-5 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+            <i class="fa-solid fa-rotate-left mr-2"></i> Restart
+          </button>
+
+          <div class="text-gray-500 font-bold hidden sm:block pl-2">
+            Slide <span id="current-num" class="text-[#004c8f]">1</span> of <span id="total-num">10</span>
+          </div>
+
+          <a href="../index.html" id="homeBtn" class="btn-nav btn-secondary px-5 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+            <i class="fa-solid fa-house mr-2"></i> Home
+          </a>
+        </div>
+
+        <button id="nextBtn" class="btn-nav px-6 py-2 rounded-full text-white font-bold flex items-center shadow-md">
+          Next <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // 20 Valid answers for Simple Present Exercises
+    const ANSWERS = [
+        ["studies"], ["doesn't eat", "does not eat"], ["does"], ["watch"], ["goes"], ["don't speak", "do not speak"], ["brushes"],
+        ["do"], ["leaves"], ["doesn't bark", "does not bark"], ["do"], ["doesn't play", "does not play"], ["does"], ["fly"],
+        ["cries"], ["don't have", "do not have"], ["washes"], ["do"], ["snows"], ["don't know", "do not know"]
+    ];
+
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const currentNum = document.getElementById('current-num');
+    const totalNum = document.getElementById('total-num');
+    const scoreDisplay = document.getElementById('total-score');
+
+    let currentSlide = 0;
+    totalNum.textContent = slides.length;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      currentNum.textContent = currentSlide + 1;
+      prevBtn.disabled = currentSlide === 0;
+      nextBtn.disabled = currentSlide === slides.length - 1;
+    }
+
+    // Navigation Logic
+    prevBtn.addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    });
+
+    restartBtn.addEventListener('click', () => {
+      currentSlide = 0;
+      resetPractice();
+      updateSlides();
+    });
+
+    // Practice Logic
+    function initPractice() {
+        const items = document.querySelectorAll('.exercise-item');
+        items.forEach((item, index) => {
+            const input = item.querySelector('.exercise-input');
+            const showBtn = item.querySelector('.show-answer-btn');
+            const solution = item.querySelector('.solution-text');
+
+            input.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') validate(input, index);
+            });
+
+            input.addEventListener('blur', () => {
+                if (input.value.trim() !== "") validate(input, index);
+            });
+
+            showBtn.addEventListener('click', () => {
+                solution.classList.toggle('show');
+                showBtn.textContent = solution.classList.contains('show') ? "[Hide]" : "[Show]";
+            });
+        });
+    }
+
+    function validate(input, index) {
+        const val = input.value.trim().toLowerCase();
+        const correctOptions = ANSWERS[index];
+        
+        if (val === "") {
+            input.classList.remove('correct', 'incorrect');
+        } else if (correctOptions.includes(val)) {
+            input.classList.remove('incorrect');
+            input.classList.add('correct');
+        } else {
+            input.classList.remove('correct');
+            input.classList.add('incorrect');
+        }
+        updateScore();
+    }
+
+    function updateScore() {
+        const correctCount = document.querySelectorAll('.exercise-input.correct').length;
+        scoreDisplay.textContent = correctCount;
+    }
+
+    function resetPractice() {
+        const inputs = document.querySelectorAll('.exercise-input');
+        inputs.forEach(input => {
+            input.value = "";
+            input.classList.remove('correct', 'incorrect');
+        });
+        document.querySelectorAll('.solution-text').forEach(s => s.classList.remove('show'));
+        document.querySelectorAll('.show-answer-btn').forEach(b => b.textContent = "[Show]");
+        scoreDisplay.textContent = "0";
+    }
+
+    // Initialize
+    window.onload = () => {
+        updateSlides();
+        initPractice();
+    };
+  </script>
+</body>
+
+</html>

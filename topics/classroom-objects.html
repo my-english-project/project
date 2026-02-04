@@ -1,258 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom Vocabulary Extended</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom Vocabulary Extended</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
-        :root {
-            /* Colores base */
-            --bg-color: #fdfdfd;
-            --text-color: #333;
-            
-            /* Paleta Pastel y Oscura para contrastes */
-            --c-purple: #dcd6f7;
-            --c-purple-dark: #6246ea;
-            --c-orange: #f4d1ba;
-            --c-orange-dark: #e85d04;
-            --c-green: #dcf7e2;
-            --c-green-dark: #2a9d8f;
-            --c-pink: #f7d6d6;
-            --c-pink-dark: #e63946;
-            --c-yellow: #fdf6bd;
-            --c-yellow-dark: #8f7e08;
-            --c-blue: #d0efff;
-            --c-blue-dark: #0077b6;
-        }
+    :root {
+      /* Colores base */
+      --bg-color: #fdfdfd;
+      --text-color: #333;
 
-        body {
-            font-family: 'Varela Round', sans-serif;
-            background-color: #f4f4f9;
-            background-image: linear-gradient(#e8e8e8 1px, transparent 1px), linear-gradient(90deg, #e8e8e8 1px, transparent 1px);
-            background-size: 20px 20px;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+      /* Paleta Pastel y Oscura para contrastes */
+      --c-purple: #dcd6f7;
+      --c-purple-dark: #6246ea;
+      --c-orange: #f4d1ba;
+      --c-orange-dark: #e85d04;
+      --c-green: #dcf7e2;
+      --c-green-dark: #2a9d8f;
+      --c-pink: #f7d6d6;
+      --c-pink-dark: #e63946;
+      --c-yellow: #fdf6bd;
+      --c-yellow-dark: #8f7e08;
+      --c-blue: #d0efff;
+      --c-blue-dark: #0077b6;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    body {
+      font-family: 'Varela Round', sans-serif;
+      background-color: #f4f4f9;
+      background-image: linear-gradient(#e8e8e8 1px, transparent 1px), linear-gradient(90deg, #e8e8e8 1px, transparent 1px);
+      background-size: 20px 20px;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: #222;
-        }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        p.subtitle {
-            color: #666;
-            margin-top: 5px;
-            font-size: 1.1rem;
-        }
+    h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #222;
+    }
 
-        /* Grid Container Responsivo */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            width: 100%;
-        }
+    p.subtitle {
+      color: #666;
+      margin-top: 5px;
+      font-size: 1.1rem;
+    }
 
-        /* Estilos de la Tarjeta */
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            border: 3px solid transparent;
-            aspect-ratio: 1 / 1.1;
-            position: relative;
-            overflow: hidden;
-        }
+    /* Grid Container Responsivo */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      width: 100%;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
+    /* Estilos de la Tarjeta */
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: 3px solid transparent;
+      aspect-ratio: 1 / 1.1;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .card:active {
-            transform: scale(0.95);
-        }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
 
-        /* Área del icono/imagen */
-        .icon-area {
-            font-size: 3.5rem;
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            user-select: none;
-        }
+    .card:active {
+      transform: scale(0.95);
+    }
 
-        /* Etiqueta de texto */
-        .label {
-            width: 100%;
-            padding: 8px 0;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            border-radius: 20px;
-            font-size: 1rem;
-            text-transform: capitalize;
-        }
+    /* Área del icono/imagen */
+    .icon-area {
+      font-size: 3.5rem;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      user-select: none;
+    }
 
-        /* Clases de colores */
-        .purple .icon-area { background-color: var(--c-purple); }
-        .purple .label { background-color: var(--c-purple-dark); }
-        .purple { border-color: var(--c-purple); }
+    /* Etiqueta de texto */
+    .label {
+      width: 100%;
+      padding: 8px 0;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
 
-        .orange .icon-area { background-color: var(--c-orange); }
-        .orange .label { background-color: var(--c-orange-dark); }
-        .orange { border-color: var(--c-orange); }
+    /* Clases de colores */
+    .purple .icon-area {
+      background-color: var(--c-purple);
+    }
 
-        .green .icon-area { background-color: var(--c-green); }
-        .green .label { background-color: var(--c-green-dark); }
-        .green { border-color: var(--c-green); }
+    .purple .label {
+      background-color: var(--c-purple-dark);
+    }
 
-        .pink .icon-area { background-color: var(--c-pink); }
-        .pink .label { background-color: var(--c-pink-dark); }
-        .pink { border-color: var(--c-pink); }
+    .purple {
+      border-color: var(--c-purple);
+    }
 
-        .yellow .icon-area { background-color: var(--c-yellow); }
-        .yellow .label { background-color: var(--c-yellow-dark); color: #554d04; }
-        .yellow { border-color: var(--c-yellow); }
+    .orange .icon-area {
+      background-color: var(--c-orange);
+    }
 
-        .blue .icon-area { background-color: var(--c-blue); }
-        .blue .label { background-color: var(--c-blue-dark); }
-        .blue { border-color: var(--c-blue); }
+    .orange .label {
+      background-color: var(--c-orange-dark);
+    }
 
-        /* Icono de sonido pequeño */
-        .sound-icon {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            font-size: 1rem;
-            opacity: 0.5;
-        }
+    .orange {
+      border-color: var(--c-orange);
+    }
 
-    </style>
+    .green .icon-area {
+      background-color: var(--c-green);
+    }
+
+    .green .label {
+      background-color: var(--c-green-dark);
+    }
+
+    .green {
+      border-color: var(--c-green);
+    }
+
+    .pink .icon-area {
+      background-color: var(--c-pink);
+    }
+
+    .pink .label {
+      background-color: var(--c-pink-dark);
+    }
+
+    .pink {
+      border-color: var(--c-pink);
+    }
+
+    .yellow .icon-area {
+      background-color: var(--c-yellow);
+    }
+
+    .yellow .label {
+      background-color: var(--c-yellow-dark);
+      color: #554d04;
+    }
+
+    .yellow {
+      border-color: var(--c-yellow);
+    }
+
+    .blue .icon-area {
+      background-color: var(--c-blue);
+    }
+
+    .blue .label {
+      background-color: var(--c-blue-dark);
+    }
+
+    .blue {
+      border-color: var(--c-blue);
+    }
+
+    /* Icono de sonido pequeño */
+    .sound-icon {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 1rem;
+      opacity: 0.5;
+    }
+  </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>Classroom Objects</h1>
-        <p class="subtitle">Click a card to listen 🔊</p>
-    </header>
+  <header>
+    <h1>Classroom Objects</h1>
+    <p class="subtitle">Click a card to listen 🔊</p>
+  </header>
 
-    <div class="grid-container" id="app">
-        </div>
+  <div class="grid-container" id="app">
+  </div>
 
-    <script>
-        // Lista extendida de vocabulario
-        const vocabulary = [
-            // Originales (Corregidos)
-            { word: "Desk", emoji: "🖥️", color: "purple" },         // Monitor o Escritorio de Computadora
-            { word: "Notebook", emoji: "📒", color: "orange" },
-            { word: "Whiteboard", emoji: "🔲", color: "green" },    // Pizarra blanca (rectángulo blanco)
-            { word: "Books", emoji: "📚", color: "pink" },
-            { word: "Eraser", emoji: "🔳", color: "yellow" },      // Bloque cuadrado (mejor que el jabón)
-            { word: "Calculator", emoji: "🧮", color: "blue" },
-            { word: "Blackboard", emoji: "⬛", color: "purple" },
-            { word: "Chair", emoji: "🪑", color: "orange" },        // Silla (mejor que el asiento de avión)
-            { word: "Sharpener", emoji: "✏️", color: "green" },    // Punta de lápiz (sugiere afilar)
-            { word: "Clipboard", emoji: "📋", color: "pink" },
-            { word: "Ruler", emoji: "📏", color: "yellow" },
-            { word: "Stapler", emoji: "🖇️", color: "blue" },      // Clip unido (mejor que un clip simple)
-            { word: "Glue", emoji: "🧴", color: "purple" },        // Botella (sugiere pegamento líquido)
-            { word: "Marker", emoji: "🖍️", color: "orange" },
-            { word: "Duster", emoji: "🧽", color: "green" },       // Esponja (sugiere borrador)
-            { word: "Bag", emoji: "🎒", color: "pink" },
-            { word: "Calendar", emoji: "📅", color: "yellow" },
-            { word: "Clock", emoji: "⏰", color: "blue" },
+  <script>
+    // Lista extendida de vocabulario
+    const vocabulary = [
+      // Originales (Corregidos)
+      { word: "Desk", emoji: "🖥️", color: "purple" },         // Monitor o Escritorio de Computadora
+      { word: "Notebook", emoji: "📒", color: "orange" },
+      { word: "Whiteboard", emoji: "🔲", color: "green" },    // Pizarra blanca (rectángulo blanco)
+      { word: "Books", emoji: "📚", color: "pink" },
+      { word: "Eraser", emoji: "🔳", color: "yellow" },      // Bloque cuadrado (mejor que el jabón)
+      { word: "Calculator", emoji: "🧮", color: "blue" },
+      { word: "Blackboard", emoji: "⬛", color: "purple" },
+      { word: "Chair", emoji: "🪑", color: "orange" },        // Silla (mejor que el asiento de avión)
+      { word: "Sharpener", emoji: "✏️", color: "green" },    // Punta de lápiz (sugiere afilar)
+      { word: "Clipboard", emoji: "📋", color: "pink" },
+      { word: "Ruler", emoji: "📏", color: "yellow" },
+      { word: "Stapler", emoji: "🖇️", color: "blue" },      // Clip unido (mejor que un clip simple)
+      { word: "Glue", emoji: "🧴", color: "purple" },        // Botella (sugiere pegamento líquido)
+      { word: "Marker", emoji: "🖍️", color: "orange" },
+      { word: "Duster", emoji: "🧽", color: "green" },       // Esponja (sugiere borrador)
+      { word: "Bag", emoji: "🎒", color: "pink" },
+      { word: "Calendar", emoji: "📅", color: "yellow" },
+      { word: "Clock", emoji: "⏰", color: "blue" },
 
-            // --- NUEVOS OBJETOS AGREGADOS (Corregidos) ---
-            { word: "Computer", emoji: "💻", color: "purple" },    // Laptop (más genérico)
-            { word: "Scissors", emoji: "✂️", color: "orange" },
-            { word: "Map", emoji: "🗺️", color: "green" },
-            { word: "Globe", emoji: "🌍", color: "pink" },
-            { word: "Pencil Case", emoji: "👝", color: "yellow" },
-            { word: "Trash Can", emoji: "🗑️", color: "blue" },
-            { word: "Paint", emoji: "🎨", color: "purple" },
-            { word: "Window", emoji: "🪟", color: "orange" },
-            { word: "Door", emoji: "🚪", color: "green" },
-            { word: "Projector", emoji: "📽️", color: "pink" },
-            { word: "Paper Clip", emoji: "📎", color: "yellow" },
-            { word: "Microscope", emoji: "🔬", color: "blue" }
-        ];
+      // --- NUEVOS OBJETOS AGREGADOS (Corregidos) ---
+      { word: "Computer", emoji: "💻", color: "purple" },    // Laptop (más genérico)
+      { word: "Scissors", emoji: "✂️", color: "orange" },
+      { word: "Map", emoji: "🗺️", color: "green" },
+      { word: "Globe", emoji: "🌍", color: "pink" },
+      { word: "Pencil Case", emoji: "👝", color: "yellow" },
+      { word: "Trash Can", emoji: "🗑️", color: "blue" },
+      { word: "Paint", emoji: "🎨", color: "purple" },
+      { word: "Window", emoji: "🪟", color: "orange" },
+      { word: "Door", emoji: "🚪", color: "green" },
+      { word: "Projector", emoji: "📽️", color: "pink" },
+      { word: "Paper Clip", emoji: "📎", color: "yellow" },
+      { word: "Microscope", emoji: "🔬", color: "blue" }
+    ];
 
-        const appContainer = document.getElementById('app');
+    const appContainer = document.getElementById('app');
 
-        // Función para renderizar tarjetas
-        function renderCards() {
-            vocabulary.forEach(item => {
-                const card = document.createElement('div');
-                card.className = `card ${item.color}`;
-                card.setAttribute('role', 'button'); // Accesibilidad
-                card.setAttribute('aria-label', `Listen to pronunciation of ${item.word}`);
-                
-                card.onclick = () => {
-                    speak(item.word);
-                    animateCard(card);
-                };
+    // Función para renderizar tarjetas
+    function renderCards() {
+      vocabulary.forEach(item => {
+        const card = document.createElement('div');
+        card.className = `card ${item.color}`;
+        card.setAttribute('role', 'button'); // Accesibilidad
+        card.setAttribute('aria-label', `Listen to pronunciation of ${item.word}`);
 
-                card.innerHTML = `
+        card.onclick = () => {
+          speak(item.word);
+          animateCard(card);
+        };
+
+        card.innerHTML = `
                     <div class="sound-icon">🔊</div>
                     <div class="icon-area">${item.emoji}</div>
                     <div class="label">${item.word}</div>
                 `;
 
-                appContainer.appendChild(card);
-            });
-        }
+        appContainer.appendChild(card);
+      });
+    }
 
-        // Pequeña animación visual al hacer click
-        function animateCard(element) {
-            element.style.transform = "scale(0.95)";
-            setTimeout(() => {
-                element.style.transform = "scale(1)";
-                element.style.removeProperty('transform'); // Limpiar estilo inline para volver al CSS hover
-            }, 100);
-        }
+    // Pequeña animación visual al hacer click
+    function animateCard(element) {
+      element.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        element.style.transform = "scale(1)";
+        element.style.removeProperty('transform'); // Limpiar estilo inline para volver al CSS hover
+      }, 100);
+    }
 
-        // Función de Texto a Voz (TTS)
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                // Cancelar audio anterior si el usuario hace click muy rápido
-                window.speechSynthesis.cancel(); 
-                
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US'; 
-                utterance.rate = 0.9; 
-                utterance.pitch = 1;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("Tu navegador no soporta audio.");
-            }
-        }
+    // Función de Texto a Voz (TTS)
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        // Cancelar audio anterior si el usuario hace click muy rápido
+        window.speechSynthesis.cancel();
 
-        // Iniciar app
-        renderCards();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Tu navegador no soporta audio.");
+      }
+    }
 
-    </script>
+    // Iniciar app
+    renderCards();
+
+  </script>
 </body>

@@ -1,321 +1,647 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Possessive 's (Genitive) Interactive Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-    <style>
-        /* ========================================================================= */
-        /* INSTITUTIONAL PALETTE DEFINITION (Copied from Nouns) */
-        /* ========================================================================= */
-        :root {
-            /* UTS & CELE Colors */
-            --color-uts-blue: #004c8f;
-            --color-uts-green: #00a859;
-            --color-cele-yellow: #ffb700;
-            
-            /* Tailwind Mapping for Harmony */
-            --color-primary: var(--color-uts-blue);
-            --color-secondary: var(--color-uts-green);
-            --color-accent: var(--color-cele-yellow);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Possessive 's (Genitive) Interactive Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <style>
+    /* ========================================================================= */
+    /* INSTITUTIONAL PALETTE DEFINITION (Copied from Nouns) */
+    /* ========================================================================= */
+    :root {
+      /* UTS & CELE Colors */
+      --color-uts-blue: #004c8f;
+      --color-uts-green: #00a859;
+      --color-cele-yellow: #ffb700;
 
-        /* Applying Custom Colors to Tailwind Utility Classes */
-        .bg-primary { background-color: var(--color-primary); }
-        .text-primary { color: var(--color-primary); }
-        .border-primary { border-color: var(--color-primary); }
+      /* Tailwind Mapping for Harmony */
+      --color-primary: var(--color-uts-blue);
+      --color-secondary: var(--color-uts-green);
+      --color-accent: var(--color-cele-yellow);
+    }
 
-        .bg-secondary { background-color: var(--color-secondary); }
-        .text-secondary { color: var(--color-secondary); }
-        .border-secondary { border-color: var(--color-secondary); }
+    /* Applying Custom Colors to Tailwind Utility Classes */
+    .bg-primary {
+      background-color: var(--color-primary);
+    }
 
-        .bg-accent { background-color: var(--color-accent); }
-        .text-accent { color: var(--color-accent); }
-        .hover\:bg-accent:hover { background-color: var(--color-accent); }
-        .hover\:text-accent:hover { color: var(--color-accent); }
-        .focus\:border-accent:focus { border-color: var(--color-accent); }
+    .text-primary {
+      color: var(--color-primary);
+    }
 
-        /* ========================================================================= */
-        /* CUSTOM STYLES */
-        /* ========================================================================= */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 350px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 350px;
-        }
-        @media (max-width: 640px) {
-            .chart-container {
-                height: 250px;
-                max-height: 250px;
-            }
-        }
-        /* Active Tab Button: Now uses UTS Blue with White Text */
-        .tab-button.active {
-            background-color: var(--color-uts-blue);
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 76, 143, 0.4);
-        }
-        /* Custom size for logos in the header */
-        .header-logo {
-            height: 40px; 
-            width: auto;
-            object-fit: contain;
-        }
-        /* Table highlight color (subtle light grey-green) */
-        .bg-rule-highlight {
-            background-color: rgba(0, 168, 89, 0.05); /* Lightest touch of UTS Green */
-        }
-        .text-rule-highlight {
-            color: var(--color-uts-green);
-        }
-        
-        /* FIX RESPONSIVE: Forzar el centrado del título con Absolute positioning en MD y más, mientras los logos están en los extremos */
-        .header-title-container {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        /* Hacer el título más pequeño en móvil */
-        @media (max-width: 768px) {
-            .header-title-container {
-                position: static; /* Deshabilitar posición absoluta en móvil */
-                transform: none;
-                text-align: center;
-                flex-grow: 1; /* Permite que ocupe espacio */
-                margin: 0 auto;
-            }
-        }
-    </style>
+    .border-primary {
+      border-color: var(--color-primary);
+    }
+
+    .bg-secondary {
+      background-color: var(--color-secondary);
+    }
+
+    .text-secondary {
+      color: var(--color-secondary);
+    }
+
+    .border-secondary {
+      border-color: var(--color-secondary);
+    }
+
+    .bg-accent {
+      background-color: var(--color-accent);
+    }
+
+    .text-accent {
+      color: var(--color-accent);
+    }
+
+    .hover\:bg-accent:hover {
+      background-color: var(--color-accent);
+    }
+
+    .hover\:text-accent:hover {
+      color: var(--color-accent);
+    }
+
+    .focus\:border-accent:focus {
+      border-color: var(--color-accent);
+    }
+
+    /* ========================================================================= */
+    /* CUSTOM STYLES */
+    /* ========================================================================= */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 350px;
+      max-height: 350px;
+    }
+
+    @media (max-width: 640px) {
+      .chart-container {
+        height: 250px;
+        max-height: 250px;
+      }
+    }
+
+    /* Active Tab Button: Now uses UTS Blue with White Text */
+    .tab-button.active {
+      background-color: var(--color-uts-blue);
+      color: white;
+      box-shadow: 0 4px 6px -1px rgba(0, 76, 143, 0.4);
+    }
+
+    /* Custom size for logos in the header */
+    .header-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* Table highlight color (subtle light grey-green) */
+    .bg-rule-highlight {
+      background-color: rgba(0, 168, 89, 0.05);
+      /* Lightest touch of UTS Green */
+    }
+
+    .text-rule-highlight {
+      color: var(--color-uts-green);
+    }
+
+    /* FIX RESPONSIVE: Forzar el centrado del título con Absolute positioning en MD y más, mientras los logos están en los extremos */
+    .header-title-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Hacer el título más pequeño en móvil */
+    @media (max-width: 768px) {
+      .header-title-container {
+        position: static;
+        /* Deshabilitar posición absoluta en móvil */
+        transform: none;
+        text-align: center;
+        flex-grow: 1;
+        /* Permite que ocupe espacio */
+        margin: 0 auto;
+      }
+    }
+
+    /* ========================================================================= */
+    /* INTERACTIVE EXERCISE STYLES */
+    /* ========================================================================= */
+    .exercise-input {
+      border-bottom: 2px solid #cbd5e1;
+      outline: none;
+      transition: all 0.3s;
+      padding: 0 4px;
+      background-color: transparent;
+      width: 140px;
+      text-align: center;
+      font-weight: bold;
+      color: var(--color-uts-blue);
+    }
+
+    .exercise-input:focus {
+      border-color: var(--color-uts-blue);
+      background-color: #f8fafc;
+    }
+
+    .exercise-input.correct {
+      border-color: var(--color-uts-green);
+      color: var(--color-uts-green);
+      background-color: #f0fdf4;
+    }
+
+    .exercise-input.incorrect {
+      border-color: #ef4444;
+      color: #ef4444;
+      background-color: #fef2f2;
+    }
+
+    .bg-rule-highlight {
+      background-color: rgba(0, 168, 89, 0.05);
+    }
+
+    .solution-text {
+      font-size: 0.75rem;
+      font-weight: bold;
+      display: none;
+      margin-top: 2px;
+    }
+
+    .solution-text.show {
+      display: block;
+    }
+  </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 antialiased min-h-screen">
 
-<header class="bg-primary shadow-md sticky top-0 z-10">
+  <header class="bg-primary shadow-md sticky top-0 z-10">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative">
-        
-        <div class="flex-shrink-0">
-            <img src="../assets/images/logo-uts-2024.png" alt="Logo Universidad Tecnológica de Salamanca" class="header-logo">
-        </div>
-        
-        <div class="header-title-container hidden md:block">
-            <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">The Possessive Genitive ('s)</h1>
-        </div>
-        
-        <div class="block md:hidden text-center flex-grow">
-             <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">The Possessive Genitive ('s)</h1>
-        </div>
-        
-        <div class="flex-shrink-0">
-            <img src="../assets/images/logo_cele.png" alt="Logo CELE UTS" class="header-logo">
-        </div>
+
+      <div class="flex-shrink-0">
+        <img src="../assets/images/logo-uts-2024.png" alt="Logo Universidad Tecnológica de Salamanca"
+          class="header-logo">
+      </div>
+
+      <div class="header-title-container hidden md:block">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">The Possessive Genitive ('s)
+        </h1>
+      </div>
+
+      <div class="block md:hidden text-center flex-grow">
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">The Possessive Genitive ('s)
+        </h1>
+      </div>
+
+      <div class="flex-shrink-0">
+        <img src="../assets/images/logo_cele.png" alt="Logo CELE UTS" class="header-logo">
+      </div>
     </div>
-    
+
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 hidden md:block">
-        <nav class="flex justify-center space-x-4">
-            <a href="#intro" class="text-white hover:text-accent transition duration-150">Intro & Use</a>
-            <a href="#rules" class="text-white hover:text-accent transition duration-150">Rules</a>
-            <a href="#duration" class="text-white hover:text-accent transition duration-150">Duration & Time</a>
-            <a href="#practice" class="text-white hover:text-accent transition duration-150">Exercises</a>
-        </nav>
+      <nav class="flex justify-center space-x-4">
+        <a href="#intro" class="text-white hover:text-accent transition duration-150">Intro & Use</a>
+        <a href="#rules" class="text-white hover:text-accent transition duration-150">Rules</a>
+        <a href="#duration" class="text-white hover:text-accent transition duration-150">Duration & Time</a>
+        <a href="#practice" class="text-white hover:text-accent transition duration-150">Exercises</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        <section id="intro" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-4">
-                <h2 class="text-2xl font-semibold text-secondary mb-2 sm:mb-0">Introduction & Basic Use</h2>
-                
-                <nav class="text-sm" aria-label="breadcrumb">
-                    <ol class="flex space-x-2 text-gray-500 flex-wrap">
-                        <li><a href="../index.html" class="hover:text-secondary">Home</a></li>
-                        <li>/</li>
-                        <li><a href="../basic-I/index.html" class="hover:text-secondary">Basic I</a></li>
-                        <li>/</li>
-                        <li class="font-semibold text-secondary">Possessive 's</li>
-                    </ol>
-                </nav>
+    <section id="intro" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-2 mb-4">
+        <h2 class="text-2xl font-semibold text-secondary mb-2 sm:mb-0">Introduction & Basic Use</h2>
+
+        <nav class="text-sm" aria-label="breadcrumb">
+          <ol class="flex space-x-2 text-gray-500 flex-wrap">
+            <li><a href="../index.html" class="hover:text-secondary">Home</a></li>
+            <li>/</li>
+            <li><a href="../basic-I/index.html" class="hover:text-secondary">Basic I</a></li>
+            <li>/</li>
+            <li class="font-semibold text-secondary">Possessive 's</li>
+          </ol>
+        </nav>
+      </div>
+
+      <p class="text-sm text-gray-600 mb-6">We use the <strong>apostrophe s ('s)</strong>, also called possessive 's, as
+        a determiner to show that something belongs to someone or something.</p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-4 border-l-4 border-primary bg-blue-50/50 rounded-lg">
+          <h3 class="text-xl font-medium text-primary mb-2">Basic Ownership</h3>
+          <p class="text-sm mb-3">The apostrophe is placed on the owner, and the item follows.</p>
+          <p class="text-sm italic mb-1">Is that <strong>Olivia's</strong> bag?</p>
+          <p class="text-sm italic"><strong>Britain's</strong> coastline is very beautiful.</p>
+        </div>
+        <div class="p-4 border-l-4 border-secondary bg-rule-highlight rounded-lg">
+          <h3 class="text-xl font-medium text-secondary mb-2">Complex Noun Phrases</h3>
+          <p class="text-sm mb-3">The possessive 's can be used in complex noun phrases and can even appear twice in the
+            same phrase.</p>
+          <p class="text-sm italic mb-1">Greg is her <strong>youngest daughter's</strong> husband.</p>
+          <p class="text-sm italic">We went to <strong>Jake's father's</strong> funeral.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-semibold text-primary border-b pb-2 mb-4">Possessive 's Rules: Singular vs. Plural</h2>
+      <p class="text-sm text-gray-600 mb-6">The position of the apostrophe depends entirely on whether the noun is
+        singular or plural.</p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-4 border border-secondary rounded-lg bg-rule-highlight">
+          <h3 class="text-xl font-medium text-secondary mb-2">Singular Noun</h3>
+          <p class="mb-2">Use <strong>'s</strong> after a singular noun.</p>
+          <p class="text-lg font-bold text-primary mb-1">FORM: Noun + 's</p>
+          <p class="text-sm italic">Example: The <strong>girl's</strong> bedroom (one girl)</p>
+        </div>
+        <div class="p-4 border border-secondary rounded-lg bg-rule-highlight">
+          <h3 class="text-xl font-medium text-secondary mb-2">Regular Plural Noun</h3>
+          <p class="mb-2">Use <strong>'</strong> after a plural noun that ends in <strong>-s</strong>.</p>
+          <p class="text-lg font-bold text-primary mb-1">FORM: Plural Noun + 's</p>
+          <p class="text-sm italic">Example: The <strong>girls'</strong> bedroom (more than one girl)</p>
+        </div>
+        <div class="p-4 border border-secondary rounded-lg bg-rule-highlight">
+          <h3 class="text-xl font-medium text-secondary mb-2">Irregular Plural Noun</h3>
+          <p class="mb-2">Use <strong>'s</strong> with irregular plural nouns (e.g., children, men).</p>
+          <p class="text-lg font-bold text-primary mb-1">FORM: Irregular Noun + 's</p>
+          <p class="text-sm italic">Example: The <strong>children's</strong> parents...</p>
+          <p class="text-sm italic">Example: other <strong>people's</strong> property.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="duration" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Possessive 's for Time and Duration</h2>
+      <p class="text-sm text-gray-600 mb-6">We also use possessive 's to talk about time and duration.</p>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-4 border-l-4 border-secondary bg-rule-highlight rounded-lg">
+          <h3 class="text-xl font-medium text-secondary mb-2">Time (Periods)</h3>
+          <p class="mb-2">Used for specific time units like days, weeks, or months.</p>
+          <p class="text-sm italic">Is that <strong>yesterday's</strong> paper?</p>
+        </div>
+        <div class="p-4 border-l-4 border-primary bg-blue-50/50 rounded-lg">
+          <h3 class="text-xl font-medium text-primary mb-2">Duration (Length of Time)</h3>
+          <p class="mb-2">Used to express how long something lasts.</p>
+          <p class="text-sm italic">I've only had one <strong>week's</strong> holiday so far this year.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section>
+      <!-- Practice Section -->
+      <section id="practice" class="mb-12 bg-white p-8 rounded-xl shadow-lg border-t-4 border-primary">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+          <div>
+            <h2 class="text-2xl font-bold text-primary border-b pb-2">Practice Exercises</h2>
+            <p class="text-sm text-gray-500 mt-2 italic">Type your answer and press Enter. Click the button to reveal
+              the answer.</p>
+          </div>
+
+          <!-- Score & Progress -->
+          <div class="bg-gray-100 px-6 py-3 rounded-full flex items-center gap-4 border shadow-inner">
+            <span class="text-sm font-bold text-gray-600">Score: <span id="score">0</span>/20</span>
+            <div class="w-32 h-3 bg-gray-300 rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-full bg-secondary transition-all duration-500" style="width: 0%"></div>
             </div>
-            
-            <p class="text-sm text-gray-600 mb-6">We use the **apostrophe s ('s)**, also called possessive 's, as a determiner to show that something belongs to someone or something.</p>
+            <button onclick="resetExercises()" class="text-xs font-bold text-gray-400 hover:text-red-500 transition">
+              <i class="fa-solid fa-rotate-right"></i> RESET
+            </button>
+          </div>
+        </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="p-4 border-l-4 border-primary bg-blue-50/50 rounded-lg">
-                    <h3 class="text-xl font-medium text-primary mb-2">Basic Ownership</h3>
-                    <p class="text-sm mb-3">The apostrophe is placed on the owner, and the item follows.</p>
-                    <p class="text-sm italic mb-1">Is that **Olivia's** bag? [cite: 4]</p>
-                    <p class="text-sm italic">**Britain's** coastline is very beautiful. [cite: 5]</p>
-                </div>
-                <div class="p-4 border-l-4 border-secondary bg-rule-highlight rounded-lg">
-                    <h3 class="text-xl font-medium text-secondary mb-2">Complex Noun Phrases</h3>
-                    <p class="text-sm mb-3">The possessive 's can be used in complex noun phrases [cite: 8] and can even appear twice in the same phrase[cite: 10].</p>
-                    <p class="text-sm italic mb-1">Greg is her **youngest daughter's** husband. [cite: 9]</p>
-                    <p class="text-sm italic">We went to **Jake's father's** funeral. [cite: 11]</p>
-                </div>
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-6 text-sm">
+          <!-- Questions 1-10 -->
+          <div class="space-y-4">
+            <div class="exercise-item" data-index="0">
+              <p>1. This is <input type="text" class="exercise-input" placeholder="Peter"> book. (Peter)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Peter's</p>
             </div>
-        </section>
-
-        <section id="rules" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
-            <h2 class="text-2xl font-semibold text-primary border-b pb-2 mb-4">Possessive 's Rules: Singular vs. Plural</h2>
-            <p class="text-sm text-gray-600 mb-6">The position of the apostrophe depends entirely on whether the noun is singular or plural[cite: 17].</p>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-4 border border-secondary rounded-lg bg-rule-highlight">
-                    <h3 class="text-xl font-medium text-secondary mb-2">Singular Noun</h3>
-                    <p class="mb-2">Use **'s** after a singular noun[cite: 17, 23].</p>
-                    <p class="text-lg font-bold text-primary mb-1">FORM: Noun + **'s**</p>
-                    <p class="text-sm italic">Example: The **girl's** bedroom (one girl) [cite: 25, 26]</p>
-                </div>
-                <div class="p-4 border border-secondary rounded-lg bg-rule-highlight">
-                    <h3 class="text-xl font-medium text-secondary mb-2">Regular Plural Noun</h3>
-                    <p class="mb-2">Use **'** after a plural noun that ends in **-s**[cite: 17, 24].</p>
-                    <p class="text-lg font-bold text-primary mb-1">FORM: Plural Noun + **'**</p>
-                    <p class="text-sm italic">Example: The **girls'** bedroom (more than one girl) [cite: 27, 28]</p>
-                </div>
-                <div class="p-4 border border-secondary rounded-lg bg-rule-highlight">
-                    <h3 class="text-xl font-medium text-secondary mb-2">Irregular Plural Noun</h3>
-                    <p class="mb-2">Use **'s** with irregular plural nouns (e.g., children, men)[cite: 19].</p>
-                    <p class="text-lg font-bold text-primary mb-1">FORM: Irregular Noun + **'s**</p>
-                    <p class="text-sm italic">Example: The **children's** parents... [cite: 20]</p>
-                    <p class="text-sm italic">Example: other **people's** property. [cite: 21]</p>
-                </div>
+            <div class="exercise-item" data-index="1">
+              <p>2. Let's go to the <input type="text" class="exercise-input" placeholder="Smiths">. (Smiths)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Smiths'</p>
             </div>
-        </section>
-
-        <section id="duration" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
-            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Possessive 's for Time and Duration</h2>
-            <p class="text-sm text-gray-600 mb-6">We also use possessive 's to talk about time and duration[cite: 12].</p>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="p-4 border-l-4 border-secondary bg-rule-highlight rounded-lg">
-                    <h3 class="text-xl font-medium text-secondary mb-2">Time (Periods)</h3>
-                    <p class="mb-2">Used for specific time units like days, weeks, or months.</p>
-                    <p class="text-sm italic">Is that **yesterday's** paper? [cite: 13]</p>
-                </div>
-                <div class="p-4 border-l-4 border-primary bg-blue-50/50 rounded-lg">
-                    <h3 class="text-xl font-medium text-primary mb-2">Duration (Length of Time)</h3>
-                    <p class="mb-2">Used to express how long something lasts.</p>
-                    <p class="text-sm italic">I've only had one **week's** holiday so far this year. [cite: 14]</p>
-                </div>
+            <div class="exercise-item" data-index="2">
+              <p>3. The <input type="text" class="exercise-input" placeholder="children"> room is upstairs. (children)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: children's</p>
             </div>
-        </section>
-
-
-        <section id="practice" class="mb-12 bg-white p-6 rounded-xl shadow-lg">
-            <h2 class="text-2xl font-semibold text-primary border-b pb-2 mb-4">Practice Exercises (20 Questions)</h2>
-            <p class="text-sm text-gray-600 mb-6">Complete the sentences using the correct possessive form ('s or '). Click to reveal the answer! [cite: 30]</p>
-
-            <div class="grid md:grid-cols-2 gap-x-12 gap-y-4 text-sm">
-                <div class="space-y-3">
-                    <p>1. This is ________ book. (Peter) [cite: 31] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>2. Let's go to the ________. (Smiths) [cite: 32] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>3. The ________ room is upstairs. (children) [cite: 33] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>4. ________ sister is twelve years old. (John) [cite: 34] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>5. ________ and ________ school is old. (Susan – Steve) [cite: 35] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>6. ________ shoes are on the second floor. (men) [cite: 36] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>7. My ________ car was not expensive. (parents) [cite: 37] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>8. ________ CD player is new. (Charles) [cite: 38] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>9. This is the ________ bike. (boy) [cite: 39] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>10. These are the ________ pencils. (boys) [cite: 40] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                </div>
-                
-                <div class="space-y-3">
-                    <p>11. Sarah is ________ aunt. (Emily) [cite: 41] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>12. These are our ________ cats. (friends) [cite: 42] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>13. Let's meet at ________ for lunch. (Giovanni) [cite: 43] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>14. Where is the ________ shower? (ladies) [cite: 44] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>15. This is our ________ car. (boss) [cite: 45] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>16. My ________ dad is my uncle. (cousin) [cite: 46] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>17. Did you read ________ newspaper? (yesterday) [cite: 47] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>18. ________ and ________ bags are black. (Jack – Joe) [cite: 48] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>19. Our grandparents live in an old ________ home. (people) [cite: 49] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                    <p>20. That sandwich would not be to ________ taste. (everyone) [cite: 50] <span class="answer text-secondary cursor-pointer hover:text-primary hover:font-bold">[Show Answer]</span></p>
-                </div>
+            <div class="exercise-item" data-index="3">
+              <p>4. <input type="text" class="exercise-input" placeholder="John"> sister is 12. (John)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: John's</p>
             </div>
-
-        </section>
-
-        <section id="summary" class="bg-white p-6 rounded-xl shadow-lg">
-            <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Summary: Final Check</h2>
-            <p class="text-sm text-gray-600 mb-6">Always check the form of the possessor to decide where the apostrophe goes. </p>
-
-            <div class="overflow-x-auto mb-6">
-                <table class="min-w-full text-left text-sm font-light">
-                    <thead class="border-b bg-gray-100 font-medium text-gray-700">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">Possessor Form</th>
-                            <th scope="col" class="px-6 py-3">Rule</th>
-                            <th scope="col" class="px-6 py-3">Example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="px-6 py-3">Singular Noun</td>
-                            <td class="px-6 py-3">Add **'s** [cite: 23]</td>
-                            <td class="px-6 py-3">The **girl's** bedroom [cite: 25]</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="px-6 py-3">Regular Plural Noun (ends in -s)</td>
-                            <td class="px-6 py-3">Add only **'** [cite: 24]</td>
-                            <td class="px-6 py-3">The **girls'** bedroom [cite: 27]</td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="px-6 py-3">Irregular Plural Noun (e.g. *children, men*)</td>
-                            <td class="px-6 py-3">Add **'s** [cite: 19]</td>
-                            <td class="px-6 py-3">The **children's** parents [cite: 20]</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="exercise-item" data-index="4">
+              <p>5. <input type="text" class="exercise-input" placeholder="Susan and Steve" style="width: 160px;"> school
+                is old. (Susan and Steve)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Susan and Steve's</p>
             </div>
+            <div class="exercise-item" data-index="5">
+              <p>6. <input type="text" class="exercise-input" placeholder="men"> shoes are upstairs. (men)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: men's</p>
+            </div>
+            <div class="exercise-item" data-index="6">
+              <p>7. My <input type="text" class="exercise-input" placeholder="parents"> car was not expensive. (parents)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: parents'</p>
+            </div>
+            <div class="exercise-item" data-index="7">
+              <p>8. <input type="text" class="exercise-input" placeholder="Charles"> player is new. (Charles)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Charles's or Charles'</p>
+            </div>
+            <div class="exercise-item" data-index="8">
+              <p>9. This is the <input type="text" class="exercise-input" placeholder="boy"> bike. (boy)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: boy's</p>
+            </div>
+            <div class="exercise-item" data-index="9">
+              <p>10. These are the <input type="text" class="exercise-input" placeholder="boys"> pencils. (boys)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: boys'</p>
+            </div>
+          </div>
 
-            <p class="text-lg font-bold text-primary mt-6">Key Takeaway: The possessive 's can also be used for time, duration [cite: 12], and in complex noun phrases[cite: 8].</p>
-        </section>
+          <!-- Questions 11-20 -->
+          <div class="space-y-4">
+            <div class="exercise-item" data-index="10">
+              <p>11. Sarah is <input type="text" class="exercise-input" placeholder="Emily"> aunt. (Emily)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Emily's</p>
+            </div>
+            <div class="exercise-item" data-index="11">
+              <p>12. These are our <input type="text" class="exercise-input" placeholder="friends"> cats. (friends)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: friends'</p>
+            </div>
+            <div class="exercise-item" data-index="12">
+              <p>13. Let's meet at <input type="text" class="exercise-input" placeholder="Giovanni">. (Giovanni)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Giovanni's</p>
+            </div>
+            <div class="exercise-item" data-index="13">
+              <p>14. Where is the <input type="text" class="exercise-input" placeholder="ladies"> shower? (ladies)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: ladies'</p>
+            </div>
+            <div class="exercise-item" data-index="14">
+              <p>15. This is our <input type="text" class="exercise-input" placeholder="boss"> car. (boss)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: boss's or boss'</p>
+            </div>
+            <div class="exercise-item" data-index="15">
+              <p>16. My <input type="text" class="exercise-input" placeholder="cousin"> dad is my uncle. (cousin)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: cousin's</p>
+            </div>
+            <div class="exercise-item" data-index="16">
+              <p>17. Did you read <input type="text" class="exercise-input" placeholder="yesterday"> paper? (yesterday)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: yesterday's</p>
+            </div>
+            <div class="exercise-item" data-index="17">
+              <p>18. <input type="text" class="exercise-input" placeholder="Jack & Joe" style="width: 160px;"> bags are
+                black. (Jack & Joe)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: Jack & Joe's</p>
+            </div>
+            <div class="exercise-item" data-index="18">
+              <p>19. They live in an old <input type="text" class="exercise-input" placeholder="people"> home. (people)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: people's</p>
+            </div>
+            <div class="exercise-item" data-index="19">
+              <p>20. That is not to <input type="text" class="exercise-input" placeholder="everyone"> taste. (everyone)
+                <span class="text-secondary cursor-pointer hover:underline show-answer-btn ml-2">[Show Answer]</span>
+              </p>
+              <p class="solution-text text-primary">Answer: everyone's</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    </main>
+      <!-- Summary -->
+      <section class="bg-primary text-white p-8 rounded-xl shadow-lg text-center">
+        <h3 class="text-xl font-bold mb-2 italic">Practice makes perfect!</h3>
+        <p class="text-sm opacity-80">Always check if the owner is singular or plural before adding the apostrophe.</p>
+      </section>
+    </section>
 
-    <script>
-        // --- JAVASCRIPT FOR INTERACTIVITY ---
+    <section id="summary" class="bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-2xl font-semibold text-secondary border-b pb-2 mb-4">Summary: Final Check</h2>
+      <p class="text-sm text-gray-600 mb-6">Always check the form of the possessor to decide where the apostrophe goes.
+      </p>
 
-        // Answers for the 20 exercises (mapped to the exercise list in the HTML)
-        const EXERCISE_ANSWERS = [
-            "Peter's", "Smiths'", "children's", "John's", "Susan and Steve's", "men's", "parents'", "Charles'",
-            "boy's", "boys'", "Emily's", "friends'", "Giovanni's", "ladies'", "boss's", "cousin's", "yesterday's",
-            "Jack and Joe's", "people's", "everyone's"
-        ];
+      <div class="overflow-x-auto mb-6">
+        <table class="min-w-full text-left text-sm font-light">
+          <thead class="border-b bg-gray-100 font-medium text-gray-700">
+            <tr>
+              <th scope="col" class="px-6 py-3">Possessor Form</th>
+              <th scope="col" class="px-6 py-3">Rule</th>
+              <th scope="col" class="px-6 py-3">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="px-6 py-3">Singular Noun</td>
+              <td class="px-6 py-3">Add <strong>'s</strong></td>
+              <td class="px-6 py-3">The <strong>girl's</strong> bedroom </td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="px-6 py-3">Regular Plural Noun (ends in -s)</td>
+              <td class="px-6 py-3">Add only <strong>'</strong></td>
+              <td class="px-6 py-3">The <strong>girls'</strong> bedroom </td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+              <td class="px-6 py-3">Irregular Plural Noun (e.g. <i>children, men</i>)</td>
+              <td class="px-6 py-3">Add <strong>'s</strong></td>
+              <td class="px-6 py-3">The <strong>children's</strong> parents</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        function initExercises() {
-            const answerElements = document.querySelectorAll('.answer');
-            answerElements.forEach((el, index) => {
-                const originalText = el.textContent;
-                const answer = EXERCISE_ANSWERS[index];
-                
-                // Set initial state
-                el.dataset.answer = answer;
-                el.dataset.revealed = 'false';
+      <p class="text-lg font-bold text-primary mt-6">Key Takeaway: The possessive 's can also be used for time,
+        duration, and in complex noun phrases.</p>
+    </section>
 
-                el.addEventListener('click', function() {
-                    if (this.dataset.revealed === 'false') {
-                        this.textContent = answer;
-                        this.classList.remove('text-secondary', 'hover:text-primary');
-                        this.classList.add('text-primary', 'font-extrabold', 'bg-yellow-50', 'p-1', 'rounded');
-                        this.dataset.revealed = 'true';
-                    } else {
-                        this.textContent = originalText;
-                        this.classList.remove('text-primary', 'font-extrabold', 'bg-yellow-50', 'p-1', 'rounded');
-                        this.classList.add('text-secondary', 'hover:text-primary');
-                        this.dataset.revealed = 'false';
-                    }
-                });
-            });
+  </main>
+
+  <script>
+    // --- JAVASCRIPT FOR INTERACTIVITY ---
+
+    // Answers for the 20 exercises (mapped to the exercise list in the HTML)
+    const EXERCISE_ANSWERS = [
+      "Peter's", "Smiths'", "children's", "John's", "Susan and Steve's", "men's", "parents'", "Charles'",
+      "boy's", "boys'", "Emily's", "friends'", "Giovanni's", "ladies'", "boss's", "cousin's", "yesterday's",
+      "Jack and Joe's", "people's", "everyone's"
+    ];
+
+    function initExercises() {
+      const answerElements = document.querySelectorAll('.answer');
+      answerElements.forEach((el, index) => {
+        const originalText = el.textContent;
+        const answer = EXERCISE_ANSWERS[index];
+
+        // Set initial state
+        el.dataset.answer = answer;
+        el.dataset.revealed = 'false';
+
+        el.addEventListener('click', function () {
+          if (this.dataset.revealed === 'false') {
+            this.textContent = answer;
+            this.classList.remove('text-secondary', 'hover:text-primary');
+            this.classList.add('text-primary', 'font-extrabold', 'bg-yellow-50', 'p-1', 'rounded');
+            this.dataset.revealed = 'true';
+          } else {
+            this.textContent = originalText;
+            this.classList.remove('text-primary', 'font-extrabold', 'bg-yellow-50', 'p-1', 'rounded');
+            this.classList.add('text-secondary', 'hover:text-primary');
+            this.dataset.revealed = 'false';
+          }
+        });
+      });
+    }
+
+    window.onload = function () {
+      initExercises();
+    };
+
+
+
+    // Valid answers including variations for specific cases
+    const ANSWERS = [
+      ["peter's"],
+      ["smiths'"],
+      ["children's"],
+      ["john's"],
+      ["susan and steve's", "susan & steve's"],
+      ["men's"],
+      ["parents'"],
+      ["charles's", "charles'"],
+      ["boy's"],
+      ["boys'"],
+      ["emily's"],
+      ["friends'"],
+      ["giovanni's"],
+      ["ladies'"],
+      ["boss's", "boss'"],
+      ["cousin's"],
+      ["yesterday's"],
+      ["jack and joe's", "jack & joe's"],
+      ["people's"],
+      ["everyone's"]
+    ];
+
+    function init() {
+      const items = document.querySelectorAll('.exercise-item');
+      const scoreDisplay = document.getElementById('score');
+      const progressBar = document.getElementById('progress-bar');
+
+      items.forEach((item, index) => {
+        const input = item.querySelector('.exercise-input');
+        const showBtn = item.querySelector('.show-answer-btn');
+        const solution = item.querySelector('.solution-text');
+
+        input.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter') validate(input, index);
+        });
+
+        input.addEventListener('blur', () => {
+          if (input.value.trim() !== "") validate(input, index);
+        });
+
+        showBtn.addEventListener('click', () => {
+          if (solution.classList.contains('show')) {
+            solution.classList.remove('show');
+            showBtn.textContent = "[Show Answer]";
+          } else {
+            solution.classList.add('show');
+            showBtn.textContent = "[Hide Answer]";
+          }
+        });
+      });
+
+      function validate(input, index) {
+        const val = input.value.trim().toLowerCase();
+        const possibleAnswers = ANSWERS[index];
+
+        if (val === "") {
+          input.classList.remove('correct', 'incorrect');
+        } else if (possibleAnswers.includes(val)) {
+          input.classList.remove('incorrect');
+          input.classList.add('correct');
+        } else {
+          input.classList.remove('correct');
+          input.classList.add('incorrect');
         }
+        updateScore();
+      }
 
-        window.onload = function() {
-            initExercises();
-        };
-    </script>
+      function updateScore() {
+        const correctCount = document.querySelectorAll('.exercise-input.correct').length;
+        scoreDisplay.textContent = correctCount;
+        const percentage = (correctCount / ANSWERS.length) * 100;
+        progressBar.style.width = percentage + "%";
+      }
+    }
+
+    function resetExercises() {
+      const inputs = document.querySelectorAll('.exercise-input');
+      const solutions = document.querySelectorAll('.solution-text');
+      const btns = document.querySelectorAll('.show-answer-btn');
+
+      inputs.forEach(input => {
+        input.value = "";
+        input.classList.remove('correct', 'incorrect');
+      });
+
+      solutions.forEach(s => s.classList.remove('show'));
+      btns.forEach(b => b.textContent = "[Show Answer]");
+
+      document.getElementById('score').textContent = "0";
+      document.getElementById('progress-bar').style.width = "0%";
+    }
+
+    window.onload = init;
+
+
+
+  </script>
 </body>
+
 </html>
