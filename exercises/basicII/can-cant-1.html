@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTS | Basic English: Can & Can't</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            uts: {
+              deep: '#1A237E',
+              sky: '#42A5F5',
+              accent: '#FFC107',
+              dark: '#0F172A',
+              light: '#F8FAFC',
+              success: '#10B981',
+              error: '#EF4444'
+            }
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif']
+          },
+          animation: {
+            'bounce-subtle': 'bounce-subtle 2s infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'slide-up': 'slideUp 0.4s ease-out forwards'
+          },
+          keyframes: {
+            'bounce-subtle': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-5px)' }
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: radial-gradient(circle at top right, #f1f5f9, #e2e8f0);
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card-shadow {
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+    }
+
+    .option-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2);
+    }
+
+    .progress-glow {
+      box-shadow: 0 0 15px rgba(66, 165, 245, 0.5);
+    }
+
+    .word-token {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .word-token:hover {
+      background-color: #1A237E;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .word-token.used {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+
+<body class="p-4 md:p-8 flex items-center justify-center">
+
+  <div id="app"
+    class="w-full max-w-2xl bg-white rounded-[2rem] overflow-hidden card-shadow flex flex-col relative min-h-[650px]">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-uts-deep text-white px-6 py-5 flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-display font-bold text-uts-deep text-xl shadow-inner">
+          <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo">
+        </div>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-tight">Basic English</h1>
+          <p class="text-[10px] uppercase tracking-widest text-uts-sky opacity-90 font-semibold">Unit: Can & Can't Vol.
+            1</p>
+        </div>
+      </div>
+      <a href="index.html" class="p-2 hover:bg-white/10 rounded-full transition-colors group" title="Return to Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:-translate-x-1 transition-transform"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </a>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="h-1.5 w-full bg-slate-100 overflow-hidden">
+      <div id="progress-fill" class="h-full bg-uts-sky w-0 transition-all duration-500 ease-out progress-glow"></div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-grow p-6 md:p-10 flex flex-col">
+
+      <!-- Quiz Card -->
+      <div id="quiz-card" class="animate-fade-in flex flex-col h-full">
+        <div class="mb-8">
+          <span id="question-counter" class="text-uts-sky font-bold text-sm tracking-widest uppercase">Question 1 of
+            10</span>
+          <h2 id="question-text" class="text-2xl md:text-3xl font-display font-bold text-uts-dark mt-2 leading-tight">
+            Loading question...
+          </h2>
+        </div>
+
+        <div id="answer-area" class="space-y-4 flex-grow">
+          <!-- Dynamic content loads here -->
+        </div>
+
+        <!-- Feedback Area -->
+        <div id="feedback" class="mt-8 hidden animate-slide-up">
+          <div id="feedback-content" class="rounded-2xl p-5 border-l-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span id="feedback-icon" class="text-xl"></span>
+              <span id="feedback-title" class="font-bold text-lg"></span>
+            </div>
+            <p id="feedback-explanation" class="text-sm md:text-base leading-relaxed"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score Screen (Hidden Initially) -->
+      <div id="score-screen" class="hidden flex-col items-center justify-center text-center animate-fade-in py-10">
+        <div class="relative mb-8">
+          <svg class="w-48 h-48 transform -rotate-90">
+            <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent"
+              class="text-slate-100" />
+            <circle id="score-circle-fill" cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12"
+              fill="transparent" stroke-dasharray="553" stroke-dashoffset="553"
+              class="text-uts-sky transition-all duration-1000 ease-out" />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span id="final-score" class="text-5xl font-display font-extrabold text-uts-deep">0</span>
+            <span class="text-slate-400 font-semibold uppercase text-xs tracking-widest">Points</span>
+          </div>
+        </div>
+        <h2 class="text-3xl font-display font-bold text-uts-dark mb-3">Quiz Complete!</h2>
+        <p id="score-message" class="text-slate-500 max-w-xs mx-auto mb-10 leading-relaxed"></p>
+        <button onclick="resetQuiz()"
+          class="bg-uts-deep text-white px-10 py-4 rounded-2xl font-bold hover:bg-uts-dark transition-all transform hover:scale-105 active:scale-95 shadow-xl">
+          Try Again
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer Controls -->
+    <footer id="footer-controls"
+      class="px-6 py-6 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center">
+      <div id="score-badge"
+        class="bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-uts-success animate-pulse"></span>
+        <span class="text-xs font-bold text-slate-600 uppercase tracking-tight">Score: <span
+            id="current-score-val">0</span></span>
+      </div>
+      <button id="next-btn" onclick="nextQuestion()"
+        class="hidden bg-uts-sky text-white px-8 py-3 rounded-xl font-bold hover:shadow-lg transition-all flex items-center gap-2 group">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </button>
+    </footer>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        type: 'mcq',
+        question: "Choose the correct sentence for capability:",
+        options: ["I can to swim very fast.", "I can swimming very fast.", "I can swim very fast.", "I cans swim very fast."],
+        answer: "I can swim very fast.",
+        explanation: "After 'can', we always use the base form of the verb without 'to' or '-ing'."
+      },
+      {
+        type: 'tf',
+        question: "'Can' changes its form for he/she/it (e.g., 'She cans').",
+        options: ["True", "False"],
+        answer: "False",
+        explanation: "'Can' is a modal verb and does not change form. It is the same for all subjects."
+      },
+      {
+        type: 'scramble',
+        question: "Unscramble the negative sentence:",
+        words: ["speak", "he", "can't", "French"],
+        answer: "he can't speak French",
+        explanation: "The structure is: Subject + can't + Verb + Complement."
+      },
+      {
+        type: 'fill',
+        question: "A bird _____ fly, but a dog _____.",
+        answer: "can, can't",
+        explanation: "Birds have the capability to fly, while dogs do not."
+      },
+      {
+        type: 'emoji',
+        question: "Which ability does this represent? 🎹",
+        options: ["Can play guitar", "Can play piano", "Can cook", "Can dance"],
+        answer: "Can play piano",
+        explanation: "The emoji shows a musical keyboard/piano."
+      },
+      {
+        type: 'grammar',
+        question: "Which question is grammatically correct?",
+        options: ["Do you can help me?", "Can you help me?", "Can you helping me?", "Can you to help me?"],
+        answer: "Can you help me?",
+        explanation: "Questions are formed by reversing 'can' and the subject. No 'do/does' is needed."
+      },
+      {
+        type: 'logic',
+        question: "I'm sorry, I ____ come to the party tonight. I have to work.",
+        options: ["can", "can't"],
+        answer: "can't",
+        explanation: "Because the person has to work, they are unable to attend the party."
+      },
+      {
+        type: 'question',
+        question: "How do you say 'No tengo la habilidad' using 'can'?",
+        options: ["I not can", "I can't", "I don't can", "I am not can"],
+        answer: "I can't",
+        explanation: "'Can't' is the contraction of 'cannot', used to express lack of ability."
+      },
+      {
+        type: 'short',
+        question: "Write the negative form of 'can' (one word):",
+        answer: "cannot",
+        explanation: "The formal one-word negative form is 'cannot', though 'can't' is more common in speech."
+      },
+      {
+        type: 'mcq',
+        question: "Complete: 'She ___ run 10km. She is very athletic.'",
+        options: ["can", "can't", "cans", "couldn't"],
+        answer: "can",
+        explanation: "The sentence implies a positive capability based on being 'athletic'."
+      }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let userScramble = [];
+    let canAnswer = true;
+
+    const app = document.getElementById('app');
+    const questionText = document.getElementById('question-text');
+    const answerArea = document.getElementById('answer-area');
+    const feedback = document.getElementById('feedback');
+    const feedbackContent = document.getElementById('feedback-content');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackExplanation = document.getElementById('feedback-explanation');
+    const nextBtn = document.getElementById('next-btn');
+    const progressFill = document.getElementById('progress-fill');
+    const questionCounter = document.getElementById('question-counter');
+    const currentScoreVal = document.getElementById('current-score-val');
+    const scoreScreen = document.getElementById('score-screen');
+    const quizCard = document.getElementById('quiz-card');
+    const footerControls = document.getElementById('footer-controls');
+
+    function startQuiz() {
+      currentIdx = 0;
+      score = 0;
+      currentScoreVal.innerText = score;
+      scoreScreen.classList.add('hidden');
+      quizCard.classList.remove('hidden');
+      footerControls.classList.remove('hidden');
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      canAnswer = true;
+      const q = quizData[currentIdx];
+      questionCounter.innerText = `Question ${currentIdx + 1} of ${quizData.length}`;
+      questionText.innerText = q.question;
+      answerArea.innerHTML = '';
+      feedback.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+
+      // Update Progress
+      const progress = ((currentIdx) / quizData.length) * 100;
+      progressFill.style.width = `${progress}%`;
+
+      if (q.type === 'mcq' || q.type === 'tf' || q.type === 'logic' || q.type === 'emoji' || q.type === 'grammar' || q.type === 'question') {
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-1 gap-3';
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn w-full p-4 text-left rounded-xl border-2 border-slate-100 bg-white font-medium text-slate-700 hover:border-uts-sky hover:bg-slate-50 transition-all';
+          btn.innerText = opt;
+          btn.onclick = () => validate(opt);
+          grid.appendChild(btn);
+        });
+        answerArea.appendChild(grid);
+      } else if (q.type === 'fill' || q.type === 'short') {
+        const container = document.createElement('div');
+        container.className = 'space-y-4';
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Type your answer here...';
+        input.className = 'w-full p-4 rounded-xl border-2 border-slate-100 bg-white focus:border-uts-sky focus:outline-none text-lg transition-all';
+        input.id = 'text-input';
+
+        const submitBtn = document.createElement('button');
+        submitBtn.innerText = 'Verify Answer';
+        submitBtn.className = 'w-full bg-uts-deep text-white p-4 rounded-xl font-bold hover:bg-uts-dark transition-all';
+        submitBtn.onclick = () => validate(input.value);
+
+        container.appendChild(input);
+        container.appendChild(submitBtn);
+        answerArea.appendChild(container);
+
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') validate(input.value);
+        });
+      } else if (q.type === 'scramble') {
+        userScramble = [];
+        const container = document.createElement('div');
+        container.className = 'space-y-6';
+
+        const dropZone = document.createElement('div');
+        dropZone.id = 'drop-zone';
+        dropZone.className = 'min-h-[60px] p-4 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 flex flex-wrap gap-2 items-center';
+
+        const wordBank = document.createElement('div');
+        wordBank.className = 'flex flex-wrap gap-2 justify-center';
+
+        const shuffled = [...q.words].sort(() => Math.random() - 0.5);
+
+        shuffled.forEach((word, idx) => {
+          const token = document.createElement('span');
+          token.className = 'word-token px-4 py-2 bg-white rounded-lg border border-slate-200 shadow-sm font-medium transition-all';
+          token.innerText = word;
+          token.id = `token-${idx}`;
+          token.onclick = () => {
+            if (!canAnswer) return;
+            if (!userScramble.includes(word)) {
+              userScramble.push(word);
+              token.classList.add('used');
+              const mini = document.createElement('span');
+              mini.className = 'px-3 py-1 bg-uts-sky text-white rounded-md text-sm animate-fade-in cursor-pointer';
+              mini.innerText = word;
+              mini.onclick = () => {
+                if (!canAnswer) return;
+                userScramble = userScramble.filter(w => w !== word);
+                token.classList.remove('used');
+                mini.remove();
+              }
+              dropZone.appendChild(mini);
+            }
+          };
+          wordBank.appendChild(token);
+        });
+
+        const checkBtn = document.createElement('button');
+        checkBtn.innerText = 'Check Sentence';
+        checkBtn.className = 'w-full bg-uts-deep text-white p-4 rounded-xl font-bold hover:bg-uts-dark transition-all mt-4';
+        checkBtn.onclick = () => validate(userScramble.join(' '));
+
+        container.appendChild(dropZone);
+        container.appendChild(wordBank);
+        container.appendChild(checkBtn);
+        answerArea.appendChild(container);
+      }
+    }
+
+    function validate(userVal) {
+      if (!canAnswer) return;
+      canAnswer = false;
+
+      const q = quizData[currentIdx];
+      const isCorrect = userVal.trim().toLowerCase() === q.answer.toLowerCase();
+
+      // Disable all buttons/inputs
+      const inputs = answerArea.querySelectorAll('button, input');
+      inputs.forEach(i => i.disabled = true);
+
+      if (isCorrect) {
+        score += 10;
+        currentScoreVal.innerText = score;
+        feedbackContent.className = 'rounded-2xl p-5 border-l-4 border-uts-success bg-emerald-50 text-emerald-900';
+        feedbackIcon.innerText = '✨';
+        feedbackTitle.innerText = 'Excellent!';
+      } else {
+        feedbackContent.className = 'rounded-2xl p-5 border-l-4 border-uts-error bg-red-50 text-red-900';
+        feedbackIcon.innerText = '💡';
+        feedbackTitle.innerText = 'Not quite...';
+      }
+
+      feedbackExplanation.innerHTML = `<strong>Answer:</strong> ${q.answer}<br><br>${q.explanation}`;
+      feedback.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+      currentIdx++;
+      if (currentIdx < quizData.length) {
+        renderQuestion();
+      } else {
+        finish();
+      }
+    }
+
+    function finish() {
+      quizCard.classList.add('hidden');
+      footerControls.classList.add('hidden');
+      scoreScreen.classList.remove('hidden');
+      progressFill.style.width = `100%`;
+
+      const finalScoreEl = document.getElementById('final-score');
+      const scoreCircleFill = document.getElementById('score-circle-fill');
+      const messageEl = document.getElementById('score-message');
+
+      const percentage = (score / (quizData.length * 10));
+      const dashOffset = 553 - (553 * percentage);
+
+      // Animate counter
+      let count = 0;
+      const timer = setInterval(() => {
+        if (count >= score) {
+          clearInterval(timer);
+          finalScoreEl.innerText = score;
+        } else {
+          count++;
+          finalScoreEl.innerText = count;
+        }
+      }, 20);
+
+      scoreCircleFill.style.strokeDashoffset = dashOffset;
+
+      if (score === 100) {
+        messageEl.innerText = "Outstanding! You've mastered 'can' and 'can't'. You are a grammar superstar!";
+      } else if (score >= 70) {
+        messageEl.innerText = "Great job! You have a solid understanding of basic capabilities and limitations.";
+      } else {
+        messageEl.innerText = "Keep practicing! Review the rules of modal verbs and try again to improve your score.";
+      }
+    }
+
+    function resetQuiz() {
+      startQuiz();
+    }
+
+    // Initialize
+    startQuiz();
+  </script>
+</body>
+
+</html>

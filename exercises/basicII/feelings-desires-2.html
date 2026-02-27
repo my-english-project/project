@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTS English Flashcards - Level A2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            uts: {
+              green: '#006341',
+              gold: '#FFCD00',
+              lightGreen: '#e6f0ec',
+              dark: '#1a1a1a',
+              blue: '#1A237E'
+            },
+            correct: '#28a745',
+            incorrect: '#dc3545',
+            faintRed: '#f8d7da'
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+            'premium': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      background-image: radial-gradient(#00634110 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .glass-morphism {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .option-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-bar-fill {
+      transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    .word-brick {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .word-brick:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="font-body text-uts-dark min-h-screen flex flex-col items-center justify-start p-4 md:p-8">
+
+  <!-- App Container -->
+  <div id="app-container"
+    class="w-full max-w-2xl glass-morphism rounded-3xl shadow-premium overflow-hidden flex flex-col min-h-[600px]">
+
+    <!-- Header -->
+    <header class="bg-uts-green p-5 md:p-6 flex items-center justify-between text-white relative">
+      <div class="flex items-center gap-3">
+        <div
+          class="w-20 h-10 border-2 border-dashed border-white/40 rounded-lg flex items-center justify-center text-[10px] font-bold text-center leading-tight">
+          <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo">
+        </div>
+        <h1 class="font-display font-bold text-xl md:text-2xl tracking-tight">Wants, Likes & Preferences Vol. 2</h1>
+      </div>
+      <a href="index.html"
+        class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full transition-all text-sm font-medium">
+        <span>←</span> <span class="hidden sm:inline">Return</span>
+      </a>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="w-full h-2 bg-uts-lightGreen relative">
+      <div id="progress-bar" class="progress-bar-fill absolute top-0 left-0 h-full bg-uts-gold w-0"></div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="quiz-main" class="flex-grow p-6 md:p-10 flex flex-col">
+
+      <!-- Question View -->
+      <div id="question-view" class="animate-fade-in space-y-6">
+        <!-- Meta Info -->
+        <div class="flex justify-between items-center text-xs font-bold uppercase tracking-widest text-uts-green/60">
+          <span id="question-counter">Question 1 of 10</span>
+          <span id="question-type-label" class="bg-uts-lightGreen px-3 py-1 rounded-full">Multiple Choice</span>
+        </div>
+
+        <!-- Question Text -->
+        <div id="question-body" class="text-xl md:text-2xl font-display font-bold text-uts-dark leading-tight">
+          How do you express a strong desire to do something?
+        </div>
+
+        <!-- Interaction Area -->
+        <div id="interaction-area" class="space-y-3 pt-4">
+          <!-- Dynamic Content Injected Here -->
+        </div>
+
+        <!-- Feedback Area -->
+        <div id="feedback" class="hidden rounded-2xl p-4 md:p-6 transition-all border-l-4">
+          <!-- Dynamic Feedback Injected Here -->
+        </div>
+      </div>
+
+      <!-- Score Screen (Hidden Initially) -->
+      <div id="score-screen"
+        class="hidden flex-grow flex flex-col items-center justify-center text-center space-y-6 py-10 animate-fade-in">
+        <div class="w-32 h-32 bg-uts-gold/20 rounded-full flex items-center justify-center mb-4">
+          <span class="text-5xl">🎓</span>
+        </div>
+        <h2 class="text-3xl font-display font-bold text-uts-green">Quiz Complete!</h2>
+        <p class="text-gray-600 max-w-xs mx-auto">You've finished the "Want, Like, Love, Hate" flashcards.</p>
+        <div class="text-6xl font-display font-black text-uts-green" id="score-display">8/10</div>
+        <p id="score-message" class="font-medium text-lg"></p>
+        <button onclick="resetQuiz()"
+          class="bg-uts-green text-white px-8 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl">
+          Try Again
+        </button>
+      </div>
+    </main>
+
+    <!-- Control Area -->
+    <div id="footer-nav"
+      class="p-6 border-t border-gray-100 bg-gray-50/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <button onclick="resetQuiz()"
+        class="reset-btn text-sm font-medium text-gray-400 hover:text-uts-green transition-colors underline decoration-dotted underline-offset-4">
+        Reset Quiz
+      </button>
+      <button id="next-btn" onclick="handleNext()"
+        class="w-full sm:w-auto px-10 py-4 bg-uts-green text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all transform active:scale-95">
+        Check Answer
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        type: 'mcq',
+        question: "Which sentence expresses the strongest emotion?",
+        options: ["I like pizza.", "I love pizza.", "I want pizza.", "I would like pizza."],
+        correct: "I love pizza.",
+        feedback: "'Love' is used for strong positive feelings, much stronger than 'like'."
+      },
+      {
+        type: 'fill',
+        question: "Complete the sentence: 'I ________ to go to the park today because the weather is nice.' (Expressing desire)",
+        correct: "want",
+        feedback: "We use 'want' followed by 'to + verb' to express a desire."
+      },
+      {
+        type: 'tf',
+        question: "'I hate cleaning my room.' Is this sentence grammatically correct?",
+        options: ["True", "False"],
+        correct: "True",
+        feedback: "'Hate' can be followed by a gerund (-ing form) to express a strong dislike for an activity."
+      },
+      {
+        type: 'scramble',
+        question: "Unscramble the sentence expressing a polite request:",
+        words: ["like", "to", "I", "order", "would", "now."],
+        correct: "I would like to order now.",
+        feedback: "'I would like' is a more formal and polite way of saying 'I want'."
+      },
+      {
+        type: 'select',
+        question: "Choose the correct form: 'She ________ playing video games after school.'",
+        options: ["likes", "like", "would like"],
+        correct: "likes",
+        feedback: "With third-person singular (She), we add 's' to the verb 'like' in the present simple."
+      },
+      {
+        type: 'mcq',
+        question: "What is the opposite of 'I love'?",
+        options: ["I don't want", "I hate", "I would like", "I like"],
+        correct: "I hate",
+        feedback: "'Hate' is the direct opposite of 'love', expressing intense dislike."
+      },
+      {
+        type: 'fill',
+        question: "Fill in the blank: 'They ________ like to travel to Japan next year.' (Polite intention)",
+        correct: "would",
+        feedback: "'Would like' is the standard structure for expressing polite desires or future intentions."
+      },
+      {
+        type: 'scramble',
+        question: "Unscramble the sentence about a hobby:",
+        words: ["doesn't", "He", "like", "swimming", "very", "much."],
+        correct: "He doesn't like swimming very much.",
+        feedback: "The negative form uses 'doesn't' + 'like' (base form) for the third person."
+      },
+      {
+        type: 'tf',
+        question: "'I would love go to the cinema.' Is this correct?",
+        options: ["True", "False"],
+        correct: "False",
+        feedback: "Correction: 'I would love TO go...' We must include 'to' before the infinitive verb."
+      },
+      {
+        type: 'mcq',
+        question: "Which of these is most likely used in a restaurant?",
+        options: ["I hate fish.", "I like menu.", "I would like the soup, please.", "I love tables."],
+        correct: "I would like the soup, please.",
+        feedback: "'I would like...' is the polite way to order food or drinks."
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let isAnswerChecked = false;
+    let selectedOption = null;
+    let selectedScramble = [];
+
+    const ui = {
+      progress: document.getElementById('progress-bar'),
+      counter: document.getElementById('question-counter'),
+      typeLabel: document.getElementById('question-type-label'),
+      body: document.getElementById('question-body'),
+      interaction: document.getElementById('interaction-area'),
+      feedback: document.getElementById('feedback'),
+      nextBtn: document.getElementById('next-btn'),
+      quizView: document.getElementById('question-view'),
+      scoreScreen: document.getElementById('score-screen'),
+      scoreDisplay: document.getElementById('score-display'),
+      scoreMessage: document.getElementById('score-message'),
+      footerNav: document.getElementById('footer-nav')
+    };
+
+    function initQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      isAnswerChecked = false;
+      ui.quizView.classList.remove('hidden');
+      ui.scoreScreen.classList.add('hidden');
+      ui.footerNav.classList.remove('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[currentQuestionIndex];
+      isAnswerChecked = false;
+      selectedOption = null;
+      selectedScramble = [];
+
+      ui.counter.innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+      ui.typeLabel.innerText = q.type.replace('mcq', 'Multiple Choice').replace('fill', 'Fill in the blank').replace('tf', 'True or False').replace('scramble', 'Sentence Scramble').replace('select', 'Selection');
+      ui.body.innerText = q.question;
+      ui.interaction.innerHTML = '';
+      ui.feedback.classList.add('hidden');
+      ui.nextBtn.innerText = "Check Answer";
+
+      // Progress Bar
+      const progress = ((currentQuestionIndex) / questions.length) * 100;
+      ui.progress.style.width = `${progress}%`;
+
+      if (q.type === 'mcq' || q.type === 'tf' || q.type === 'select') {
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = "option-btn w-full text-left p-4 rounded-xl border-2 border-uts-lightGreen bg-white font-medium hover:bg-uts-lightGreen/30 transition-all";
+          btn.innerText = opt;
+          btn.onclick = () => selectOption(btn, opt);
+          ui.interaction.appendChild(btn);
+        });
+      } else if (q.type === 'fill') {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Type your answer here...';
+        input.className = "w-full p-4 rounded-xl border-2 border-uts-lightGreen focus:border-uts-green focus:outline-none transition-all text-lg";
+        input.id = "fill-input";
+        ui.interaction.appendChild(input);
+      } else if (q.type === 'scramble') {
+        const answerBox = document.createElement('div');
+        answerBox.id = "scramble-answer";
+        answerBox.className = "min-h-[60px] p-4 rounded-xl border-2 border-dashed border-uts-lightGreen bg-uts-lightGreen/10 flex flex-wrap gap-2 mb-4";
+        ui.interaction.appendChild(answerBox);
+
+        const wordContainer = document.createElement('div');
+        wordContainer.className = "flex flex-wrap gap-2";
+
+        // Shuffle words for display
+        const shuffled = [...q.words].sort(() => Math.random() - 0.5);
+        shuffled.forEach(word => {
+          const brick = document.createElement('div');
+          brick.className = "word-brick px-4 py-2 bg-white border-2 border-uts-lightGreen rounded-lg shadow-sm font-medium hover:bg-uts-lightGreen/50";
+          brick.innerText = word;
+          brick.onclick = () => toggleWord(brick, word);
+          wordContainer.appendChild(brick);
+        });
+        ui.interaction.appendChild(wordContainer);
+      }
+    }
+
+    function selectOption(btn, opt) {
+      if (isAnswerChecked) return;
+      const btns = ui.interaction.querySelectorAll('.option-btn');
+      btns.forEach(b => b.classList.remove('border-uts-green', 'bg-uts-lightGreen/50', 'ring-2', 'ring-uts-green/20'));
+      btn.classList.add('border-uts-green', 'bg-uts-lightGreen/50', 'ring-2', 'ring-uts-green/20');
+      selectedOption = opt;
+    }
+
+    function toggleWord(brick, word) {
+      if (isAnswerChecked) return;
+      const answerBox = document.getElementById('scramble-answer');
+
+      if (brick.parentElement.id === 'scramble-answer') {
+        // Move back to tray
+        ui.interaction.lastChild.appendChild(brick);
+        selectedScramble = selectedScramble.filter(w => w !== word);
+      } else {
+        // Move to answer box
+        answerBox.appendChild(brick);
+        selectedScramble.push(word);
+      }
+    }
+
+    function handleNext() {
+      if (!isAnswerChecked) {
+        checkAnswer();
+      } else {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+          showQuestion();
+        } else {
+          showScore();
+        }
+      }
+    }
+
+    function checkAnswer() {
+      const q = questions[currentQuestionIndex];
+      let isCorrect = false;
+      let userAnswer = "";
+
+      if (q.type === 'mcq' || q.type === 'tf' || q.type === 'select') {
+        if (!selectedOption) return alert("Please select an option!");
+        userAnswer = selectedOption;
+        isCorrect = (selectedOption === q.correct);
+
+        // Style the options
+        const btns = ui.interaction.querySelectorAll('.option-btn');
+        btns.forEach(btn => {
+          btn.disabled = true;
+          if (btn.innerText === q.correct) {
+            btn.classList.add('bg-correct', 'text-white', 'border-correct');
+          } else if (btn.innerText === selectedOption && !isCorrect) {
+            btn.classList.add('bg-incorrect', 'text-white', 'border-incorrect');
+          }
+        });
+      } else if (q.type === 'fill') {
+        const input = document.getElementById('fill-input');
+        userAnswer = input.value.trim().toLowerCase();
+        isCorrect = (userAnswer === q.correct.toLowerCase());
+        input.disabled = true;
+        input.classList.add(isCorrect ? 'border-correct' : 'border-incorrect');
+      } else if (q.type === 'scramble') {
+        userAnswer = selectedScramble.join(' ');
+        isCorrect = (userAnswer.trim() === q.correct.trim());
+        const bricks = ui.interaction.querySelectorAll('.word-brick');
+        bricks.forEach(b => b.style.pointerEvents = 'none');
+      }
+
+      if (isCorrect) score++;
+
+      // Display Feedback
+      ui.feedback.classList.remove('hidden');
+      ui.feedback.innerHTML = `
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xl">${isCorrect ? '✅' : '❌'}</span>
+                    <span class="font-bold ${isCorrect ? 'text-correct' : 'text-incorrect'}">${isCorrect ? 'Excellent!' : 'Not quite right'}</span>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed">${q.feedback}</p>
+                ${!isCorrect ? `<div class="mt-3 text-xs font-bold text-gray-400 uppercase">Correct Answer:</div><div class="text-uts-green font-semibold">${q.correct}</div>` : ''}
+            `;
+      ui.feedback.classList.remove('bg-correct/10', 'bg-incorrect/10', 'border-correct', 'border-incorrect');
+      ui.feedback.classList.add(isCorrect ? 'bg-correct/10' : 'bg-incorrect/10');
+      ui.feedback.classList.add(isCorrect ? 'border-correct' : 'border-incorrect');
+
+      ui.nextBtn.innerText = "Continue";
+      isAnswerChecked = true;
+    }
+
+    function showScore() {
+      ui.progress.style.width = `100%`;
+      ui.quizView.classList.add('hidden');
+      ui.footerNav.classList.add('hidden');
+      ui.scoreScreen.classList.remove('hidden');
+      ui.scoreDisplay.innerText = `${score} / ${questions.length}`;
+
+      let message = "";
+      if (score === questions.length) message = "Perfect Score! You're a master of expressing desires and likes!";
+      else if (score >= 7) message = "Great job! You have a solid understanding of these concepts.";
+      else if (score >= 5) message = "Good effort! Keep practicing to master the differences.";
+      else message = "Keep studying! Review the 'want' and 'would like' structures.";
+
+      ui.scoreMessage.innerText = message;
+    }
+
+    function resetQuiz() {
+      initQuiz();
+    }
+
+    window.onload = initQuiz;
+  </script>
+</body>
+
+</html>

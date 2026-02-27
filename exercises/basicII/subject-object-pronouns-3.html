@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subject & Object Pronouns Practice | CELE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#001f3f',
+              light: '#003366',
+              dark: '#00152b',
+            },
+            accent: '#3b82f6',
+            success: '#28a745',
+            danger: '#dc3545',
+            dangerLight: '#f8d7da',
+            glass: 'rgba(255, 255, 255, 0.9)',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'slide-up': 'slideUp 0.4s ease-out forwards',
+            'bounce-subtle': 'bounceSubtle 2s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            bounceSubtle: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-5px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #f4f7f6 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    }
+
+    .option-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .scramble-word {
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+
+    .progress-bar-fill {
+      transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    .scramble-zone {
+      min-height: 60px;
+      border: 2px dashed #cbd5e1;
+    }
+  </style>
+</head>
+
+<body class="text-slate-800 antialiased overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full px-6 py-4 flex items-center justify-between glass-card mb-8">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="p-2 hover:bg-slate-100 rounded-full transition-colors group" aria-label="Go back">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6 text-navy group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </a>
+      <div class="flex items-center gap-3">
+        <div class="w-20 h-18 rounded-lg flex items-center justify-center">
+          <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo">
+        </div>
+        <h1 class="text-xl font-bold font-display text-navy tracking-tight hidden sm:block">CELE</h1>
+      </div>
+    </div>
+    <div class="text-center flex-1 mx-4">
+      <h2 class="text-sm md:text-lg font-semibold text-navy-light uppercase tracking-widest">Subject & Object Pronouns
+        Vol. 3
+      </h2>
+    </div>
+    <div class="flex items-center gap-2 bg-slate-100 px-4 py-1.5 rounded-full shadow-inner">
+      <span class="text-xs font-bold text-slate-500">SCORE</span>
+      <span id="score-val" class="text-navy font-bold">0</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 pb-12">
+    <!-- Progress Section -->
+    <div class="mb-8 animate-fade-in">
+      <div class="flex justify-between items-end mb-2">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-tighter" id="question-counter">Question 1 of
+          10</span>
+        <span class="text-xs font-bold text-accent" id="progress-percent">10%</span>
+      </div>
+      <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-accent progress-bar-fill" style="width: 10%;"></div>
+      </div>
+    </div>
+
+    <!-- Game Card -->
+    <div id="game-card" class="glass-card rounded-3xl p-8 md:p-12 animate-slide-up">
+      <!-- Question Content -->
+      <div id="question-container">
+        <!-- Dynamic Content Loads Here -->
+      </div>
+
+      <!-- Feedback Area -->
+      <div id="feedback-area" class="mt-8 hidden animate-fade-in">
+        <div id="feedback-box" class="p-6 rounded-2xl border-l-8 mb-6">
+          <div class="flex items-start gap-4">
+            <div id="feedback-icon" class="w-8 h-8 flex-shrink-0 mt-1"></div>
+            <div>
+              <p id="feedback-text" class="font-bold text-lg mb-1"></p>
+              <p id="explanation-text" class="text-sm opacity-90 leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-10 flex justify-end">
+        <button id="submit-btn"
+          class="bg-navy hover:bg-navy-light text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-navy/20 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+          Submit Answer
+        </button>
+        <button id="next-btn"
+          class="hidden bg-accent hover:bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-95">
+          Next Question →
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Card -->
+    <div id="result-card" class="hidden glass-card rounded-3xl p-12 text-center animate-slide-up max-w-2xl mx-auto">
+      <div class="w-24 h-24 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h2 class="text-4xl font-bold font-display text-navy mb-2">Practice Complete!</h2>
+      <p class="text-slate-500 mb-8">You've finished the Subject & Object Pronouns module.</p>
+
+      <div class="grid grid-cols-2 gap-4 mb-10">
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <p class="text-xs font-bold text-slate-400 uppercase mb-1">Final Score</p>
+          <p class="text-3xl font-bold text-navy" id="final-score">0/10</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <p class="text-xs font-bold text-slate-400 uppercase mb-1">Accuracy</p>
+          <p class="text-3xl font-bold text-accent" id="accuracy-val">0%</p>
+        </div>
+      </div>
+
+      <p id="result-msg" class="text-lg font-medium text-slate-700 mb-10 italic"></p>
+
+      <button onclick="initGame()"
+        class="w-full bg-navy hover:bg-navy-light text-white py-4 rounded-2xl font-bold text-xl shadow-xl shadow-navy/20 transition-all hover:scale-[1.02] active:scale-95">
+        Restart Practice
+      </button>
+    </div>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        type: 'mcq',
+        question: 'Select the correct pronoun for the blank: "_____ am going to the library."',
+        options: ['Me', 'I', 'Him', 'Them'],
+        answer: 'I',
+        explanation: '"I" is a subject pronoun used when the person is performing the action.'
+      },
+      {
+        type: 'mcq',
+        question: 'Which object pronoun fits here? "Can you help _____ with my homework?"',
+        options: ['I', 'She', 'Me', 'We'],
+        answer: 'Me',
+        explanation: '"Me" is an object pronoun receiving the action of the verb "help".'
+      },
+      {
+        type: 'fill',
+        question: 'Complete the sentence: "The teacher called (he) ____ to the front of the class."',
+        answer: 'him',
+        explanation: 'When "he" is the object of the verb "called", it changes to the object pronoun "him".'
+      },
+      {
+        type: 'scramble',
+        question: 'Unscramble the sentence using the correct pronouns:',
+        words: ['They', 'invited', 'us', 'party', 'their', 'to'],
+        answer: 'They invited us to their party',
+        explanation: '"They" is the subject pronoun and "us" is the object pronoun.'
+      },
+      {
+        type: 'mcq',
+        question: 'Identify the error: "Sarah and me went to the park."',
+        options: ['Sarah', 'and', 'me', 'went'],
+        answer: 'me',
+        explanation: 'The subject should be "Sarah and I" because "I" is performing the action.'
+      },
+      {
+        type: 'fill',
+        question: 'Rewrite the bracketed noun with a pronoun: "Give the book to (Sarah) ____."',
+        answer: 'her',
+        explanation: '"Sarah" is the indirect object, so we use the object pronoun "her".'
+      },
+      {
+        type: 'mcq',
+        question: 'Which is correct? "Please tell ____ the story."',
+        options: ['we', 'us', 'they', 'she'],
+        answer: 'us',
+        explanation: '"Us" is the object pronoun receiving the telling.'
+      },
+      {
+        type: 'scramble',
+        question: 'Build the sentence:',
+        words: ['gave', 'He', 'it', 'me', 'to'],
+        answer: 'He gave it to me',
+        explanation: '"He" is the subject, "it" and "me" are objects.'
+      },
+      {
+        type: 'mcq',
+        question: 'Choose the correct subject pronoun: "____ are my best friends."',
+        options: ['Them', 'They', 'Him', 'Her'],
+        answer: 'They',
+        explanation: 'Use the subject pronoun "They" to refer to more than one person performing the action.'
+      },
+      {
+        type: 'fill',
+        question: 'Change the noun to a pronoun: "I saw (the cat) ____ under the table."',
+        answer: 'it',
+        explanation: 'The object pronoun for non-human things/animals is typically "it".'
+      }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let selectedOption = null;
+    let scrambleAnswer = [];
+
+    const gameCard = document.getElementById('game-card');
+    const resultCard = document.getElementById('result-card');
+    const questionContainer = document.getElementById('question-container');
+    const feedbackArea = document.getElementById('feedback-area');
+    const feedbackBox = document.getElementById('feedback-box');
+    const feedbackText = document.getElementById('feedback-text');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const explanationText = document.getElementById('explanation-text');
+    const submitBtn = document.getElementById('submit-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const scoreVal = document.getElementById('score-val');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercent = document.getElementById('progress-percent');
+    const questionCounter = document.getElementById('question-counter');
+
+    function initGame() {
+      currentIdx = 0;
+      score = 0;
+      updateStats();
+      gameCard.classList.remove('hidden');
+      resultCard.classList.add('hidden');
+      showQuestion();
+    }
+
+    function updateStats() {
+      scoreVal.textContent = score;
+      const progress = ((currentIdx) / questions.length) * 100;
+      progressBar.style.width = `${progress}%`;
+      progressPercent.textContent = `${Math.round(progress)}%`;
+      questionCounter.textContent = `Question ${currentIdx + 1} of ${questions.length}`;
+    }
+
+    function showQuestion() {
+      const q = questions[currentIdx];
+      selectedOption = null;
+      scrambleAnswer = [];
+
+      feedbackArea.classList.add('hidden');
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+      submitBtn.disabled = true;
+
+      let html = `<h3 class="text-2xl md:text-3xl font-bold font-display text-navy mb-8 leading-tight">${q.question}</h3>`;
+
+      if (q.type === 'mcq') {
+        html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+        q.options.forEach(opt => {
+          html += `
+                        <button onclick="selectMCQ('${opt}')" class="option-btn p-5 rounded-2xl border-2 border-slate-100 text-left font-semibold text-lg hover:border-accent hover:bg-blue-50/50 flex items-center gap-4 group" data-option="${opt}">
+                            <span class="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs text-slate-400 group-hover:border-accent group-hover:text-accent transition-colors">${opt[0]}</span>
+                            ${opt}
+                        </button>
+                    `;
+        });
+        html += `</div>`;
+      } else if (q.type === 'fill') {
+        html += `
+                    <div class="mt-4">
+                        <input type="text" id="fill-input" oninput="validateFill()" placeholder="Type your answer here..." 
+                               class="w-full p-6 text-xl font-bold bg-slate-50 border-2 border-slate-200 rounded-2xl focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all"
+                               autocomplete="off">
+                    </div>
+                `;
+      } else if (q.type === 'scramble') {
+        html += `
+                    <div class="mb-6">
+                        <div id="scramble-zone" class="scramble-zone w-full p-6 rounded-2xl bg-slate-50/50 flex flex-wrap gap-2 items-center">
+                            <!-- Selected words go here -->
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3" id="word-pool">
+                        ${q.words.sort(() => Math.random() - 0.5).map(word => `
+                            <button onclick="toggleWord(this, '${word}')" class="scramble-word px-6 py-3 bg-white border-2 border-slate-200 rounded-xl font-semibold shadow-sm hover:border-accent hover:shadow-md active:scale-95 transition-all">
+                                ${word}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+      }
+
+      questionContainer.innerHTML = html;
+      updateStats();
+    }
+
+    function selectMCQ(opt) {
+      selectedOption = opt;
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.remove('border-accent', 'bg-blue-50/50', 'ring-4', 'ring-accent/10');
+        if (btn.dataset.option === opt) {
+          btn.classList.add('border-accent', 'bg-blue-50/50', 'ring-4', 'ring-accent/10');
+        }
+      });
+      submitBtn.disabled = false;
+    }
+
+    function validateFill() {
+      const val = document.getElementById('fill-input').value.trim();
+      submitBtn.disabled = val.length === 0;
+    }
+
+    function toggleWord(btn, word) {
+      if (btn.dataset.selected === "true") {
+        btn.dataset.selected = "false";
+        btn.classList.remove('opacity-30', 'pointer-events-none');
+        scrambleAnswer = scrambleAnswer.filter(w => w !== word);
+      } else {
+        btn.dataset.selected = "true";
+        btn.classList.add('opacity-30', 'pointer-events-none');
+        scrambleAnswer.push(word);
+      }
+      updateScrambleDisplay();
+      submitBtn.disabled = scrambleAnswer.length === 0;
+    }
+
+    function updateScrambleDisplay() {
+      const zone = document.getElementById('scramble-zone');
+      zone.innerHTML = scrambleAnswer.map(word => `
+                <span class="px-4 py-2 bg-accent text-white rounded-lg font-bold shadow-sm animate-fade-in flex items-center gap-2">
+                    ${word}
+                    <button onclick="removeWord('${word}')" class="hover:text-red-200">×</button>
+                </span>
+            `).join('');
+    }
+
+    function removeWord(word) {
+      scrambleAnswer = scrambleAnswer.filter(w => w !== word);
+      const poolBtns = document.querySelectorAll('#word-pool button');
+      poolBtns.forEach(btn => {
+        if (btn.innerText.trim() === word && btn.dataset.selected === "true") {
+          btn.dataset.selected = "false";
+          btn.classList.remove('opacity-30', 'pointer-events-none');
+        }
+      });
+      updateScrambleDisplay();
+      submitBtn.disabled = scrambleAnswer.length === 0;
+    }
+
+    function checkAnswer() {
+      const q = questions[currentIdx];
+      let userAns = '';
+      let isCorrect = false;
+
+      if (q.type === 'mcq') {
+        userAns = selectedOption;
+        isCorrect = userAns === q.answer;
+      } else if (q.type === 'fill') {
+        userAns = document.getElementById('fill-input').value.trim();
+        isCorrect = userAns.toLowerCase() === q.answer.toLowerCase();
+      } else if (q.type === 'scramble') {
+        userAns = scrambleAnswer.join(' ');
+        isCorrect = userAns === q.answer;
+      }
+
+      if (isCorrect) score++;
+
+      displayFeedback(isCorrect, q.explanation, q.answer);
+
+      submitBtn.classList.add('hidden');
+      nextBtn.classList.remove('hidden');
+
+      // Disable all interactions in the question area
+      const inputs = questionContainer.querySelectorAll('button, input');
+      inputs.forEach(i => i.disabled = true);
+    }
+
+    function displayFeedback(correct, explanation, actualAnswer) {
+      feedbackArea.classList.remove('hidden');
+      if (correct) {
+        feedbackBox.className = "p-6 rounded-2xl border-l-8 mb-6 bg-green-50 border-success text-success";
+        feedbackText.textContent = "Excellent! That's correct.";
+        feedbackIcon.innerHTML = `<svg viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`;
+      } else {
+        feedbackBox.className = "p-6 rounded-2xl border-l-8 mb-6 bg-red-50 border-danger text-danger";
+        feedbackText.textContent = `Not quite. The correct answer is: ${actualAnswer}`;
+        feedbackIcon.innerHTML = `<svg viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>`;
+      }
+      explanationText.textContent = explanation;
+    }
+
+    function nextQuestion() {
+      currentIdx++;
+      if (currentIdx < questions.length) {
+        showQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      gameCard.classList.add('hidden');
+      resultCard.classList.remove('hidden');
+
+      const accuracy = (score / questions.length) * 100;
+      document.getElementById('final-score').textContent = `${score}/${questions.length}`;
+      document.getElementById('accuracy-val').textContent = `${accuracy}%`;
+
+      const msg = document.getElementById('result-msg');
+      if (accuracy === 100) msg.textContent = "Perfect! You've mastered Subject and Object pronouns.";
+      else if (accuracy >= 80) msg.textContent = "Great job! You have a strong grasp of these concepts.";
+      else if (accuracy >= 60) msg.textContent = "Good effort! A bit more practice will make you an expert.";
+      else msg.textContent = "Keep practicing! Review the rules and try again to improve your score.";
+
+      // Final progress update
+      progressBar.style.width = '100%';
+      progressPercent.textContent = '100%';
+      questionCounter.textContent = 'Complete';
+    }
+
+    submitBtn.addEventListener('click', checkAnswer);
+    nextBtn.addEventListener('click', nextQuestion);
+
+    // Init
+    initGame();
+  </script>
+</body>
+
+</html>

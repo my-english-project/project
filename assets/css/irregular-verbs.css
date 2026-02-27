@@ -1,0 +1,117 @@
+/* Basic Reset to make styling easier across browsers */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* The main container for the app content */
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px; /* Ensures it doesn't get too wide on large screens */
+    text-align: center;
+}
+
+header h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Styling the search input and button area */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 400px) {
+    .search-box {
+        flex-direction: column;
+    }
+    input[type="text"], button {
+        width: 100%;
+    }
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling the results area */
+.result-container {
+    text-align: left;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 5px solid #007bff;
+}
+
+.result-line {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #444;
+}
+
+/* The bold labels in the result (e.g., "Infinitive:") */
+.label {
+    font-weight: 700;
+    color: #222;
+    margin-right: 8px;
+}
+
+/* Utility classes to hide elements */
+.hidden {
+    display: none;
+}
+
+.error {
+    color: #d9534f;
+    background-color: #f2dede;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #ebccd1;
+}

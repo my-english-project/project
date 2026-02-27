@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTS English Language Program</title>
+    <style>
+        /* --- VARIABLES CSS & RESET --- */
+        :root {
+            --color-uts-green: #008F4C;
+            --color-uts-blue: #004C97;
+            --color-accent-green: #66BC29;
+            --color-bg-light: #F4F4F4;
+            --color-text-dark: #333;
+            --shadow-card: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+            padding-bottom: 60px; /* Espacio para el footer fijo si fuera necesario, o solo aire */
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+
+        /* --- LAYOUT PRINCIPAL --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .header-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-title {
+            text-align: center;
+            color: var(--color-uts-blue);
+        }
+
+        .header-title h1 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .header-title h2 {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        /* Media query para header en móviles muy pequeños */
+        @media (max-width: 480px) {
+            header { flex-direction: column; gap: 15px; }
+            .header-logo { height: 40px; }
+            .header-title h1 { font-size: 1rem; }
+            .header-title h2 { font-size: 0.9rem; }
+        }
+
+        /* --- BREADCRUMBS --- */
+        .breadcrumbs {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .crumb-link { color: var(--color-uts-blue); font-weight: bold; }
+        .crumb-link:hover { text-decoration: underline; }
+        .crumb-separator { margin: 0 8px; color: #ccc; }
+        .crumb-current { color: #333; font-weight: bold; }
+
+        /* --- COMPONENTES GENERALES --- */
+        .section-title {
+            color: var(--color-uts-green);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .cefr-desc-box {
+            background-color: #E8F5E9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--color-uts-green);
+            margin-bottom: 30px;
+        }
+        .cefr-desc-box h3 { color: var(--color-uts-green); margin-bottom: 10px; }
+
+        /* --- BOTONES DE GRID (Niveles y Subniveles) --- */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: 1fr; /* Móvil: 1 columna */
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 600px) {
+            .grid-menu { grid-template-columns: repeat(2, 1fr); } /* Tablet: 2 columnas */
+        }
+        @media (min-width: 900px) {
+             /* Escritorio: 3 columnas para la home */
+            .grid-menu.home-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .menu-btn {
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-subtitle {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: normal;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        .btn-arrow { font-size: 1.5rem; }
+
+        .btn-basic { background-color: var(--color-uts-green); }
+        .btn-inter { background-color: var(--color-uts-blue); }
+        .btn-adv { background-color: var(--color-accent-green); }
+
+
+        /* --- LISTA DE TÓPICOS --- */
+        .topic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .topic-item {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--color-accent-green);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .topic-item:hover {
+            background-color: #f0f8eb;
+        }
+
+        /* --- PÁGINA DE CONTENIDO --- */
+        .content-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-card);
+        }
+        .content-box h2 { color: var(--color-uts-blue); margin-top: 20px; margin-bottom: 10px;}
+        .content-example-box {
+             background-color: #F4F4F4;
+             padding: 15px;
+             border-radius: 8px;
+             border-left: 4px solid var(--color-uts-blue);
+             margin: 15px 0;
+        }
+
+        /* --- BUSCADOR --- */
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+        .search-input:focus { outline: none; border-color: var(--color-uts-blue); }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: var(--shadow-card);
+            display: none; /* Oculto por defecto */
+        }
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f4f4f4;
+            cursor: pointer;
+        }
+        .search-result-item:hover { background-color: #f9f9f9; }
+        .result-path { font-size: 0.8rem; color: #888; display: block;}
+
+
+        /* --- FOOTER BUTTONS --- */
+        .footer-nav {
+            margin-top: 40px;
+            border-top: 2px solid #eee;
+            padding-top: 30px;
+        }
+        .footer-nav h3 { margin-bottom: 15px; color: #555;}
+        .footer-grid {
+             display: grid;
+             grid-template-columns: repeat(3, 1fr);
+             gap: 10px;
+        }
+        .footer-btn {
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            background: white;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .f-btn-1 { color: var(--color-uts-green); border-color: var(--color-uts-green); }
+        .f-btn-2 { color: var(--color-uts-blue); border-color: var(--color-uts-blue); }
+        .f-btn-3 { color: var(--color-accent-green); border-color: var(--color-accent-green); }
+        
+        .footer-btn:hover { color: white; }
+        .f-btn-1:hover { background: var(--color-uts-green); }
+        .f-btn-2:hover { background: var(--color-uts-blue); }
+        .f-btn-3:hover { background: var(--color-accent-green); }
+
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; } /* Botones footer apilados en móvil */
+        }
+
+        /* --- UTILIDADES --- */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <img src="https://placehold.co/150x50/004C97/ffffff?text=UTS+Logo" alt="UTS Logo" class="header-logo">
+        <div class="header-title">
+            <h1>UTS FOREIGN LANGUAGE CENTER</h1>
+            <h2>ENGLISH LANGUAGE PROGRAM</h2>
+        </div>
+        <img src="https://placehold.co/150x50/ffb700/000000?text=CELE+Logo" alt="CELE Logo" class="header-logo">
+    </header>
+
+    <div id="breadcrumbs" class="breadcrumbs">
+        </div>
+
+    <main id="main-content">
+        </main>
+
+    <div id="global-footer-nav" class="footer-nav hidden">
+        <h3>Additional Resources</h3>
+        <div class="footer-grid">
+            <div class="footer-btn f-btn-1">Slideshows</div>
+            <div class="footer-btn f-btn-2">Exercises</div>
+            <div class="footer-btn f-btn-3">Extras</div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    // ==========================================
+    // 1. BASE DE DATOS DEL CURSO
+    // ==========================================
+    // Contiene toda la estructura proporcionada en el prompt.
+    const courseData = {
+        basic: {
+            title: "BASIC LEVELS",
+            subtitle: "(A1 - A2) Basic I, II, III, IV",
+            theme: "btn-basic",
+            cefrDesc: [
+                { title: "LEVEL A1", text: "The student is able to understand and use everyday expressions and very basic phrases aimed at satisfying immediate needs. They can introduce themselves and others, ask for and give basic personal information about their home, belongings, and people they know." },
+                { title: "LEVEL A2", text: "The student is able to understand sentences and frequently used expressions related to areas of most immediate relevance (e.g., very basic personal and family information, shopping, local geography, employment)." }
+            ],
+            levels: {
+                basic1: {
+                    title: "BASIC I",
+                    topics: [
+                        "Greetings and introductions", "The alphabet and basic pronunciation", "Numbers, days, months, and dates", "Definite/indefinite articles", "Verbs to be and have got", "Basic questions (What’s your name? Where are you from?)", "Nationalities and professions", "Vocabulary: family, colors, classroom objects, jobs, sports, food, drinks", "Possessive adjectives and pronouns", "Simple present tense", "Nouns: singular and plural", "Telling the time / prepositions of time: at, on, in", "Adjective + noun", "Describing people"
+                    ]
+                },
+                basic2: {
+                    title: "BASIC II",
+                    topics: [
+                        "Review: verbs in simple present", "Prepositions of place", "There is / There are", "This / That / These / Those", "Affirmative, negative, and interrogative sentences with do/does", "Reading and writing simple descriptions", "Have / Has", "Adverbs of frequency", "How much / How many / Some / Any", "Prepositions: in, on, under, next to", "Was / Were", "Simple past (regular and irregular verbs)", "Can / Can’t", "Want, like, would like, love, hate", "Object pronouns", "Adverbs", "Verbs + nouns", "Giving directions / restaurant dialogue / shopping"
+                    ]
+                },
+                basic3: {
+                    title: "BASIC III",
+                    topics: [
+                        "Review: simple past verbs (regular and irregular)", "Time expressions: last, yesterday, ago", "Simple present and present progressive", "Present progressive as future", "Future: will / going to", "Comparatives and superlatives", "A / some", "Review: much / many", "Reading, writing, and speaking about holidays and celebrations", "Describing types of weather"
+                    ]
+                },
+                basic4: {
+                    title: "BASIC IV",
+                    topics: [
+                        "Modal verbs: should, must, have to", "Review: future with going to and will", "Past continuous", "Vocabulary: health, media, airport", "Writing simple emails, personal descriptions, stories, experiences", "Infinitive as an objective", "Simple past vs. past continuous", "Past participle verbs", "Present perfect: ever / never; yet / already / just", "Interviews", "Describing feelings and emotions"
+                    ]
+                }
+            }
+        },
+        intermediate: {
+            title: "INTERMEDIATE LEVELS",
+            subtitle: "(B1 - B2) Intermediate I, II, III, IV",
+            theme: "btn-inter",
+            cefrDesc: [
+                { title: "LEVEL B1", text: "The student can understand the main points of clear standard input on familiar matters regularly encountered in work, school, leisure, etc. They can deal with most situations likely to arise while traveling in an area where the language is spoken." },
+                { title: "LEVEL B2", text: "The student can understand the main ideas of complex texts on both concrete and abstract topics, including technical discussions in their field of specialization. They can interact with native speakers with a degree of fluency and spontaneity." }
+            ],
+            levels: {
+                inter1: {
+                    title: "INTERMEDIATE I",
+                    topics: [
+                        "Review of verb tenses: present, past, and future", "Verb patterns (want to, enjoy + -ing, etc.)", "First conditional", "Present perfect vs. past simple", "Vocabulary: work, travel, technology", "Writing informal emails and messages", "A few / a little / a lot / lots of", "Something, someone, somewhere", "Review: future intentions", "As…as", "For / since", "-ed / -ing adjectives", "Synonyms and antonyms", "Connectors with adverbs, time expressions"
+                    ]
+                },
+                inter2: {
+                    title: "INTERMEDIATE II",
+                    topics: [
+                        "Second conditional", "Reported speech (introductory)", "Past modal verbs (could have, should have)", "Expressions with get, common phrasal verbs", "Vocabulary: relationships, environment", "Comprehension of more complex texts", "Present perfect progressive", "Passive voice", "Time clauses: while, when, until", "Exclamations with so / such", "Linking ideas with: and, still, just, unfortunately", "Present perfect vs. present perfect progressive"
+                    ]
+                },
+                inter3: {
+                    title: "INTERMEDIATE III",
+                    topics: [
+                        "Passive voice in different tenses", "Reported speech (advanced)", "Perfect tenses (present/past/future perfect)", "Sentences with wish / if only", "Vocabulary: politics, science", "Short argumentative essays", "Used to", "Future possibilities: may, might, could", "Lifestyles / comparing customs in different countries", "Prefixes and suffixes", "Talking about yourself / job interview", "Fears and phobias"
+                    ]
+                },
+                inter4: {
+                    title: "INTERMEDIATE IV",
+                    topics: [
+                        "Mixed conditionals", "Third conditional", "Relative clauses (defining / non-defining)", "Reflexive pronouns", "Formal and informal discourse", "Complex connectors (although, in spite of, etc.)", "Reading academic texts and opinion articles", "Oral production with fluency and accuracy", "Might have done / could have done / should have done", "All / Everything; each / other", "Compound nouns", "Phrasal verbs with out and up", "Linking ideas: anyway / naturally / fortunately"
+                    ]
+                }
+            }
+        },
+        advanced: {
+            title: "ADVANCED LEVELS",
+            subtitle: "(C1) Advanced I, II, III, IV",
+            theme: "btn-adv",
+            cefrDesc: [
+                { title: "LEVEL C1", text: "The student can understand a wide range of demanding, longer texts, and recognize implicit meaning. They can express themselves fluently and spontaneously without much obvious searching for expressions. They can use language flexibly and effectively for social, academic, and professional purposes." }
+            ],
+            levels: {
+                adv1: {
+                    title: "ADVANCED I",
+                    topics: [
+                        "Subjunctive and formal structures", "Complex narrative tenses", "Idiomatic expressions", "Inversion for emphasis", "Critical reading of long texts", "Debating social and ethical topics", "Future forms detailed", "Expressions of quantity detailed", "Modals and related verbs detailed", "Expressing habits", "Prefixes and antonyms", "Discussion: pros and cons of living abroad", "A CV", "Correcting mistakes", "Talking about your favorite book or film", "Homonyms / homophones", "Conjunctions: whenever / so that / even though", "Business expressions", "Numbers, fractions, decimals, dates, time, phone numbers"
+                    ]
+                },
+                adv2: {
+                    title: "ADVANCED II",
+                    topics: [
+                        "Collocations and verbal collocations", "Nominalization", "Academic vocabulary", "Structured essay writing", "Reformulation and paraphrasing", "Formal presentations with visual support", "Modal auxiliary verbs: could have been / might have done", "Hypothesizing: I wish / I’d rather / If only", "Determiners: each, every, no, none, both, either", "Review of all tenses", "Review of active and passive voice", "Linking words and expressions: as soon as, eventually", "Linking and commenting: personally, anyway, hopefully", "The reunion discussion"
+                    ]
+                },
+                adv3: {
+                    title: "ADVANCED III",
+                    topics: [
+                        "English for business and academic contexts", "Report and formal email writing techniques", "Meetings, negotiations, and presentations", "Specialized technical vocabulary", "Competency-based language assessment", "Phrasal verbs with up and down", "Idiomatic collocations", "Finding things in common", "Pronunciation focus", "Phrasal verbs with on and off", "Discussing economic growth", "Report writing", "Summarizing a listening", "Giving an overview of key information in a text", "Researching a period in history", "Talking about things that make people happy"
+                    ]
+                },
+                adv4: {
+                    title: "ADVANCED IV",
+                    topics: [
+                         "Simulation of international exams (CAE, IELTS C1)", "Complex and critical argumentation", "Production of specialized speeches and essays", "Mastery of registers (formal/informal)", "Personalized feedback for improvement", "Relatives and participles detailed", "Future forms", "Future in the past", "Linking devices: thus / furthermore / meanwhile", "Homonyms, homophones, and homographs", "Metaphorical language", "Tags and replies", "Debating an issue", "Describing and evaluating", "Exchanging information about a reading text"
+                    ]
+                }
+            }
+        }
+    };
+
+    // ==========================================
+    // 2. CONTROLADORES DE VISTA (El "Router" simple)
+    // ==========================================
+    const mainContent = document.getElementById('main-content');
+    const breadcrumbsContainer = document.getElementById('breadcrumbs');
+    const globalFooterNav = document.getElementById('global-footer-nav');
+
+    // --- VISTA: HOME ---
+    function renderHome() {
+        updateBreadcrumbs([]);
+        globalFooterNav.classList.remove('hidden');
+
+        mainContent.innerHTML = `
+            <div class="search-container">
+                <input type="text" id="globalSearch" class="search-input" placeholder="Search for topics (e.g., Simple Present)...">
+                <div id="searchResults" class="search-results"></div>
+            </div>
+
+            <h1 class="section-title">Course Levels</h1>
+            <div class="grid-menu home-grid">
+                <div class="menu-btn btn-basic" onclick="renderGrade('basic')">
+                    <div>
+                        <span>BASIC LEVELS</span>
+                        <span class="btn-subtitle">(A1 - A2) Basic I, II, III, IV</span>
+                    </div>
+                    <span class="btn-arrow">➔</span>
+                </div>
+                 <div class="menu-btn btn-inter" onclick="renderGrade('intermediate')">
+                    <div>
+                        <span>INTERMEDIATE LEVELS</span>
+                        <span class="btn-subtitle">(B1 - B2) Intermediate I, II, III, IV</span>
+                    </div>
+                    <span class="btn-arrow">➔</span>
+                </div>
+                 <div class="menu-btn btn-adv" onclick="renderGrade('advanced')">
+                    <div>
+                        <span>ADVANCED LEVELS</span>
+                        <span class="btn-subtitle">(C1) Advanced I, II, III, IV</span>
+                    </div>
+                    <span class="btn-arrow">➔</span>
+                </div>
+            </div>
+        `;
+        initSearch(); // Inicializar el listener del buscador
+    }
+
+
+    // --- VISTA: GRADO (Ej. Basic Levels) ---
+    function renderGrade(gradeKey) {
+        const gradeData = courseData[gradeKey];
+        updateBreadcrumbs([{text: gradeData.title, onClick: `renderGrade('${gradeKey}')`}]);
+        globalFooterNav.classList.add('hidden');
+
+        let cefrHtml = '';
+        gradeData.cefrDesc.forEach(desc => {
+            cefrHtml += `<h3>${desc.title}</h3><p>${desc.text}</p>`;
+        });
+
+        let levelsHtml = '<div class="grid-menu">';
+        for (const [levelKey, levelData] of Object.entries(gradeData.levels)) {
+             levelsHtml += `
+                <div class="menu-btn ${gradeData.theme}" onclick="renderLevel('${gradeKey}', '${levelKey}')">
+                    ${levelData.title}
+                    <span class="btn-arrow">➔</span>
+                </div>
+             `;
+        }
+        levelsHtml += '</div>';
+
+        mainContent.innerHTML = `
+            <h1 class="section-title">${gradeData.title}</h1>
+            <div class="cefr-desc-box">${cefrHtml}</div>
+            ${levelsHtml}
+        `;
+    }
+
+
+    // --- VISTA: NIVEL (Índice de Tópicos, Ej. Basic I) ---
+    function renderLevel(gradeKey, levelKey) {
+        const gradeData = courseData[gradeKey];
+        const levelData = gradeData.levels[levelKey];
+        updateBreadcrumbs([
+            {text: gradeData.title, onClick: `renderGrade('${gradeKey}')`},
+            {text: levelData.title, onClick: `renderLevel('${gradeKey}', '${levelKey}')`}
+        ]);
+        globalFooterNav.classList.add('hidden');
+
+        let topicsHtml = '<div class="topic-list">';
+        levelData.topics.forEach((topic, index) => {
+            // Usamos el índice del array como identificador del tópico
+            topicsHtml += `
+                <div class="topic-item" onclick="renderContent('${gradeKey}', '${levelKey}', ${index})">
+                    ${topic}
+                    <span style="color: #999;">➔</span>
+                </div>
+            `;
+        });
+        topicsHtml += '</div>';
+
+        mainContent.innerHTML = `
+            <h1 class="section-title">${levelData.title}: Topics</h1>
+            ${topicsHtml}
+        `;
+    }
+
+
+    // --- VISTA: CONTENIDO (La lección final) ---
+    function renderContent(gradeKey, levelKey, topicIndex) {
+        const gradeData = courseData[gradeKey];
+        const levelData = gradeData.levels[levelKey];
+        const topicTitle = levelData.topics[topicIndex];
+
+        updateBreadcrumbs([
+            {text: gradeData.title, onClick: `renderGrade('${gradeKey}')`},
+            {text: levelData.title, onClick: `renderLevel('${gradeKey}', '${levelKey}')`},
+            {text: topicTitle, isCurrent: true}
+        ]);
+        globalFooterNav.classList.add('hidden');
+
+        // --- GENERADOR DE CONTENIDO (PLACEHOLDER) ---
+        // Aquí es donde se conectaría una base de datos real con el contenido de cada lección.
+        // Para este demo, uso una plantilla genérica, y un CASO REAL para "Simple present tense".
+
+        let contentBody = '';
+
+        // --- EJEMPLO REAL DE CONTENIDO ---
+        if (topicTitle === "Simple present tense" && levelKey === 'basic1') {
+             contentBody = `
+                <p>The <strong>Simple Present</strong> is used to talk about daily routines, habits, general truths, and permanent facts.</p>
+
+                <h2>Structure (Affirmative)</h2>
+                <div class="content-example-box">
+                  <p>Subject + Verb (base form) + Complement</p>
+                  <ul>
+                    <li>I <strong>work</strong> in an office.</li>
+                    <li>They <strong>play</strong> soccer on weekends.</li>
+                  </ul>
+                  <p><em>*For <strong>He, She, It</strong>, we add 's' or 'es' to the verb.</em></p>
+                  <ul>
+                    <li>She <strong>works</strong> in an office.</li>
+                    <li>He <strong>watches</strong> TV every night.</li>
+                  </ul>
+                </div>
+
+                <h2>Common Uses</h2>
+                 <ul>
+                  <li><strong>Routines:</strong> I wake up at 7:00 AM.</li>
+                  <li><strong>Habits:</strong> She drinks coffee every morning.</li>
+                  <li><strong>Truths:</strong> The sun rises in the east.</li>
+                </ul>
+            `;
+        } else {
+            // --- PLANTILLA GENÉRICA PARA EL RESTO ---
+            contentBody = `
+                <p>This is the content placeholder for the topic: <strong>${topicTitle}</strong>.</p>
+                <p>In a full application, the specific grammar explanations, vocabulary lists, and examples for this lesson would appear here.</p>
+                <div class="content-example-box">
+                    <h3>Examples:</h3>
+                    <ul>
+                        <li>Example sentence 1 related to ${topicTitle}.</li>
+                        <li>Example sentence 2 related to ${topicTitle}.</li>
+                        <li>Example sentence 3 related to ${topicTitle}.</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        mainContent.innerHTML = `
+            <div class="content-box">
+                <h1 style="color: var(--color-uts-green);">${topicTitle}</h1>
+                ${contentBody}
+                 <div style="margin-top: 30px; text-align: center;">
+                  <button class="menu-btn btn-adv" style="margin: auto; display: inline-block; font-size: 1rem; padding: 10px 20px;">
+                    Go to Exercises for this topic
+                  </button>
+                </div>
+            </div>
+        `;
+    }
+
+
+    // ==========================================
+    // 3. FUNCIONES UTILITARIAS
+    // ==========================================
+
+    // Actualiza la barra de navegación (Breadcrumbs)
+    function updateBreadcrumbs(path) {
+        let html = '<a class="crumb-link" onclick="renderHome()">Home</a>';
+        path.forEach(step => {
+            html += '<span class="crumb-separator">/</span>';
+            if (step.isCurrent) {
+                html += `<span class="crumb-current">${step.text}</span>`;
+            } else {
+                html += `<a class="crumb-link" onclick="${step.onClick}">${step.text}</a>`;
+            }
+        });
+        breadcrumbsContainer.innerHTML = html;
+    }
+
+    // Lógica del Buscador
+    function initSearch() {
+        const searchInput = document.getElementById('globalSearch');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            searchResults.innerHTML = '';
+
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            let resultsFound = false;
+            // Recorrer todo el objeto courseData buscando coincidencias
+            for (const [gradeKey, gradeData] of Object.entries(courseData)) {
+                for (const [levelKey, levelData] of Object.entries(gradeData.levels)) {
+                    levelData.topics.forEach((topic, index) => {
+                        if (topic.toLowerCase().includes(query)) {
+                            resultsFound = true;
+                            const resultItem = document.createElement('div');
+                            resultItem.className = 'search-result-item';
+                            resultItem.innerHTML = `
+                                <div>${topic}</div>
+                                <span class="result-path">${gradeData.title} > ${levelData.title}</span>
+                            `;
+                            // Al hacer clic en un resultado, ir directamente al contenido
+                            resultItem.addEventListener('click', () => {
+                                renderContent(gradeKey, levelKey, index);
+                            });
+                            searchResults.appendChild(resultItem);
+                        }
+                    });
+                }
+            }
+
+            searchResults.style.display = resultsFound ? 'block' : 'none';
+            if (!resultsFound && query.length >=2) {
+                 searchResults.innerHTML = '<div class="search-result-item" style="cursor: default;">No topics found.</div>';
+                 searchResults.style.display = 'block';
+            }
+        });
+
+        // Cerrar resultados si se hace clic fuera
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    }
+
+
+    // ==========================================
+    // 4. INICIALIZACIÓN
+    // ==========================================
+    // Cargar la vista de inicio al abrir la app
+    renderHome();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* =========================================
+   1. VARIABLES CSS & RESET
+   ========================================= */
+:root {
+    --color-uts-green: #008F4C;
+    --color-uts-blue: #004C97;
+    --color-accent-green: #66BC29;
+    --color-bg-light: #F8F9FA;
+    --color-text-dark: #333;
+    --shadow-card: 0 4px 8px rgba(0,0,0,0.08);
+    /* Altura mínima para asegurar que los logos quepan bien */
+    --header-min-height: 90px;
+}
+
+/* Reset básico para eliminar márgenes y paddings por defecto */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+ul { list-style: none; }
+
+
+/* =========================================
+   2. HEADER GLOBAL (DISEÑO 3 COLUMNAS)
+   ========================================= */
+
+/* Contenedor principal del header */
+.global-header {
+    background: white;
+    border-bottom: 4px solid var(--color-uts-green);
+    padding: 10px 30px; /* Buen espacio horizontal */
+    /* FLEXBOX: La clave para distribuir en 3 columnas */
+    display: flex;
+    justify-content: space-between; /* Empuja elementos a los extremos */
+    align-items: center; /* Centra verticalmente */
+    min-height: var(--header-min-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+}
+
+/* Estilo base para los logos */
+.header-logo {
+    height: 65px; /* Tamaño prominente pero no excesivo */
+    width: auto;
+    display: block; /* Elimina espacios fantasma debajo de la imagen */
+}
+
+/* --- COLUMNA IZQUIERDA (Logo UTS) --- */
+.header-left {
+    flex: 0 0 auto; /* No se estira ni se encoge */
+}
+
+/* --- COLUMNA CENTRAL (Títulos) --- */
+.header-center {
+    flex: 1; /* Ocupa todo el espacio disponible en el medio */
+    text-align: center;
+    padding: 0 20px; /* Margen de seguridad para no tocar los lados */
+}
+
+.header-center h1 {
+    font-size: 1.2rem;
+    color: var(--color-uts-blue);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-center h2 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+/* --- COLUMNA DERECHA (Buscador + Logo CELE) --- */
+.header-right {
+    flex: 0 0 auto; /* No se estira */
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Espacio entre el buscador y el segundo logo */
+}
+
+/* --- ESTILOS DEL BUSCADOR --- */
+.header-search-container {
+    position: relative;
+    width: 240px; /* Ancho fijo para escritorio */
+}
+
+.header-search-input {
+    width: 100%;
+    padding: 10px 35px 10px 15px; /* Espacio a la derecha para el icono */
+    border-radius: 25px; /* Bordes más redondeados */
+    border: 2px solid #e0e0e0;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.header-search-input:focus {
+    outline: none;
+    border-color: var(--color-uts-blue);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(0, 76, 151, 0.1);
+}
+
+/* Icono decorativo de lupa */
+.search-icon-deco {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none; /* Permite hacer clic a través del icono */
+}
+
+/* Dropdown de resultados */
+.search-results-dropdown {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1001;
+}
+.search-result-item { padding: 10px 15px; border-bottom: 1px solid #f4f4f4; display: block; text-align: left;}
+.search-result-item:hover { background-color: #f9f9f9; color: var(--color-uts-blue); }
+.result-title { font-weight: 600; display: block; }
+.result-path { font-size: 0.75rem; color: #888; }
+
+
+/* =========================================
+   3. RESPONSIVE DESIGN (MÓVIL Y TABLET)
+   ========================================= */
+
+/* Punto de quiebre para tablets y móviles (menor a 850px) */
+@media (max-width: 850px) {
+    .global-header {
+        /* Cambiamos de Flexbox a CSS Grid para un reordenamiento preciso */
+        display: grid;
+        /* Definimos 3 filas: Logos, Títulos, Buscador */
+        grid-template-rows: auto auto auto;
+        /* Definimos 2 columnas para los logos superiores */
+        grid-template-columns: 1fr 1fr;
+        gap: 15px; /* Espacio entre elementos */
+        padding: 15px 20px;
+        height: auto; /* Altura automática */
+    }
+
+    /* POSICIONAMIENTO EN LA REJILLA (GRID) */
+
+    /* 1. Logo Izquierdo: Fila 1, Columna 1, alineado al inicio */
+    .header-left {
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    /* 2. Logo Derecho (CELE): Fila 1, Columna 2, alineado al final */
+    /* Truco: Usamos el selector descendiente para sacarlo de su contenedor .header-right */
+    .header-right .header-logo {
+        grid-row: 1;
+        grid-column: 2;
+        justify-self: end;
+    }
+
+    /* 3. Títulos: Fila 2, ocupan las 2 columnas */
+    .header-center {
+        grid-row: 2;
+        grid-column: 1 / span 2;
+        padding: 0;
+        margin-bottom: 5px;
+    }
+    /* Reducimos un poco el tamaño de fuente en móvil */
+    .header-center h1 { font-size: 1.1rem; }
+    .header-center h2 { font-size: 0.85rem; }
+
+    /* 4. Buscador: Fila 3, ocupa las 2 columnas */
+    .header-search-container {
+        grid-row: 3;
+        grid-column: 1 / span 2;
+        width: 100%; /* Ancho completo en móvil */
+        max-width: 500px; /* Pero no excesivo en tablets */
+        justify-self: center; /* Centrado horizontalmente */
+    }
+
+    /* Hacemos que el contenedor .header-right original "desaparezca" para que no interfiera con el Grid */
+    .header-right { display: contents; }
+    /* Reducimos ligeramente los logos en móvil */
+    .header-logo { height: 55px; }
+}
+
+
+/* =========================================
+   4. RESTO DEL LAYOUT (Hero, Cards, Footer)
+   ========================================= */
+.main-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    min-height: calc(100vh - 150px);
+    box-shadow: 0 0 25px rgba(0,0,0,0.05);
+}
+
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--color-uts-blue) 0%, var(--color-uts-green) 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+.hero-title { font-size: 2.5rem; margin-bottom: 15px; }
+.hero-subtitle { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+.section-heading {
+    text-align: center; color: var(--color-uts-blue); margin-bottom: 30px; position: relative;
+}
+.section-heading::after {
+    content: ''; display: block; width: 60px; height: 3px; background: var(--color-accent-green); margin: 10px auto 0;
+}
+
+.cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;
+}
+.nav-card {
+    background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-card); transition: transform 0.3s, box-shadow 0.3s; border-top: 5px solid transparent;
+}
+.nav-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.12); }
+.card-basic { border-color: var(--color-uts-green); }
+.card-inter { border-color: var(--color-uts-blue); }
+.card-adv { border-color: var(--color-accent-green); }
+.card-resource { border-color: #666; }
+.card-body { padding: 25px; }
+.card-title { font-size: 1.3rem; margin-bottom: 10px; color: var(--color-text-dark); }
+.card-desc { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+.btn-card {
+    display: inline-block; padding: 8px 20px; border-radius: 20px; background-color: #eee; color: var(--color-text-dark); font-weight: 600; transition: background 0.2s;
+}
+.card-basic .btn-card { background-color: rgba(0, 143, 76, 0.1); color: var(--color-uts-green); }
+.global-footer { text-align: center; padding: 20px; margin-top: 40px; color: #888; font-size: 0.9rem; border-top: 1px solid #eee;}
+
+/* Estilos para páginas internas (Breadcrumbs, etc) */
+.breadcrumbs { padding: 15px 0; margin-bottom: 20px; color: #666; font-size: 0.9rem; border-bottom: 1px solid #eee; }
+.crumb-link:hover { color: var(--color-uts-blue); text-decoration: underline; }
+.crumb-separator { margin: 0 8px; color: #ccc; }
+.content-area { padding: 20px 0; }
+.topic-title { color: var(--color-uts-blue); margin-bottom: 25px; }
+.topic-list-item { display: block; background: #fff; border: 1px solid #eee; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid var(--color-accent-green); font-weight: 500; display: flex; justify-content: space-between; }
+.topic-list-item:hover { background-color: #f9f9f9; border-left-color: var(--color-uts-blue); }

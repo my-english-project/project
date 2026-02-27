@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTS | English Flashcards - Simple Past</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&family=Outfit:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            academic: {
+              deep: '#1A237E',
+              sky: '#42A5F5',
+              accent: '#3949AB',
+              light: '#E8EAF6'
+            },
+            neutral: {
+              offwhite: '#F5F5F5',
+              dark: '#333333'
+            },
+            status: {
+              correct: '#4CAF50',
+              errorBg: '#EF9A9A',
+              errorText: '#D3220A'
+            }
+          },
+          fontFamily: {
+            display: ['Outfit', 'Montserrat', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+            'premium': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F5F5F5;
+      background-image: radial-gradient(circle at 2px 2px, #e5e7eb 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .option-label {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-label:hover {
+      transform: translateY(-2px);
+    }
+
+    .progress-bar {
+      transition: width 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="font-body text-neutral-dark min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-academic-deep text-white shadow-lg">
+    <div class="max-w-4xl mx-auto px-4 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-20 h-10 bg-white rounded-lg flex items-center justify-center font-display font-bold text-academic-deep text-xl">
+          <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo">
+        </div>
+        <div class="hidden sm:block">
+          <p class="text-[10px] uppercase tracking-widest opacity-80 leading-tight">Universidad Tecnológica</p>
+          <p class="text-[10px] uppercase tracking-widest opacity-80 leading-tight">de Salamanca</p>
+        </div>
+      </div>
+
+      <h1 class="font-display font-bold text-lg sm:text-2xl tracking-tight">Simple Past Vol. 3</h1>
+
+      <a href="index.html" class="p-2 hover:bg-white/10 rounded-full transition-colors group" aria-label="Return">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 group-hover:-translate-x-1 transition-transform"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </a>
+    </div>
+    <!-- Progress Bar -->
+    <div class="w-full h-1.5 bg-academic-deep/30">
+      <div id="progressBar" class="progress-bar h-full bg-academic-sky" style="width: 0%"></div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="app" class="flex-grow flex flex-col items-center justify-start p-4 sm:p-8 max-w-4xl mx-auto w-full">
+
+    <div id="quizContainer" class="w-full space-y-8 animate-fade-in">
+      <!-- Question Meta -->
+      <div class="flex justify-between items-end">
+        <div>
+          <span
+            class="inline-block px-3 py-1 bg-academic-light text-academic-deep rounded-full text-xs font-bold uppercase tracking-wider mb-2">Level
+            A1 • Simple Past</span>
+          <h2 class="text-3xl font-display font-bold text-academic-deep" id="questionNumber">Question 01</h2>
+        </div>
+        <div class="text-right">
+          <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest">Progress</p>
+          <p class="text-xl font-display font-bold text-academic-sky" id="progressText">1 / 10</p>
+        </div>
+      </div>
+
+      <!-- Flashcard Card -->
+      <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-premium border-t-4 border-academic-deep">
+        <div id="questionText" class="text-xl sm:text-2xl font-semibold mb-8 text-neutral-dark leading-relaxed">
+          Loading question...
+        </div>
+
+        <div id="optionsContainer" class="grid grid-cols-1 gap-4">
+          <!-- Options injected by JS -->
+        </div>
+
+        <div id="feedbackContainer" class="hidden mt-8 p-5 rounded-2xl animate-fade-in">
+          <div class="flex items-start space-x-3">
+            <div id="feedbackIcon" class="mt-1"></div>
+            <div>
+              <p id="feedbackTitle" class="font-bold text-lg"></p>
+              <p id="feedbackExp" class="text-sm opacity-90 mt-1 italic"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 flex justify-end">
+          <button id="actionBtn"
+            class="px-8 py-4 bg-academic-deep text-white font-display font-bold rounded-2xl shadow-lg hover:bg-academic-accent hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center space-x-2">
+            <span>Check Answer</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score Screen (Hidden Initially) -->
+    <div id="scoreContainer" class="hidden w-full max-w-2xl mx-auto text-center space-y-8 animate-fade-in py-10">
+      <div class="glass-card rounded-[3rem] p-12 shadow-premium relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-academic-sky"></div>
+        <h2 class="text-4xl font-display font-bold text-academic-deep mb-4">Quiz Completed!</h2>
+        <p class="text-gray-600 mb-8">Excellent effort. Here is your final performance overview.</p>
+
+        <div class="relative inline-block mb-10">
+          <svg class="w-48 h-48 transform -rotate-90">
+            <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent"
+              class="text-gray-100" />
+            <circle id="scoreCircle" cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent"
+              stroke-dasharray="552.92" stroke-dashoffset="552.92"
+              class="text-academic-sky transition-all duration-1000 ease-out" />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span id="finalScore" class="text-6xl font-display font-bold text-academic-deep">0</span>
+            <span class="text-sm font-bold text-gray-400 uppercase tracking-widest">Points</span>
+          </div>
+        </div>
+
+        <div id="scoreMessage" class="text-xl font-semibold text-neutral-dark mb-10"></div>
+
+        <button onclick="resetQuiz()"
+          class="w-full sm:w-auto px-12 py-4 bg-academic-sky text-white font-display font-bold rounded-2xl shadow-lg hover:bg-academic-deep hover:scale-[1.05] transition-all">
+          Restart Experience
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const quizData = [
+      {
+        type: 'mc',
+        q: "Last weekend, I _______ to the park with my dog.",
+        opts: ["go", "goed", "went", "gone"],
+        ans: "went",
+        exp: "'Went' is the irregular past form of the verb 'go'."
+      },
+      {
+        type: 'tf',
+        q: "The past tense of 'study' is 'studyed'.",
+        opts: ["True", "False"],
+        ans: "False",
+        exp: "Correction: The past tense of 'study' is 'studied' (change 'y' to 'i' + 'ed')."
+      },
+      {
+        type: 'fill',
+        q: "Yesterday, she _______ (eat) a delicious pizza for lunch.",
+        ans: "ate",
+        exp: "'Ate' is the irregular past tense of 'eat'."
+      },
+      {
+        type: 'mc',
+        q: "They _______ at the cinema when I called them.",
+        opts: ["was", "were", "are", "been"],
+        ans: "were",
+        exp: "With the plural pronoun 'They', we use 'were' in the past tense of 'be'."
+      },
+      {
+        type: 'mc',
+        q: "My sister _______ a new car last month.",
+        opts: ["buyed", "buys", "bought", "buy"],
+        ans: "bought",
+        exp: "'Bought' is the irregular past tense of 'buy'."
+      },
+      {
+        type: 'tf',
+        q: "The past tense of 'visit' is 'visited'.",
+        opts: ["True", "False"],
+        ans: "True",
+        exp: "'Visit' is a regular verb, so we simply add '-ed'."
+      },
+      {
+        type: 'fill',
+        q: "We _______ (see) a famous actor at the airport.",
+        ans: "saw",
+        exp: "'Saw' is the irregular past tense of 'see'."
+      },
+      {
+        type: 'mc',
+        q: "I _______ very happy to see my grandparents yesterday.",
+        opts: ["was", "were", "is", "am"],
+        ans: "was",
+        exp: "For the first person singular 'I', the past tense of 'be' is 'was'."
+      },
+      {
+        type: 'fill',
+        q: "He _______ (write) a long letter to his friend in London.",
+        ans: "wrote",
+        exp: "'Wrote' is the irregular past form of 'write'."
+      },
+      {
+        type: 'mc',
+        q: "Where _______ you go on your last vacation?",
+        opts: ["do", "did", "does", "done"],
+        ans: "did",
+        exp: "We use 'did' as an auxiliary verb to form questions in the simple past."
+      }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let isReviewing = false;
+    let selectedValue = "";
+
+    const app = document.getElementById('quizContainer');
+    const scoreScreen = document.getElementById('scoreContainer');
+    const questionNumber = document.getElementById('questionNumber');
+    const progressText = document.getElementById('progressText');
+    const progressBar = document.getElementById('progressBar');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const feedbackContainer = document.getElementById('feedbackContainer');
+    const feedbackIcon = document.getElementById('feedbackIcon');
+    const feedbackTitle = document.getElementById('feedbackTitle');
+    const feedbackExp = document.getElementById('feedbackExp');
+    const actionBtn = document.getElementById('actionBtn');
+
+    function loadQuestion() {
+      const data = quizData[currentIdx];
+      isReviewing = false;
+      selectedValue = "";
+
+      // UI Updates
+      questionNumber.innerText = `Question ${String(currentIdx + 1).padStart(2, '0')}`;
+      progressText.innerText = `${currentIdx + 1} / ${quizData.length}`;
+      progressBar.style.width = `${((currentIdx + 1) / quizData.length) * 100}%`;
+      questionText.innerText = data.q;
+
+      feedbackContainer.classList.add('hidden');
+      actionBtn.innerHTML = `<span>Check Answer</span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
+
+      optionsContainer.innerHTML = '';
+
+      if (data.type === 'mc' || data.type === 'tf') {
+        data.opts.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = "option-label w-full text-left p-5 rounded-2xl border-2 border-gray-100 hover:border-academic-sky hover:bg-academic-light/30 font-semibold transition-all flex items-center justify-between group";
+          btn.innerHTML = `
+                        <span>${opt}</span>
+                        <div class="w-6 h-6 rounded-full border-2 border-gray-300 group-hover:border-academic-sky flex items-center justify-center transition-colors">
+                            <div class="w-3 h-3 bg-academic-sky rounded-full scale-0 transition-transform dot"></div>
+                        </div>
+                    `;
+          btn.onclick = () => selectOption(btn, opt);
+          optionsContainer.appendChild(btn);
+        });
+      } else if (data.type === 'fill') {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Type your answer here...';
+        input.className = "w-full p-5 rounded-2xl border-2 border-gray-100 focus:border-academic-sky focus:ring-4 focus:ring-academic-sky/10 outline-none font-semibold text-lg transition-all";
+        input.oninput = (e) => { selectedValue = e.target.value.trim().toLowerCase(); };
+        optionsContainer.appendChild(input);
+      }
+    }
+
+    function selectOption(element, value) {
+      if (isReviewing) return;
+
+      // Clear previous
+      document.querySelectorAll('.option-label').forEach(el => {
+        el.classList.remove('border-academic-sky', 'bg-academic-light/30');
+        el.querySelector('.dot').classList.remove('scale-100');
+      });
+
+      // Select current
+      element.classList.add('border-academic-sky', 'bg-academic-light/30');
+      element.querySelector('.dot').classList.add('scale-100');
+      selectedValue = value;
+    }
+
+    function checkAnswer() {
+      if (!selectedValue && quizData[currentIdx].type !== 'fill') return;
+
+      const data = quizData[currentIdx];
+      isReviewing = true;
+      let isCorrect = false;
+
+      if (data.type === 'fill') {
+        isCorrect = selectedValue.toLowerCase() === data.ans.toLowerCase();
+      } else {
+        isCorrect = selectedValue === data.ans;
+      }
+
+      if (isCorrect) {
+        score++;
+        showFeedback(true, "Great Job!", data.exp);
+      } else {
+        showFeedback(false, "Not quite right", data.exp);
+      }
+
+      actionBtn.innerHTML = `<span>Next Question</span><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
+    }
+
+    function showFeedback(correct, title, exp) {
+      feedbackContainer.classList.remove('hidden', 'bg-green-50', 'bg-red-50', 'text-status-correct', 'text-status-errorText');
+
+      if (correct) {
+        feedbackContainer.classList.add('bg-green-50', 'text-status-correct', 'border', 'border-status-correct/20');
+        feedbackIcon.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
+      } else {
+        feedbackContainer.classList.add('bg-red-50', 'text-status-errorText', 'border', 'border-status-errorText/20');
+        feedbackIcon.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>`;
+      }
+
+      feedbackTitle.innerText = title;
+      feedbackExp.innerText = exp;
+    }
+
+    function nextQuestion() {
+      currentIdx++;
+      if (currentIdx < quizData.length) {
+        loadQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      app.classList.add('hidden');
+      scoreScreen.classList.remove('hidden');
+
+      const percentage = (score / quizData.length) * 100;
+      const dashoffset = 552.92 - (552.92 * percentage) / 100;
+
+      // Trigger animation
+      setTimeout(() => {
+        document.getElementById('scoreCircle').style.strokeDashoffset = dashoffset;
+        animateValue('finalScore', 0, score, 1000);
+      }, 100);
+
+      let msg = "";
+      if (percentage === 100) msg = "Perfect Score! You're a Simple Past Master.";
+      else if (percentage >= 80) msg = "Excellent! You have a strong grasp of the Simple Past.";
+      else if (percentage >= 60) msg = "Good job! A little more practice and you'll be an expert.";
+      else msg = "Keep practicing! The Simple Past can be tricky with irregular verbs.";
+
+      document.getElementById('scoreMessage').innerText = msg;
+    }
+
+    function animateValue(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerText = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function resetQuiz() {
+      currentIdx = 0;
+      score = 0;
+      app.classList.remove('hidden');
+      scoreScreen.classList.add('hidden');
+      loadQuestion();
+    }
+
+    actionBtn.onclick = () => {
+      if (isReviewing) {
+        nextQuestion();
+      } else {
+        checkAnswer();
+      }
+    };
+
+    window.onload = loadQuestion;
+  </script>
+</body>
+
+</html>

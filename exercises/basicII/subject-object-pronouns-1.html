@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTS English - Subject & Object Pronouns</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            uts: {
+              green: '#004A26',
+              gold: '#F2C100',
+              dark: '#003018',
+              light: '#E8F5E9',
+            },
+            academic: {
+              blue: '#1A237E',
+              sky: '#42A5F5',
+            },
+            status: {
+              success: '#28a745',
+              error: '#dc3545',
+              errorBg: '#fff5f5'
+            }
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(0, 74, 38, 0.1)',
+            'premium': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #f8fafc, #f1f5f9);
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .uts-logo-circle {
+      /* background: linear-gradient(135deg, #004A26 0%, #006b37 100%); */
+      background: white;
+      border: 2px solid #F2C100;
+    }
+
+    .progress-bar {
+      transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .option-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 74, 38, 0.1);
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #004A26;
+      border-radius: 10px;
+    }
+
+    .correct-answer {
+      border-color: #28a745 !important;
+      background-color: #f0fff4 !important;
+      color: #22543d !important;
+    }
+
+    .wrong-answer {
+      border-color: #dc3545 !important;
+      background-color: #fff5f5 !important;
+      color: #742a2a !important;
+    }
+  </style>
+</head>
+
+<body class="text-slate-800">
+
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 w-full bg-uts-green shadow-lg border-b-4 border-uts-gold px-4 py-3 md:px-8">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div
+          class="uts-logo-circle w-12 h-12 rounded-full flex items-center justify-center text-[10px] font-bold text-white text-center leading-tight shadow-inner">
+          <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo">
+
+        </div>
+        <div class="hidden sm:block">
+          <h1 class="text-white font-bold leading-none text-lg">UTS Salamanca</h1>
+          <p class="text-uts-gold text-xs font-semibold uppercase tracking-wider">English Department</p>
+        </div>
+      </div>
+
+      <h2 class="text-white font-display font-bold text-lg md:text-2xl text-center flex-grow px-4">
+        Subject & Object Pronouns Vol. 1
+      </h2>
+
+      <a href="index.html" target="_blank"
+        class="flex items-center gap-2 text-white hover:text-uts-gold transition-colors font-semibold text-sm group">
+        <span class="group-hover:-translate-x-1 transition-transform">←</span>
+        <span>Return</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div id="app" class="max-w-3xl mx-auto px-4 py-8 md:py-12">
+
+    <!-- Progress Info -->
+    <div class="mb-8 flex flex-col gap-2">
+      <div class="flex justify-between items-end mb-1">
+        <span id="progress-text" class="text-sm font-bold text-uts-green uppercase tracking-widest">Question 1 of
+          10</span>
+        <span id="score-text" class="text-sm font-bold bg-uts-gold/20 text-uts-dark px-3 py-1 rounded-full">Score:
+          0</span>
+      </div>
+      <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden shadow-inner">
+        <div id="progress-bar" class="progress-bar h-full bg-gradient-to-r from-uts-green to-academic-sky w-[10%]">
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Container -->
+    <div id="quiz-container" class="relative">
+      <!-- Questions will be injected here -->
+    </div>
+
+    <!-- Feedback Section (Injected inside card) -->
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        type: 'mcq',
+        question: "Choose the correct subject pronoun: '____ is my best friend.' (referring to a girl)",
+        options: ["He", "She", "It", "They"],
+        correct: 1,
+        explanation: "'She' is the subject pronoun used for a female person."
+      },
+      {
+        type: 'input',
+        question: "Complete the sentence with the correct object pronoun: 'I love my parents. I visit ____ every weekend.'",
+        correct: "them",
+        explanation: "'Them' is the object pronoun used for plural third-person (my parents)."
+      },
+      {
+        type: 'mcq',
+        question: "Select the correct pronoun: 'Can you help ____ with my homework?'",
+        options: ["I", "me", "my", "mine"],
+        correct: 1,
+        explanation: "'Me' is the object pronoun used after a verb like 'help'."
+      },
+      {
+        type: 'boolean',
+        question: "Is 'Us' a subject pronoun?",
+        options: ["True", "False"],
+        correct: 1,
+        explanation: "'Us' is an object pronoun. The subject pronoun is 'We'."
+      },
+      {
+        type: 'select',
+        question: "Identify the object pronoun in this sentence: 'Sarah saw him at the park.'",
+        options: ["Sarah", "saw", "him", "at"],
+        correct: 2,
+        explanation: "'Him' is the object pronoun receiving the action of seeing."
+      },
+      {
+        type: 'mcq',
+        question: "Which sentence is correct?",
+        options: ["Me and him are going to the mall.", "He and I are going to the mall.", "Him and me are going to the mall.", "I and he are going to the mall."],
+        correct: 1,
+        explanation: "Always use subject pronouns ('He' and 'I') for the subject of a sentence."
+      },
+      {
+        type: 'input',
+        question: "Fill in the blank: 'The cake is delicious! I want to eat ____.'",
+        correct: "it",
+        explanation: "'It' is the object pronoun used for singular non-human things like a cake."
+      },
+      {
+        type: 'transformation',
+        question: "Change the underlined part to a pronoun: '<u>The students</u> are studying hard.'",
+        options: ["We", "You", "They", "Them"],
+        correct: 2,
+        explanation: "'They' is the subject pronoun replacing a plural third-person noun."
+      },
+      {
+        type: 'mcq',
+        question: "Where should the object pronoun go? 'Tell ____ the truth.'",
+        options: ["we", "us", "our", "ours"],
+        correct: 1,
+        explanation: "'Us' is the object pronoun that follows the imperative verb 'Tell'."
+      },
+      {
+        type: 'mcq',
+        question: "Choose the correct pair: '____ forgot to bring ____ umbrella.'",
+        options: ["She / her", "Her / she", "She / it", "It / her"],
+        correct: 0,
+        explanation: "The first blank needs a subject pronoun (She), and the second needs a possessive adjective (her)."
+      }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let answered = false;
+
+    const quizContainer = document.getElementById('quiz-container');
+    const progressText = document.getElementById('progress-text');
+    const progressBar = document.getElementById('progress-bar');
+    const scoreDisplay = document.getElementById('score-text');
+
+    function loadQuestion() {
+      answered = false;
+      const q = quizData[currentIdx];
+
+      // Update Progress
+      progressText.innerText = `Question ${currentIdx + 1} of ${quizData.length}`;
+      progressBar.style.width = `${((currentIdx + 1) / quizData.length) * 100}%`;
+      scoreDisplay.innerText = `Score: ${score}`;
+
+      let content = '';
+
+      if (q.type === 'input') {
+        content = `
+                    <div class="mt-6">
+                        <input type="text" id="user-input" placeholder="Type your answer here..." 
+                            class="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-uts-green focus:outline-none text-lg transition-all"
+                            onkeypress="if(event.key === 'Enter') checkInputAnswer()">
+                        <button onclick="checkInputAnswer()" class="mt-4 w-full bg-uts-green text-white font-bold py-4 rounded-xl hover:bg-uts-dark transition-all shadow-lg active:scale-[0.98]">
+                            Submit Answer
+                        </button>
+                    </div>
+                `;
+      } else {
+        content = `<div class="mt-6 grid grid-cols-1 gap-3">`;
+        q.options.forEach((opt, idx) => {
+          content += `
+                        <button onclick="checkAnswer(${idx})" class="option-btn text-left p-4 border-2 border-slate-200 rounded-xl font-medium text-slate-700 hover:border-uts-gold bg-white group flex justify-between items-center">
+                            <span>${opt}</span>
+                            <span class="opacity-0 group-hover:opacity-100 transition-opacity text-uts-gold">→</span>
+                        </button>
+                    `;
+        });
+        content += `</div>`;
+      }
+
+      quizContainer.innerHTML = `
+                <div class="card glass-card p-6 md:p-10 rounded-3xl shadow-premium border-t-8 border-uts-green fade-in">
+                    <div class="mb-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-uts-green/60">${q.type.replace('mcq', 'Multiple Choice').replace('input', 'Fill in the blank').replace('boolean', 'True or False').replace('transformation', 'Transformation')}</span>
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-display font-bold text-slate-900 leading-tight">
+                        ${q.question}
+                    </h3>
+                    <div id="interaction-area">
+                        ${content}
+                    </div>
+                    <div id="feedback-area" class="mt-6 hidden"></div>
+                </div>
+            `;
+    }
+
+    function checkAnswer(selectedIdx) {
+      if (answered) return;
+      answered = true;
+
+      const q = quizData[currentIdx];
+      const buttons = document.querySelectorAll('.option-btn');
+      const feedbackArea = document.getElementById('feedback-area');
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.correct) {
+          btn.classList.add('correct-answer');
+        } else if (idx === selectedIdx) {
+          btn.classList.add('wrong-answer');
+        }
+      });
+
+      if (selectedIdx === q.correct) {
+        score++;
+        showFeedback(true, q.explanation);
+      } else {
+        showFeedback(false, q.explanation);
+      }
+
+      scoreDisplay.innerText = `Score: ${score}`;
+      appendNextButton();
+    }
+
+    function checkInputAnswer() {
+      if (answered) return;
+      const input = document.getElementById('user-input');
+      const userVal = input.value.trim().toLowerCase();
+      const q = quizData[currentIdx];
+
+      if (!userVal) return;
+
+      answered = true;
+      input.disabled = true;
+
+      const isCorrect = userVal === q.correct.toLowerCase();
+      if (isCorrect) {
+        score++;
+        input.classList.add('correct-answer');
+        showFeedback(true, q.explanation);
+      } else {
+        input.classList.add('wrong-answer');
+        showFeedback(false, `The correct answer was: <strong>${q.correct}</strong>. ${q.explanation}`);
+      }
+
+      scoreDisplay.innerText = `Score: ${score}`;
+      appendNextButton();
+    }
+
+    function showFeedback(isCorrect, text) {
+      const feedbackArea = document.getElementById('feedback-area');
+      feedbackArea.classList.remove('hidden');
+      feedbackArea.className = `mt-6 p-4 rounded-xl border-l-4 ${isCorrect ? 'bg-green-50 border-status-success text-green-800' : 'bg-red-50 border-status-error text-red-800'} fade-in`;
+      feedbackArea.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <span class="text-xl">${isCorrect ? '✨' : '💡'}</span>
+                    <div>
+                        <p class="font-bold mb-1">${isCorrect ? 'Excellent!' : 'Not quite right...'}</p>
+                        <p class="text-sm opacity-90">${text}</p>
+                    </div>
+                </div>
+            `;
+    }
+
+    function appendNextButton() {
+      const container = document.getElementById('interaction-area');
+      const nextBtn = document.createElement('button');
+      nextBtn.className = "mt-6 w-full py-4 bg-academic-blue text-white font-bold rounded-xl hover:bg-slate-800 transition-all shadow-xl flex items-center justify-center gap-2 group";
+      nextBtn.innerHTML = `
+                <span>${currentIdx === quizData.length - 1 ? 'Finish Activity' : 'Continue'}</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+            `;
+      nextBtn.onclick = nextQuestion;
+      container.appendChild(nextBtn);
+    }
+
+    function nextQuestion() {
+      if (currentIdx < quizData.length - 1) {
+        currentIdx++;
+        loadQuestion();
+      } else {
+        showFinalScreen();
+      }
+    }
+
+    function showFinalScreen() {
+      const percentage = (score / quizData.length) * 100;
+      let message = "";
+      let emoji = "";
+
+      if (percentage === 100) { message = "Perfect Score! You're a pro!"; emoji = "🏆"; }
+      else if (percentage >= 80) { message = "Excellent work! Almost perfect."; emoji = "🌟"; }
+      else if (percentage >= 60) { message = "Good job! Keep practicing."; emoji = "👍"; }
+      else { message = "Keep studying. You'll get there!"; emoji = "📚"; }
+
+      quizContainer.innerHTML = `
+                <div class="card glass-card p-10 rounded-3xl shadow-premium text-center fade-in border-b-8 border-uts-gold">
+                    <div class="text-6xl mb-4">${emoji}</div>
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mb-2">Activity Completed!</h2>
+                    <p class="text-slate-500 mb-8">${message}</p>
+                    
+                    <div class="inline-block bg-uts-light p-8 rounded-full mb-8 border-4 border-uts-gold">
+                        <span class="text-5xl font-display font-bold text-uts-green">${score}</span>
+                        <span class="text-xl text-uts-green/60">/ ${quizData.length}</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4">
+                        <button onclick="resetQuiz()" class="bg-uts-green text-white font-bold py-4 rounded-xl hover:bg-uts-dark transition-all shadow-lg active:scale-95">
+                            Restart Activity
+                        </button>
+                        <a href="https://www.google.com" target="_blank" class="text-uts-green font-bold py-3 hover:text-uts-dark transition-colors">
+                            Return to Dashboard
+                        </a>
+                    </div>
+                </div>
+            `;
+
+      // Hide progress area on results
+      document.querySelector('.mb-8.flex.flex-col').style.display = 'none';
+    }
+
+    function resetQuiz() {
+      currentIdx = 0;
+      score = 0;
+      document.querySelector('.mb-8.flex.flex-col').style.display = 'flex';
+      loadQuestion();
+    }
+
+    // Initialize
+    loadQuestion();
+  </script>
+</body>
+
+</html>

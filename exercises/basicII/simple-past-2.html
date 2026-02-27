@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTS English Flashcards - Simple Past</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&family=Outfit:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            utsBlue: '#1A237E',
+            utsAccent: '#42A5F5',
+            utsNeutral: '#F5F5F5',
+            utsSuccess: '#4CAF50',
+            utsError: '#D3220A',
+            utsErrorBg: '#EF9A9A',
+          },
+          fontFamily: {
+            display: ['Montserrat', 'Outfit', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+            'card': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F5F5F5;
+      background-image: radial-gradient(circle at 2px 2px, rgba(26, 35, 126, 0.05) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .flashcard-transition {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn {
+      transition: all 0.2s ease;
+    }
+
+    .option-btn.selected {
+      border-color: #1A237E;
+      background-color: #E8EAF6;
+      transform: scale(1.02);
+    }
+
+    .score-circle {
+      background: conic-gradient(#4CAF50 var(--percentage), #E2E8F0 0);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+
+<body class="font-body text-[#333333] min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-utsBlue text-white shadow-lg">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-10 h-10 bg-white rounded-full flex items-center justify-center font-display font-bold text-utsBlue shadow-sm">
+          <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="logo">
+        </div>
+        <div>
+          <h1 class="font-display font-bold text-lg leading-none">UTS</h1>
+          <p class="text-xs text-utsAccent opacity-90 uppercase tracking-wider">CELE</p>
+        </div>
+      </div>
+
+      <div class="font-display text-sm font-semibold tracking-wide">
+        Simple Past Vol. 2
+      </div>
+
+      <a href="index.html" class="p-2 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2 group"
+        aria-label="Return">
+        <span class="text-xs font-semibold hidden sm:inline group-hover:underline">Return</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main id="app" class="flex-grow w-full max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center">
+
+    <!-- Quiz Section -->
+    <section id="quiz-container" class="w-full space-y-6">
+      <!-- Progress Bar -->
+      <div class="w-full space-y-2">
+        <div class="flex justify-between items-end text-sm font-semibold text-utsBlue">
+          <span id="progress-text">Question 1 of 10</span>
+          <span id="score-live">Score: 0</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-utsAccent transition-all duration-500 ease-out" style="width: 10%;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Flashcard Card -->
+      <div id="flashcard"
+        class="glass-effect rounded-3xl shadow-card overflow-hidden flashcard-transition animate-fade-in">
+        <div class="p-6 sm:p-10">
+          <h2 id="question-text" class="font-display text-xl sm:text-2xl font-bold mb-8 leading-tight">
+            Loading question...
+          </h2>
+
+          <!-- Answer Options (Multiple Choice) -->
+          <div id="options-container" class="space-y-3 hidden">
+            <!-- Options will be injected here -->
+          </div>
+
+          <!-- Answer Input (Fill in the blank) -->
+          <div id="input-container" class="hidden space-y-4">
+            <input type="text" id="answer-input" placeholder="Type your answer here..."
+              class="w-full px-6 py-4 rounded-xl border-2 border-gray-100 focus:border-utsAccent outline-none transition-all text-lg font-semibold">
+          </div>
+
+          <!-- Feedback Area -->
+          <div id="feedback" class="mt-8 hidden animate-fade-in">
+            <div id="feedback-box" class="p-5 rounded-2xl flex items-start gap-4">
+              <div id="feedback-icon" class="mt-1"></div>
+              <div>
+                <h4 id="feedback-title" class="font-bold text-lg mb-1">Correct!</h4>
+                <p id="feedback-text" class="text-sm opacity-90"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Actions -->
+        <div class="bg-gray-50/50 p-6 flex justify-end items-center gap-3">
+          <button id="submit-btn" onclick="checkAnswer()"
+            class="bg-utsBlue text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-900 transition-all shadow-md active:scale-95">
+            Submit Answer
+          </button>
+          <button id="next-btn" onclick="nextQuestion()"
+            class="hidden bg-utsAccent text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-400 transition-all shadow-md active:scale-95">
+            Next Question
+          </button>
+          <button id="finish-btn" onclick="showResults()"
+            class="hidden bg-utsBlue text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-900 transition-all shadow-md active:scale-95">
+            Finish Quiz
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Score Screen -->
+    <section id="score-screen" class="hidden w-full max-w-md animate-fade-in text-center space-y-8">
+      <div class="glass-effect p-10 rounded-[2.5rem] shadow-card">
+        <h2 class="font-display text-3xl font-bold text-utsBlue mb-6">Quiz Complete!</h2>
+
+        <div class="relative w-48 h-48 mx-auto mb-8">
+          <div id="score-circle-bg"
+            class="score-circle w-full h-full rounded-full flex items-center justify-center p-4">
+            <div class="bg-white w-full h-full rounded-full flex flex-col items-center justify-center shadow-inner">
+              <span id="final-score-val" class="text-5xl font-display font-bold text-utsBlue leading-none">0</span>
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">out of 10</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3 mb-8">
+          <h3 id="result-message" class="text-2xl font-bold">Great job!</h3>
+          <p id="result-desc" class="text-gray-500">You've mastered the basics of Simple Past!</p>
+        </div>
+
+        <button onclick="resetQuiz()"
+          class="w-full bg-utsBlue text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-900 transition-all shadow-lg hover:shadow-xl active:scale-95">
+          Try Again
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const questions = [
+      {
+        type: "mc",
+        question: "Yesterday, I ________ to the park with my dog.",
+        options: ["go", "goed", "went", "gone"],
+        answer: "went",
+        explanation: "'Went' is the irregular past tense form of 'go'."
+      },
+      {
+        type: "fill",
+        question: "They ________ (to be) very happy after the English test last Friday.",
+        answer: "were",
+        explanation: "The past tense of 'to be' for plural subjects (they) is 'were'."
+      },
+      {
+        type: "mc",
+        question: "She ________ breakfast this morning because she was late.",
+        options: ["didn't eat", "don't eat", "didn't ate", "not ate"],
+        answer: "didn't eat",
+        explanation: "In negative sentences, we use 'didn't' + base form of the verb."
+      },
+      {
+        type: "mc",
+        question: "Last year, my family ________ to Mexico for vacation.",
+        options: ["travels", "travelled", "traveling", "traveled"],
+        answer: "traveled",
+        explanation: "'Traveled' is the regular past tense form of 'travel' (both 'travelled' and 'traveled' are accepted, but American English uses 'traveled')."
+      },
+      {
+        type: "fill",
+        question: "Did you ________ (see) the movie last night?",
+        answer: "see",
+        explanation: "In questions with 'Did', we use the base form of the verb."
+      },
+      {
+        type: "mc",
+        question: "We ________ a great time at the UTS university event.",
+        options: ["have", "had", "haves", "haden"],
+        answer: "had",
+        explanation: "'Had' is the irregular past tense of 'have'."
+      },
+      {
+        type: "fill",
+        question: "I ________ (study) hard for the A2 level exam yesterday.",
+        answer: "studied",
+        explanation: "For verbs ending in 'y' preceded by a consonant, change 'y' to 'i' and add 'ed'."
+      },
+      {
+        type: "mc",
+        question: "Where ________ you born?",
+        options: ["was", "did", "were", "are"],
+        answer: "were",
+        explanation: "We use 'were' with the subject 'you' for the past of 'to be'."
+      },
+      {
+        type: "fill",
+        question: "He ________ (write) a letter to his grandparents last weekend.",
+        answer: "wrote",
+        explanation: "'Wrote' is the irregular past tense form of 'write'."
+      },
+      {
+        type: "mc",
+        question: "The cat ________ on the sofa all afternoon.",
+        options: ["sleep", "sleeped", "slept", "slapt"],
+        answer: "slept",
+        explanation: "'Slept' is the irregular past tense form of 'sleep'."
+      }
+    ];
+
+    let currentQuestionIdx = 0;
+    let score = 0;
+    let selectedOption = null;
+
+    const appContainer = document.getElementById('app');
+    const quizContainer = document.getElementById('quiz-container');
+    const scoreScreen = document.getElementById('score-screen');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const inputContainer = document.getElementById('input-container');
+    const answerInput = document.getElementById('answer-input');
+    const feedbackArea = document.getElementById('feedback');
+    const feedbackBox = document.getElementById('feedback-box');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackText = document.getElementById('feedback-text');
+    const feedbackIcon = document.getElementById('feedback-icon');
+    const submitBtn = document.getElementById('submit-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const finishBtn = document.getElementById('finish-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const scoreLive = document.getElementById('score-live');
+
+    function loadQuestion() {
+      const q = questions[currentQuestionIdx];
+
+      // UI Reset
+      selectedOption = null;
+      answerInput.value = "";
+      feedbackArea.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+      nextBtn.classList.add('hidden');
+      finishBtn.classList.add('hidden');
+
+      // Update Progress
+      const progress = ((currentQuestionIdx + 1) / questions.length) * 100;
+      progressBar.style.width = `${progress}%`;
+      progressText.innerText = `Question ${currentQuestionIdx + 1} of ${questions.length}`;
+      scoreLive.innerText = `Score: ${score}`;
+
+      // Set Content
+      questionText.innerText = q.question;
+
+      if (q.type === "mc") {
+        optionsContainer.classList.remove('hidden');
+        inputContainer.classList.add('hidden');
+        optionsContainer.innerHTML = "";
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = "option-btn w-full text-left px-6 py-4 rounded-xl border-2 border-gray-100 hover:border-utsAccent font-semibold flex items-center justify-between group";
+          btn.innerHTML = `<span>${opt}</span> <div class="w-5 h-5 rounded-full border-2 border-gray-200 group-hover:border-utsAccent"></div>`;
+          btn.onclick = () => selectOption(btn, opt);
+          optionsContainer.appendChild(btn);
+        });
+      } else {
+        optionsContainer.classList.add('hidden');
+        inputContainer.classList.remove('hidden');
+        answerInput.focus();
+      }
+    }
+
+    function selectOption(btn, val) {
+      if (feedbackArea.classList.contains('hidden')) {
+        document.querySelectorAll('.option-btn').forEach(b => {
+          b.classList.remove('selected', 'border-utsBlue', 'bg-blue-50');
+          b.querySelector('div').innerHTML = "";
+          b.querySelector('div').classList.remove('bg-utsBlue', 'border-utsBlue');
+        });
+        btn.classList.add('selected', 'border-utsBlue', 'bg-blue-50');
+        btn.querySelector('div').classList.add('bg-utsBlue', 'border-utsBlue');
+        btn.querySelector('div').innerHTML = `<svg class="w-3 h-3 text-white mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>`;
+        selectedOption = val;
+      }
+    }
+
+    function checkAnswer() {
+      const q = questions[currentQuestionIdx];
+      let userAnswer = "";
+      let isCorrect = false;
+
+      if (q.type === "mc") {
+        if (!selectedOption) return alert("Please select an option!");
+        userAnswer = selectedOption;
+        isCorrect = userAnswer === q.answer;
+      } else {
+        userAnswer = answerInput.value.trim().toLowerCase();
+        if (!userAnswer) return alert("Please type an answer!");
+        isCorrect = userAnswer === q.answer.toLowerCase();
+      }
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "p-5 rounded-2xl flex items-start gap-4 bg-green-50 text-utsSuccess border border-utsSuccess/20";
+        feedbackTitle.innerText = "Correct!";
+        feedbackIcon.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`;
+      } else {
+        feedbackBox.className = "p-5 rounded-2xl flex items-start gap-4 bg-red-50 text-utsError border border-utsError/20";
+        feedbackTitle.innerText = "Incorrect";
+        feedbackIcon.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>`;
+      }
+
+      feedbackText.innerText = q.explanation + ` (Correct answer: ${q.answer})`;
+      feedbackArea.classList.remove('hidden');
+      submitBtn.classList.add('hidden');
+
+      if (currentQuestionIdx < questions.length - 1) {
+        nextBtn.classList.remove('hidden');
+      } else {
+        finishBtn.classList.remove('hidden');
+      }
+
+      // Lock inputs
+      if (q.type === 'mc') {
+        document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+      } else {
+        answerInput.disabled = true;
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestionIdx++;
+      loadQuestion();
+      // Reset disabled states
+      answerInput.disabled = false;
+    }
+
+    function showResults() {
+      quizContainer.classList.add('hidden');
+      scoreScreen.classList.remove('hidden');
+
+      const finalVal = document.getElementById('final-score-val');
+      const percentage = (score / questions.length) * 100;
+      const circleBg = document.getElementById('score-circle-bg');
+      const msgTitle = document.getElementById('result-message');
+      const msgDesc = document.getElementById('result-desc');
+
+      finalVal.innerText = score;
+      circleBg.style.setProperty('--percentage', `${percentage}%`);
+
+      if (score === 10) {
+        msgTitle.innerText = "Excellent!";
+        msgDesc.innerText = "Perfect score! You are a master of the Simple Past.";
+      } else if (score >= 7) {
+        msgTitle.innerText = "Well Done!";
+        msgDesc.innerText = "You have a solid understanding of past tense verbs.";
+      } else if (score >= 5) {
+        msgTitle.innerText = "Good Effort";
+        msgDesc.innerText = "Keep practicing irregular verbs and you'll improve!";
+      } else {
+        msgTitle.innerText = "Keep Studying";
+        msgDesc.innerText = "Review the Simple Past rules and try again.";
+      }
+    }
+
+    function resetQuiz() {
+      currentQuestionIdx = 0;
+      score = 0;
+      scoreScreen.classList.add('hidden');
+      quizContainer.classList.remove('hidden');
+      answerInput.disabled = false;
+      loadQuestion();
+    }
+
+    // Initialize
+    loadQuestion();
+
+    // Keyboard support for Fill in the Blank
+    answerInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !submitBtn.classList.contains('hidden')) {
+        checkAnswer();
+      } else if (e.key === 'Enter' && !nextBtn.classList.contains('hidden')) {
+        nextQuestion();
+      } else if (e.key === 'Enter' && !finishBtn.classList.contains('hidden')) {
+        showResults();
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Possessive Adjectives Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================================================= */
+        /* INSTITUTIONAL PALETTE & BASE STYLES */
+        /* ========================================================================= */
+        :root {
+            --color-uts-blue: #004c8f;
+            --color-uts-green: #00a859;
+            --color-cele-yellow: #ffb700;
+            --color-primary: var(--color-uts-blue);
+            --color-secondary: var(--color-uts-green);
+            --color-accent: var(--color-cele-yellow);
+            /* Altura del header para compensar el scroll */
+            --header-height: 70px; 
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Padding inferior extra en móvil para la barra de navegación fija */
+            padding-bottom: 60px;
+        }
+        
+        /* --- CORRECCIÓN DEL ERROR AQUÍ --- */
+        @media (min-width: 768px) {
+            body { padding-bottom: 0; }
+            /* La variable se re-define dentro de :root para pantallas grandes */
+            :root {
+                --header-height: 80px;
+            }
+        }
+        /* -------------------------------- */
+
+        /* Tailwind Color Mappings */
+        .bg-primary { background-color: var(--color-primary); }
+        .text-primary { color: var(--color-primary); }
+        .border-primary { border-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .text-secondary { color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+        .bg-accent { background-color: var(--color-accent); }
+        .text-accent { color: var(--color-accent); }
+        .hover\:text-accent:hover { color: var(--color-accent); }
+        .focus\:border-secondary:focus { border-color: var(--color-secondary); }
+        .focus\:ring-secondary:focus { --tw-ring-color: var(--color-secondary); }
+
+
+        /* ========================================================================= */
+        /* CUSTOM COMPONENT STYLES */
+        /* ========================================================================= */
+        
+        /* --- HEADER & LOGOS --- */
+        .header-logo {
+            height: 36px; /* Un poco más pequeño en móvil */
+            width: auto;
+            object-fit: contain;
+            /* SOLUCIÓN AL CONTRASTE: Halo blanco alrededor de los logos */
+            filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.9));
+        }
+        @media (min-width: 768px) {
+            .header-logo { height: 42px; }
+        }
+
+        /* Centrado absoluto del título en desktop */
+        .header-title-container-desktop {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- NAVEGACIÓN MÓVIL INFERIOR (App-like) --- */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 50;
+            border-top: 1px solid #eee;
+        }
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #666;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+        .mobile-nav-item.active {
+            color: var(--color-uts-blue);
+            font-weight: 600;
+        }
+        .mobile-nav-icon {
+            height: 24px;
+            width: 24px;
+            margin-bottom: 2px;
+        }
+        @media (min-width: 768px) {
+            .mobile-bottom-nav { display: none; }
+        }
+
+        /* --- SECCIONES Y SCROLL --- */
+        /* Esto evita que el título de la sección quede oculto tras el header al hacer clic en el menú */
+        section {
+            scroll-margin-top: calc(var(--header-height) + 20px);
+        }
+
+        /* --- CHART & QUIZ --- */
+        .chart-container {
+            position: relative; width: 100%; max-width: 300px; margin: 0 auto; height: 250px;
+        }
+        .bg-rule-highlight { background-color: rgba(0, 168, 89, 0.05); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased min-h-screen">
+
+<header class="bg-primary shadow-lg sticky top-0 z-30 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-[var(--header-height)] flex justify-between items-center relative">
+        
+        <div class="flex-shrink-0 z-10">
+            <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo" class="header-logo">
+        </div>
+        
+        <div class="header-title-container-desktop hidden md:block">
+            <h1 class="text-2xl lg:text-3xl font-bold text-white tracking-tight">Possessive Adjectives</h1>
+        </div>
+        
+        <div class="block md:hidden text-center flex-grow px-2 z-10">
+             <h1 class="text-lg leading-tight font-bold text-white tracking-tight">Possessive Adjectives</h1>
+        </div>
+        
+        <div class="flex-shrink-0 z-10">
+            <img src="../../assets/images/logo_cele.png" alt="CELE UTS Logo" class="header-logo">
+        </div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-3 hidden md:block">
+        <nav class="flex justify-center space-x-6 text-sm font-medium">
+            <a href="#intro" class="text-white/90 hover:text-accent transition duration-150">Intro & Rules</a>
+            <a href="#chart" class="text-white/90 hover:text-accent transition duration-150">Reference Chart</a>
+            <a href="#practice" class="text-white/90 hover:text-accent transition duration-150">Practice Quiz</a>
+        </nav>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <section id="intro" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-100 pb-3 mb-4">
+            <h2 class="text-xl font-bold text-secondary flex items-center">
+                <span class="mr-2">📘</span> Introduction
+            </h2>
+            
+            <nav class="text-xs mt-2 sm:mt-0" aria-label="breadcrumb">
+                <ol class="flex space-x-1 text-gray-500">
+                    <li><a href="../index.html" class="hover:text-primary">Home</a></li><li>/</li>
+                    <li><a href="../basic-I/index.html" class="hover:text-primary">Basic I</a></li><li>/</li>
+                    <li class="font-semibold text-primary">Possessives</li>
+                </ol>
+            </nav>
+        </div>
+        
+        <p class="text-gray-700 mb-6 leading-relaxed">Possessive adjectives show <strong>ownership</strong>. They tell us who something belongs to and are <em>always</em> followed by a noun.</p>
+
+        <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+            <div class="p-5 border-l-4 border-primary bg-blue-50 rounded-xl">
+                <h3 class="font-bold text-primary mb-2 flex items-center">🎯 Key Rule</h3>
+                <p class="text-sm mb-3">They act as adjectives, modifying a noun. They cannot stand alone.</p>
+                <p class="text-sm bg-white/50 p-2 rounded inline-block">✅ <strong>My</strong> jacket is red.<br>❌ The jacket is <strong>my</strong>.</p>
+            </div>
+            <div class="p-5 border-l-4 border-secondary bg-green-50 rounded-xl">
+                <h3 class="font-bold text-secondary mb-2 flex items-center">👫 Agreement Rule</h3>
+                <p class="text-sm mb-3">The adjective agrees with the <strong>owner</strong>, not the object(s) owned.</p>
+                <p class="text-sm bg-white/50 p-2 rounded inline-block">👩 <strong>Her</strong> book (1 object)<br>👩 <strong>Her</strong> books (2+ objects)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="chart" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+        <h2 class="text-xl font-bold text-primary border-b border-gray-100 pb-3 mb-4 flex items-center">
+            <span class="mr-2">📊</span> Reference Chart
+        </h2>
+        <p class="text-sm text-gray-600 mb-4">Match the Subject Pronoun (the owner) to the correct Possessive Adjective.</p>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+            <table class="min-w-full text-left text-sm">
+                <thead class="bg-gray-50 text-gray-700 font-semibold">
+                    <tr>
+                        <th class="px-4 py-3">Owner (Subject)</th>
+                        <th class="px-4 py-3 bg-blue-50 text-primary">Possessive Adjective</th>
+                        <th class="px-4 py-3 hidden sm:table-cell">Example</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr>
+                        <td class="px-4 py-3 font-medium">I</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">MY</td>
+                        <td class="px-4 py-3 hidden sm:table-cell">This is <strong>my</strong> computer.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-medium">YOU</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">YOUR</td>
+                        <td class="px-4 py-3 hidden sm:table-cell">Is that <strong>your</strong> phone?</td>
+                    </tr>
+                    <tr class="bg-gray-50/50">
+                        <td class="px-4 py-3 font-medium">HE</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">HIS</td>
+                        <td class="px-4 py-3 hidden sm:table-cell"><strong>His</strong> car is new.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-medium">SHE</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">HER</td>
+                        <td class="px-4 py-3 hidden sm:table-cell"><strong>Her</strong> name is Anna.</td>
+                    </tr>
+                    <tr class="bg-gray-50/50">
+                        <td class="px-4 py-3 font-medium">IT</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">ITS</td>
+                        <td class="px-4 py-3 hidden sm:table-cell">The dog wants <strong>its</strong> toy.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-medium">WE</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">OUR</td>
+                        <td class="px-4 py-3 hidden sm:table-cell">Welcome to <strong>our</strong> home.</td>
+                    </tr>
+                    <tr class="bg-gray-50/50">
+                        <td class="px-4 py-3 font-medium">THEY</td>
+                        <td class="px-4 py-3 font-bold text-primary bg-blue-50/30">THEIR</td>
+                        <td class="px-4 py-3 hidden sm:table-cell">I like <strong>their</strong> ideas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-gray-500 mt-2 sm:hidden">* Scroll horizontally to see examples.</p>
+    </section>
+
+    <section id="practice" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+        <h2 class="text-xl font-bold text-secondary border-b border-gray-100 pb-3 mb-6 flex items-center">
+            <span class="mr-2">✍️</span> Practice Quiz
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="md:col-span-2">
+                <div class="bg-rule-highlight p-5 rounded-xl border-2 border-secondary/30">
+                    <div class="flex justify-between items-center mb-4">
+                        <span id="q-number" class="text-sm font-bold text-secondary uppercase tracking-wider">Question 1 / 10</span>
+                    </div>
+                    
+                    <p id="q-sentence" class="text-xl sm:text-2xl font-extrabold text-gray-800 mb-6 leading-snug">I have a dog. ____ name is Buddy.</p>
+                    
+                    <div id="answer-section">
+                        <label for="answer-input" class="block text-sm font-semibold text-gray-700 mb-2">Type the correct adjective:</label>
+                        <input type="text" id="answer-input" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-secondary focus:border-secondary text-lg transition-all" placeholder="e.g., My, Their..." autocomplete="off">
+                        
+                        <button id="check-button" class="w-full mt-4 bg-primary hover:bg-primary/90 text-white p-4 rounded-xl transition duration-200 font-bold text-lg shadow-sm active:scale-[0.99]">Check Answer</button>
+
+                        <div class="md:hidden mt-4 text-center">
+                             <p id="score-text-mobile" class="text-lg font-bold text-primary">Score: 0 / 0</p>
+                        </div>
+
+                        <p id="q-hint" class="mt-4 text-sm text-gray-500 bg-white p-3 rounded-lg inline-block border border-gray-100">💡 Hint: <span id="hint-text">...</span></p>
+                    </div>
+
+                    <div id="q-feedback" class="mt-4 p-4 rounded-xl font-bold hidden animate-bounce-in"></div>
+                     <button id="reset-quiz-button" class="w-full mt-4 bg-gray-500 hover:bg-gray-600 text-white p-4 rounded-xl transition duration-200 font-bold text-lg hidden">Restart Quiz</button>
+                </div>
+            </div>
+
+            <div class="md:col-span-1 flex flex-col justify-start items-center bg-gray-50 p-5 rounded-xl">
+                <h3 class="text-lg font-bold text-gray-700 mb-4">Progress Summary</h3>
+                
+                <div class="chart-container relative mb-4">
+                    <canvas id="progressChart"></canvas>
+                    <div class="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                        <span id="score-percentage" class="text-3xl font-extrabold text-primary">0%</span>
+                    </div>
+                </div>
+                
+                <p id="score-text-desktop" class="hidden md:block mt-2 text-xl font-bold text-primary">Score: 0 / 10</p>
+                <p class="text-sm text-gray-500 text-center mt-2">Complete all questions to see your final result.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<nav class="mobile-bottom-nav">
+    <a href="#intro" class="mobile-nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        Intro
+    </a>
+    <a href="#chart" class="mobile-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        Chart
+    </a>
+    <a href="#practice" class="mobile-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        Practice
+    </a>
+</nav>
+
+
+<script>
+    // --- QUIZ DATA ---
+    const PRACTICE_QUESTIONS = [
+        { id: 1, sentence: 'I have a dog. ____ name is Buddy.', hint: 'The owner is "The dog" (It).', answer: 'Its', rule: 'It' },
+        { id: 2, sentence: 'She is a student. ____ classes are difficult.', hint: 'The owner is "She".', answer: 'Her', rule: 'She' },
+        { id: 3, sentence: 'We live in Mexico. ____ capital is Mexico City.', hint: 'The owner is "Mexico" (It).', answer: 'Its', rule: 'It' },
+        { id: 4, sentence: 'He has two brothers. ____ names are Alex and Mark.', hint: 'The owners are "Alex and Mark" (They).', answer: 'Their', rule: 'They' },
+        { id: 5, sentence: 'You look tired. Is ____ homework too long?', hint: 'The owner is "You".', answer: 'Your', rule: 'You' },
+        { id: 6, sentence: 'They bought a house. ____ yard is huge.', hint: 'The owner is "The house" (It).', answer: 'Its', rule: 'It' },
+        { id: 7, sentence: 'The company changed ____ logo.', hint: 'The owner is "The company" (It).', answer: 'Its', rule: 'It' },
+        { id: 8, sentence: 'I forgot ____ wallet at home.', hint: 'The owner is "I".', answer: 'My', rule: 'I' },
+        { id: 9, sentence: 'Maria and Luis visit ____ grandparents every summer.', hint: 'The owners are "Maria and Luis" (They).', answer: 'Their', rule: 'They' },
+        { id: 10, sentence: 'This is my boss. ____ name is Mr. Smith.', hint: 'The owner is "my boss" (He).', answer: 'His', rule: 'He' },
+    ];
+
+    let currentQuestionIndex = 0;
+    let correctAnswers = 0;
+    const totalQuestions = PRACTICE_QUESTIONS.length;
+    let quizActive = true;
+    let chartInstance = null;
+    
+    const inputElement = document.getElementById('answer-input');
+    const feedbackElement = document.getElementById('q-feedback');
+    const checkButton = document.getElementById('check-button');
+    const resetButton = document.getElementById('reset-quiz-button');
+    const answerSection = document.getElementById('answer-section');
+
+    function loadQuestion() {
+        if (currentQuestionIndex >= totalQuestions) { endQuiz(); return; }
+        quizActive = true;
+        inputElement.disabled = false;
+        checkButton.disabled = false;
+        feedbackElement.classList.add('hidden');
+        inputElement.value = '';
+        inputElement.focus();
+        
+        const q = PRACTICE_QUESTIONS[currentQuestionIndex];
+        document.getElementById('q-number').textContent = `Question ${currentQuestionIndex + 1} / ${totalQuestions}`;
+        document.getElementById('q-sentence').textContent = q.sentence;
+        document.getElementById('hint-text').textContent = q.hint;
+        updateScoresUI();
+    }
+
+    function checkAnswer() {
+        if (!quizActive) return;
+        const userAnswer = inputElement.value.trim();
+        if (userAnswer === '') {
+            showFeedback('Please enter an answer first.', 'bg-yellow-100 text-yellow-800 border-yellow-200');
+            return;
+        }
+
+        quizActive = false;
+        inputElement.disabled = true;
+        checkButton.disabled = true;
+
+        const correctAnswer = PRACTICE_QUESTIONS[currentQuestionIndex].answer;
+        const isCorrect = userAnswer.toLowerCase() === correctAnswer.toLowerCase();
+
+        if (isCorrect) {
+            correctAnswers++;
+            showFeedback(`✅ Correct! "${correctAnswer}" is right.`, 'bg-green-100 text-green-800 border-green-200');
+        } else {
+            showFeedback(`❌ Incorrect. The answer is "${correctAnswer}". Rule: ${PRACTICE_QUESTIONS[currentQuestionIndex].rule}.`, 'bg-red-100 text-red-800 border-red-200');
+        }
+
+        updateScoresUI();
+        updateChart();
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            loadQuestion();
+        }, 2500);
+    }
+
+    function showFeedback(message, colorClasses) {
+        feedbackElement.textContent = message;
+        feedbackElement.className = `mt-4 p-4 rounded-xl font-bold border-2 ${colorClasses} animate-pulse`;
+        feedbackElement.classList.remove('hidden');
+    }
+    
+    function updateScoresUI() {
+        const scoreString = `Score: ${correctAnswers} / ${currentQuestionIndex}`;
+        document.getElementById('score-text-desktop').textContent = scoreString;
+        document.getElementById('score-text-mobile').textContent = scoreString;
+        
+        const percentage = currentQuestionIndex === 0 ? 0 : Math.round((correctAnswers / currentQuestionIndex) * 100);
+        document.getElementById('score-percentage').textContent = `${percentage}%`;
+    }
+
+    function updateChart() {
+        if (chartInstance) {
+            chartInstance.data.datasets[0].data = [
+                correctAnswers, 
+                currentQuestionIndex - correctAnswers, 
+                totalQuestions - currentQuestionIndex
+            ];
+            chartInstance.update();
+        }
+    }
+
+    function endQuiz() {
+        document.getElementById('q-number').textContent = 'Quiz Complete!';
+        document.getElementById('q-sentence').textContent = `Final Score: ${correctAnswers} out of ${totalQuestions}`;
+        answerSection.classList.add('hidden');
+        feedbackElement.classList.add('hidden');
+        resetButton.classList.remove('hidden');
+        updateScoresUI();
+        document.getElementById('score-percentage').textContent = Math.round((correctAnswers / totalQuestions) * 100) + "%";
+    }
+
+    function resetQuiz() {
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+        resetButton.classList.add('hidden');
+        answerSection.classList.remove('hidden');
+        updateScoresUI();
+        updateChart();
+        loadQuestion();
+    }
+
+    function initChart() {
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        chartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Correct', 'Incorrect', 'Remaining'],
+                datasets: [{
+                    data: [0, 0, totalQuestions],
+                    backgroundColor: ['var(--color-uts-green)', '#ef4444', '#e5e7eb'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: { legend: { display: false }, tooltip: { enabled: false } }
+            }
+        });
+    }
+
+    // Manejo de la navegación móvil activa
+    const sections = document.querySelectorAll('section[id]');
+    function scrollActive() {
+        const scrollY = window.pageYOffset;
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 100;
+            sectionId = current.getAttribute('id');
+            if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                document.querySelector('.mobile-bottom-nav a[href*=' + sectionId + ']').classList.add('active');
+            } else {
+                document.querySelector('.mobile-bottom-nav a[href*=' + sectionId + ']').classList.remove('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', scrollActive);
+
+    window.onload = function() {
+        loadQuestion();
+        initChart();
+        checkButton.addEventListener('click', checkAnswer);
+        resetButton.addEventListener('click', resetQuiz);
+        inputElement.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter' && quizActive) checkAnswer();
+        });
+    };
+</script>
+</body>
+</html>

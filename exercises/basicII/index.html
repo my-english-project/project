@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTS | English Learning Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --uts-green-dark: #004d32;
+      --uts-green-light: #008c5e;
+      --uts-gradient: linear-gradient(135deg, #006341 0%, #008c5e 100%);
+      --bg-color: #f0f2f5;
+      --text-main: #2d3436;
+      --glass-white: rgba(255, 255, 255, 0.9);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      background-image: radial-gradient(circle at top right, #e0eadd, transparent);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Header con Gradiente y Logo */
+    header {
+      background: var(--uts-gradient);
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0, 99, 65, 0.2);
+    }
+
+    .logo-container img {
+      max-width: 220px;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      margin: 10px 0 5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    /* Contenedor Principal */
+    .main-container {
+      max-width: 1100px;
+      margin: -40px auto 50px;
+      padding: 0 20px;
+    }
+
+    /* Secciones de Temas */
+    .category-wrapper {
+      background: var(--glass-white);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 30px;
+      margin-bottom: 35px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .category-header h2 {
+      color: var(--uts-green-dark);
+      font-size: 1.5rem;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    /* Grid de Ejercicios */
+    .grid-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+    }
+
+    .exercise-card {
+      background: white;
+      padding: 18px 25px;
+      border-radius: 15px;
+      text-decoration: none;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      border: 1px solid #f0f0f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exercise-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--uts-green-light);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      color: var(--uts-green-dark);
+    }
+
+    .exercise-card .icon {
+      background: #e8f5e9;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      transition: 0.3s;
+    }
+
+    .exercise-card:hover .icon {
+      background: var(--uts-green-dark);
+      color: white;
+    }
+
+    .exercise-card span {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* Flecha indicadora */
+    .exercise-card::after {
+      content: '→';
+      margin-left: auto;
+      opacity: 0.3;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .exercise-card:hover::after {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #7f8c8d;
+      font-size: 0.85rem;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 600px) {
+      header {
+        padding: 60px 20px 80px;
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      .main-container {
+        margin-top: -60px;
+      }
+
+      .category-wrapper {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="../../assets/images/logo-uts-2024.png" alt="UTS Logo"
+        onerror="this.src='https://via.placeholder.com/200x80?text=UTS+LOGO'">
+    </div>
+    <h1>English Practice Portal</h1>
+    <p>Center of Languages (CELE) | Select your topic to start</p>
+  </header>
+
+  <div class="main-container">
+
+    <div class="category-wrapper">
+      <div class="category-header">
+        <h2>Can / Can't Ability</h2>
+      </div>
+      <div class="grid-links">
+        <a href="can-cant-1.html" class="exercise-card">
+          <div class="icon">1</div> <span>Exercises Part 1</span>
+        </a>
+        <a href="can-cant-2.html" class="exercise-card">
+          <div class="icon">2</div> <span>Exercises Part 2</span>
+        </a>
+        <a href="can-cant-3.html" class="exercise-card">
+          <div class="icon">3</div> <span>Exercises Part 3</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="category-wrapper">
+      <div class="category-header">
+        <h2>Feelings & Desires</h2>
+      </div>
+      <div class="grid-links">
+        <a href="feelings-desires-1.html" class="exercise-card">
+          <div class="icon">1</div> <span>Vocabulary & Grammar 1</span>
+        </a>
+        <a href="feelings-desires-2.html" class="exercise-card">
+          <div class="icon">2</div> <span>Vocabulary & Grammar 2</span>
+        </a>
+        <a href="feelings-desires-3.html" class="exercise-card">
+          <div class="icon">3</div> <span>Vocabulary & Grammar 3</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="category-wrapper">
+      <div class="category-header">
+        <h2>Simple Past Tense</h2>
+      </div>
+      <div class="grid-links">
+        <a href="simple-past-1.html" class="exercise-card">
+          <div class="icon">1</div> <span>Past Simple Review 1</span>
+        </a>
+        <a href="simple-past-2.html" class="exercise-card">
+          <div class="icon">2</div> <span>Past Simple Review 2</span>
+        </a>
+        <a href="simple-past-3.html" class="exercise-card">
+          <div class="icon">3</div> <span>Past Simple Review 3</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="category-wrapper">
+      <div class="category-header">
+        <h2>Subject & Object Pronouns</h2>
+      </div>
+      <div class="grid-links">
+        <a href="subject-object-pronouns-1.html" class="exercise-card">
+          <div class="icon">1</div> <span>Pronouns Practice 1</span>
+        </a>
+        <a href="subject-object-pronouns-2.html" class="exercise-card">
+          <div class="icon">2</div> <span>Pronouns Practice 2</span>
+        </a>
+        <a href="subject-object-pronouns-3.html" class="exercise-card">
+          <div class="icon">3</div> <span>Pronouns Practice 3</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Universidad Tecnológica de Salamanca © 2026<br>
+      Designed for UTS Students</p>
+  </footer>
+
+</body>
+
+</html>
